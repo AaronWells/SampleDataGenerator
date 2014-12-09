@@ -1,0 +1,9 @@
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.app\bin\Debug\edfi.sdg.app.exe.config
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.app\bin\Debug\edfi.sdg.app.exe
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.app\bin\Debug\edfi.sdg.app.pdb
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.app\bin\Debug\edfi.sdg.dll
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.app\bin\Debug\Topshelf.dll
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.app\bin\Debug\edfi.sdg.pdb
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.app\obj\Debug\edfi.sdg.app.csprojResolveAssemblyReference.cache
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.app\obj\Debug\edfi.sdg.app.exe
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.app\obj\Debug\edfi.sdg.app.pdb

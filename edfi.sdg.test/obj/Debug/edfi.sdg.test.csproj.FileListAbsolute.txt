@@ -1,0 +1,7 @@
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.test\bin\Debug\edfi.sdg.test.dll
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.test\bin\Debug\edfi.sdg.test.pdb
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.test\bin\Debug\edfi.sdg.dll
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.test\bin\Debug\edfi.sdg.pdb
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.test\obj\Debug\edfi.sdg.test.csprojResolveAssemblyReference.cache
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.test\obj\Debug\edfi.sdg.test.dll
+C:\Projects\alliance\SampleDataGenerator\edfi.sdg.test\obj\Debug\edfi.sdg.test.pdb
