@@ -1,5 +1,0 @@
-C:\Projects\alliance\SampleDataGenerator\edfi.sdg\bin\Debug\edfi.sdg.dll
-C:\Projects\alliance\SampleDataGenerator\edfi.sdg\bin\Debug\edfi.sdg.pdb
-C:\Projects\alliance\SampleDataGenerator\edfi.sdg\obj\Debug\edfi.sdg.csprojResolveAssemblyReference.cache
-C:\Projects\alliance\SampleDataGenerator\edfi.sdg\obj\Debug\edfi.sdg.dll
-C:\Projects\alliance\SampleDataGenerator\edfi.sdg\obj\Debug\edfi.sdg.pdb

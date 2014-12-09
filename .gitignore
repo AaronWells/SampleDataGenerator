@@ -1,0 +1,7 @@
+/obj
+/bin
+*.user
+obj
+bin
+packages
+*.suo
