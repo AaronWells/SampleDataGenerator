@@ -58,14 +58,10 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="dbo" />
-    <Folder Include="dbo\sequences" />
-    <Folder Include="dbo\functions" />
     <Folder Include="dbo\tables" />
-    <Folder Include="dbo\procedures" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\sequences\Sequence_Id.sql" />
-    <Build Include="dbo\functions\fnBase36.sql" />
-    <Build Include="dbo\procedures\spCreateIdentifiers.sql" />
+    <Build Include="dbo\tables\ComplexObject.sql" />
+    <Build Include="dbo\tables\ComplexObjectClass.sql" />
   </ItemGroup>
 </Project>
