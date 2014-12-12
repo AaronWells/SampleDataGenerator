@@ -24,10 +24,10 @@ namespace edfi.sdg.test.generators
             {
                 var generator = new DistributedEnumValueGenerator<TestEnum>
                 {
-                    Distribution = new DistributedEnumValue<TestEnum>[]
+                    Weightings = new Weighting<TestEnum>[]
                     {
-                        new DistributedEnumValue<TestEnum>{Value = TestEnum.Alpha, Weight = 0.5},
-                        new DistributedEnumValue<TestEnum>{Value = TestEnum.Charlie, Weight = 0.5},
+                        new Weighting<TestEnum>{Value = TestEnum.Alpha, Weight = 0.5},
+                        new Weighting<TestEnum>{Value = TestEnum.Charlie, Weight = 0.5},
                     },
                     PropertyName = "TestEnum",
                 };

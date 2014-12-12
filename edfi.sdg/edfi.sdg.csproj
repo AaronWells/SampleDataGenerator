@@ -56,8 +56,9 @@
     <Compile Include="data\ComplexObject.cs" />
     <Compile Include="data\ComplexObjectClass.cs" />
     <Compile Include="data\DataModel.cs" />
-    <Compile Include="generators\DistributedEnumValue.cs" />
+    <Compile Include="generators\Weighting.cs" />
     <Compile Include="generators\DistributedEnumValueGenerator.cs" />
+    <Compile Include="generators\Quantity.cs" />
     <Compile Include="interfaces\IComplexObjectType.cs" />
     <Compile Include="interfaces\IConfiguration.cs" />
     <Compile Include="generators\TypeQuantityGenerator.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="utility\IdentifierGenerator.cs" />
+    <Compile Include="utility\RandomExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
