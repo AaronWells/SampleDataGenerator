@@ -58,6 +58,7 @@
     <Compile Include="data\DataModel.cs" />
     <Compile Include="generators\DistributedEnumValue.cs" />
     <Compile Include="generators\DistributedEnumValueGenerator.cs" />
+    <Compile Include="interfaces\IComplexObjectType.cs" />
     <Compile Include="interfaces\IConfiguration.cs" />
     <Compile Include="generators\TypeQuantityGenerator.cs" />
     <Compile Include="interfaces\IGenerator.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="messaging\WorkQueue.cs" />
     <Compile Include="models\models.cs" />
     <Compile Include="generators\Generator.cs" />
+    <Compile Include="models\models.partial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="utility\IdentifierGenerator.cs" />

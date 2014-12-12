@@ -1,6 +1,5 @@
 ﻿namespace edfi.sdg.generators
 {
-    using System.Linq;
     using System.Threading.Tasks;
 
     using edfi.sdg.interfaces;
@@ -14,7 +13,7 @@
     /// <typeparam name="T">The type of object to generate</typeparam>
     [System.SerializableAttribute()]
     public class TypeQuantityGenerator<T> : Generator
-        where T : new()
+        where T : IComplexObjectType, new()
     {
         /// <summary>
         /// Number of objects to create
@@ -49,7 +48,7 @@
                         var complexObject = model as ComplexObjectType;
                         if (complexObject != null)
                         {
-                            complexObject.id = IdentifierGenerator.CreateNew();
+                            complexObject.id = IdentifierGenerator.Create();
                         }
 
                         var envelope = new WorkEnvelope

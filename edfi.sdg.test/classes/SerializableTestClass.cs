@@ -1,20 +1,19 @@
 ﻿namespace edfi.sdg.test.classes
 {
     using System;
-    using System.Linq;
+
+    using edfi.sdg.interfaces;
 
     [Serializable()]
-    public class SerializableTestClass
+    public class SerializableTestClass: IComplexObjectType
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public string id { get; set; }
         public TestEnum TestEnum { get; set; }
 
         public SerializableTestClass()
         {
             var guid = Guid.NewGuid();
-            this.Id = guid.ToByteArray().First();
-            this.Name = guid.ToString("N");
+            this.id = guid.ToString("N");
         }
     }
 }

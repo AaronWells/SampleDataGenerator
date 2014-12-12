@@ -3869,7 +3869,7 @@ namespace edfi.sdg.models {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ed-fi.org/0120")]
-    public partial class Telephone : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class allTelephone : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string telephoneNumberField;
         

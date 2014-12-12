@@ -25,7 +25,7 @@ namespace edfi.sdg.test.messaging
                 var task = (reader as IQueueReader).ReadObjectAsync();
                 task.Wait();
                 var obj2 = (SerializableTestClass)task.Result;
-                Assert.AreEqual(obj1.Name, obj2.Name);
+                Assert.AreEqual(obj1.id, obj2.id);
             }
         }
     }

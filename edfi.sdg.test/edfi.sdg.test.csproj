@@ -55,12 +55,6 @@
     <Compile Include="classes\TestEnum.cs" />
     <Compile Include="classes\TestQueue.cs" />
     <Compile Include="configurations\Configuration.cs" />
-    <Compile Include="database\functions.cs">
-      <SubType>Designer</SubType>
-    </Compile>
-    <Compile Include="database\procedures.cs">
-      <SubType>Designer</SubType>
-    </Compile>
     <Compile Include="generators\TypeQuantityGenerator.cs" />
     <Compile Include="classes\SerializableTestClass.cs" />
     <Compile Include="generators\DistributedEnumValueGenerator.cs" />
@@ -82,12 +76,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="database\functions.resx">
-      <DependentUpon>functions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="database\procedures.resx">
-      <DependentUpon>procedures.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="database\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

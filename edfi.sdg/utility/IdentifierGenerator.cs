@@ -7,19 +7,17 @@ namespace edfi.sdg.utility
 {
     using System.Numerics;
 
-    using edfi.sdg.models;
-
     public static class IdentifierGenerator
     {
         static readonly BigInteger Base36 = new BigInteger(36);
         static readonly char[] Digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
-        public static string CreateNew()
+        public static string Create()
         {
-            return CreateFromGuid(Guid.NewGuid());
+            return Create(Guid.NewGuid());
         }
 
-        public static string CreateFromGuid(Guid guid)
+        public static string Create(Guid guid)
         {
             var builder = new StringBuilder();
             // need trailing 0 to not be a negative value
