@@ -17,9 +17,9 @@
                                Generators =
                                    new Generator[]
                                        {
-                                           new TypeQuantityGenerator<Student>{ Name = "Students", Quantity = 2500000 },
-                                           new DistributedEnumValueGenerator<SexType>{ Name = "Sex", PropertyName = "Sex" },
-                                           new DistributedEnumValueGenerator<OldEthnicityType>{ Name = "OldEthnicity", PropertyName = "OldEthnicity" },
+                                           new TypeQuantityGenerator<Student>{ QuantitySpecifier = new ConstantQuantity{Quantity = 2500000}},
+                                           new DistributedEnumValueGenerator<SexType>{ Property = "Sex" },
+                                           new DistributedEnumValueGenerator<OldEthnicityType>{ Property = "OldEthnicity" },
                                        }
                            };
             }

@@ -2,9 +2,9 @@
 
 namespace edfi.sdg.generators
 {
-    using System.Configuration;
-    using System.IO;
-    using System.Linq;
+    using System.Xml.Serialization;
+
+    using edfi.sdg.utility;
 
     public abstract class Quantity
     {
@@ -14,6 +14,7 @@ namespace edfi.sdg.generators
 
     public class ConstantQuantity : Quantity
     {
+        [XmlAttribute]
         public int Quantity { get; set; }
         public override int Next()
         {
@@ -23,19 +24,13 @@ namespace edfi.sdg.generators
 
     public class RangeQuantity : Quantity
     {
+        [XmlAttribute]
         public int Min { get; set; }
+        [XmlAttribute]
         public int Max { get; set; }
         public override int Next()
         {
-            return Rnd.Next((int)Min, (int)Max);
-        }
-    }
-
-    public class LinearQuantity : RangeQuantity
-    {
-        public override int Next()
-        {
-            return base.Next();
+            return Rnd.Next(this.Min, this.Max);
         }
     }
 
@@ -43,9 +38,36 @@ namespace edfi.sdg.generators
     {
         public override int Next()
         {
-            return base.Next();
+            var mu = (Min + Max) / 2;
+            var sigma = Math.Abs(Max - Min) / 6.0;
+            var result = (int)Math.Round(Rnd.NextNormal(mu, sigma));
+            if (result < Min) return Min;
+            return result > this.Max ? this.Max : result;
         }
     }
+
+    public class ChiQuantity : RangeQuantity
+    {
+        public override int Next()
+        {
+            var sigma = Math.Abs(Max - Min) / 3.0;
+            var result = (int)Math.Round(Rnd.NextChi(1, sigma));
+            if (result < Min) return Min;
+            return result > this.Max ? this.Max : result;
+        }
+    }
+
+    public class ChiSquareQuantity : RangeQuantity
+    {
+        public override int Next()
+        {
+            var sigma = Math.Abs(Max - Min) / 3.0;
+            var result = (int)Math.Round(Rnd.NextChiSquare(1, sigma));
+            if (result < Min) return Min;
+            return result > this.Max ? this.Max : result;
+        }
+    }
+
 
     public class BucketedQuantity : Quantity
     {

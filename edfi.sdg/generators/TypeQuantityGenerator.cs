@@ -18,7 +18,12 @@
         /// <summary>
         /// Number of objects to create
         /// </summary>
-        public long Quantity { get; set; }
+        [System.Xml.Serialization.XmlElementAttribute("ConstantQuantity", typeof(ConstantQuantity))]
+        [System.Xml.Serialization.XmlElementAttribute("NormalQuantity", typeof(NormalQuantity))]
+        [System.Xml.Serialization.XmlElementAttribute("ChiQuantity", typeof(ChiQuantity))]
+        [System.Xml.Serialization.XmlElementAttribute("ChiSquareQuantity", typeof(ChiSquareQuantity))]
+        [System.Xml.Serialization.XmlElementAttribute("BucketedQuantity", typeof(BucketedQuantity))]
+        public Quantity QuantitySpecifier { get; set; }
 
         /// <summary>
         /// Create a number of objects and place them on the queue, 
@@ -30,17 +35,18 @@
         /// <param name="configuration">uses MaxQueueWrites property</param>
         public override void Generate(object input, IQueueWriter queueWriter, IConfiguration configuration)
         {
-            if (Quantity > configuration.MaxQueueWrites)
+            var qty = QuantitySpecifier.Next();
+            if (qty > configuration.MaxQueueWrites)
             {
-                var gen1 = new TypeQuantityGenerator<T> { Id = Id, Name = Name, Quantity = Quantity / 2 };
+                var gen1 = new TypeQuantityGenerator<T> { QuantitySpecifier = new ConstantQuantity { Quantity = qty / 2 } };
                 queueWriter.WriteObject(gen1);
 
-                var gen2 = new TypeQuantityGenerator<T> { Id = Id, Name = Name, Quantity = Quantity / 2 + Quantity % 2 };
+                var gen2 = new TypeQuantityGenerator<T> { QuantitySpecifier = new ConstantQuantity { Quantity = qty / 2 + qty % 2 } };
                 queueWriter.WriteObject(gen2);
             }
             else
             {
-                Parallel.For(0, Quantity,
+                Parallel.For(0, qty,
                     number =>
                     {
                         var model = new T();

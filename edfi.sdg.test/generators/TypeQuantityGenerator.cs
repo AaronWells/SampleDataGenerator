@@ -3,6 +3,7 @@
 namespace edfi.sdg.test.generators
 {
     using edfi.sdg.configurations;
+    using edfi.sdg.generators;
     using edfi.sdg.interfaces;
     using edfi.sdg.test.classes;
 
@@ -27,15 +28,14 @@ namespace edfi.sdg.test.generators
                                         MaxQueueWrites = 50
                                     };
 
-            var generator = (IGenerator) new edfi.sdg.generators.TypeQuantityGenerator<SerializableTestClass>()
+            var generator = (IGenerator)new edfi.sdg.generators.TypeQuantityGenerator<SerializableTestClass>()
                                 {
                                     Id = 1,
-                                    Name = "Test TypeQuantityGenerator",
-                                    Quantity = SpecifiedQuantity,
+                                    QuantitySpecifier = new ConstantQuantity { Quantity = SpecifiedQuantity },
                                 };
 
             generator.Generate(null, queue, configuration);
-            
+
             while (!queue.IsEmpty)
             {
                 var task = queue.ReadObjectAsync();

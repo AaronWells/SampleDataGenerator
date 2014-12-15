@@ -29,7 +29,7 @@ namespace edfi.sdg.test.generators
                         new Weighting<TestEnum>{Value = TestEnum.Alpha, Weight = 0.5},
                         new Weighting<TestEnum>{Value = TestEnum.Charlie, Weight = 0.5},
                     },
-                    PropertyName = "TestEnum",
+                    Property = "TestEnum",
                 };
                 var obj = new SerializableTestClass();
                 generator.Generate(obj, queue, config);

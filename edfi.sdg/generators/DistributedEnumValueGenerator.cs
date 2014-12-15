@@ -2,16 +2,18 @@
 {
     using System;
     using System.Linq;
+    using System.Xml.Serialization;
 
     using edfi.sdg.interfaces;
     using edfi.sdg.messaging;
 
     [System.SerializableAttribute()]
-    public class DistributedEnumValueGenerator<T> : Generator where T: struct, IConvertible
+    public class DistributedEnumValueGenerator<T> : Generator where T : struct, IConvertible
     {
         public Weighting<T>[] Weightings { get; set; }
 
-        public string PropertyName { get; set; }
+        [XmlAttribute]
+        public string Property { get; set; }
 
         public DistributedEnumValueGenerator()
         {
@@ -38,7 +40,7 @@
                 else break;
             }
             var type = input.GetType();
-            type.GetProperty(PropertyName).GetSetMethod().Invoke(input, new object[] { current });
+            type.GetProperty(Property).GetSetMethod().Invoke(input, new object[] { current });
             queueWriter.WriteObject(new WorkEnvelope { NextStep = Id, Model = input });
         }
     }

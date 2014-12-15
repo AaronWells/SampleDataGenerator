@@ -27,7 +27,6 @@
         {
             var workQueue = new WorkQueue(configuration.WorkQueueName);
             var generator = configuration.Generators.First();
-            generator.Id = 1;
             generator.Generate(null, workQueue, configuration);
         }
 
