@@ -73,6 +73,7 @@
     <Compile Include="models\models.partial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.cs" />
+    <Compile Include="utility\ComplexObjectRepository.cs" />
     <Compile Include="utility\IdentifierGenerator.cs" />
     <Compile Include="utility\RandomExtensions.cs" />
   </ItemGroup>

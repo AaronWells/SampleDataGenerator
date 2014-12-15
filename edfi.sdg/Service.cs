@@ -61,7 +61,6 @@
                     generator.Generate(workEnvelope.Model, workQueue, configuration);
                     continue;
                 }
-
             }
         }
 
