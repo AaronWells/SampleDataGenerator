@@ -12,6 +12,6 @@
         [XmlIgnore]
         public int Id { get; set; }
 
-        public abstract void Generate(object input, IQueueWriter queueWriter, IConfiguration configuration);
+        public abstract object[] Generate(object input, IConfiguration configuration);
     }
 }

@@ -1,10 +1,6 @@
 ﻿namespace edfi.sdg.generators
 {
-    using System.Threading.Tasks;
-
     using edfi.sdg.interfaces;
-    using edfi.sdg.messaging;
-    using edfi.sdg.models;
     using edfi.sdg.utility;
 
     /// <summary>
@@ -30,41 +26,30 @@
         /// or if there are too many, split the task in two and put those tasks back on the queue.
         /// Initialize the Id property.
         /// </summary>
-        /// <param name="input">Ignored</param>
-        /// <param name="queueWriter">Writes one or more elements to queue</param>
+        /// <param name="input">ignored</param>
         /// <param name="configuration">uses MaxQueueWrites property</param>
-        public override void Generate(object input, IQueueWriter queueWriter, IConfiguration configuration)
+        /// <returns>an array of work items</returns>
+        public override object[] Generate(object input, IConfiguration configuration)
         {
+            object[] results;
             var qty = QuantitySpecifier.Next();
             if (qty > configuration.MaxQueueWrites)
             {
-                var gen1 = new TypeQuantityGenerator<T> { QuantitySpecifier = new ConstantQuantity { Quantity = qty / 2 } };
-                queueWriter.WriteObject(gen1);
-
-                var gen2 = new TypeQuantityGenerator<T> { QuantitySpecifier = new ConstantQuantity { Quantity = qty / 2 + qty % 2 } };
-                queueWriter.WriteObject(gen2);
+                results = new object[]
+                              {
+                                  new TypeQuantityGenerator<T> { Id = this.Id, QuantitySpecifier = new ConstantQuantity { Quantity = qty / 2 } },
+                                  new TypeQuantityGenerator<T> { Id = this.Id, QuantitySpecifier = new ConstantQuantity { Quantity = qty / 2 + qty % 2 } }
+                              };
             }
             else
             {
-                Parallel.For(0, qty,
-                    number =>
-                    {
-                        var model = new T();
-
-                        var complexObject = model as ComplexObjectType;
-                        if (complexObject != null)
-                        {
-                            complexObject.id = IdentifierGenerator.Create();
-                        }
-
-                        var envelope = new WorkEnvelope
-                                           {
-                                               NextStep = this.Id,
-                                               Model = model
-                                           };
-                        queueWriter.WriteObject(envelope);
-                    });
+                results = new object[qty];
+                for (var i = 0; i < qty; i++)
+                {
+                    results[i] = new T() { id = IdentifierGenerator.Create() };
+                }
             }
+            return results;
         }
     }
 }

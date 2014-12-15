@@ -34,7 +34,10 @@ namespace edfi.sdg.test.generators
                                     QuantitySpecifier = new ConstantQuantity { Quantity = SpecifiedQuantity },
                                 };
 
-            generator.Generate(null, queue, configuration);
+            foreach (var tmp in generator.Generate(null, configuration))
+            {
+                queue.WriteObject(tmp);
+            }
 
             while (!queue.IsEmpty)
             {
@@ -47,7 +50,10 @@ namespace edfi.sdg.test.generators
                 }
                 else
                 {
-                    obj.Generate(null, queue, configuration);
+                    foreach (var tmp in obj.Generate(null, configuration))
+                    {
+                        queue.WriteObject(tmp);
+                    }
                 }
             }
             Assert.AreEqual(SpecifiedQuantity, generatedQuantity);

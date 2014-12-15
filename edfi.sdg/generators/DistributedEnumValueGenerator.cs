@@ -5,7 +5,6 @@
     using System.Xml.Serialization;
 
     using edfi.sdg.interfaces;
-    using edfi.sdg.messaging;
 
     [System.SerializableAttribute()]
     public class DistributedEnumValueGenerator<T> : Generator where T : struct, IConvertible
@@ -26,7 +25,7 @@
             }
         }
 
-        public override void Generate(object input, IQueueWriter queueWriter, IConfiguration configuration)
+        public override object[] Generate(object input, IConfiguration configuration)
         {
             var current = Weightings.First().Value;
             var r = Rnd.NextDouble();
@@ -41,7 +40,7 @@
             }
             var type = input.GetType();
             type.GetProperty(Property).GetSetMethod().Invoke(input, new object[] { current });
-            queueWriter.WriteObject(new WorkEnvelope { NextStep = Id, Model = input });
+            return new[] { input };
         }
     }
 }

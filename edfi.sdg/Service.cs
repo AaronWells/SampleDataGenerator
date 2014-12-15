@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Concurrent;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
@@ -9,6 +10,8 @@
     using edfi.sdg.configurations;
     using edfi.sdg.interfaces;
     using edfi.sdg.messaging;
+    using edfi.sdg.models;
+    using edfi.sdg.utility;
 
     public class Service
     {
@@ -27,7 +30,8 @@
         {
             var workQueue = new WorkQueue(configuration.WorkQueueName);
             var generator = configuration.Generators.First();
-            generator.Generate(null, workQueue, configuration);
+            var workItems = generator.Generate(workQueue, configuration);
+            EnqueueWorkItems(workItems, generator);
         }
 
         public void Start()
@@ -38,6 +42,27 @@
             }
         }
 
+        private void EnqueueWorkItems(IEnumerable<object> workItems, IGenerator generator)
+        {
+            Parallel.ForEach(
+                workItems,
+                item =>
+                {
+                    var workQueue = new WorkQueue(configuration.WorkQueueName);
+                    var objectRepository = new ComplexObjectRepository();
+                    if (item is IGenerator)
+                    {
+                        workQueue.WriteObject(item);
+                    }
+                    else
+                    {
+                        var envelope = new WorkEnvelope { NextStep = generator.Id + 1, Model = item };
+                        objectRepository.Save(item as ComplexObjectType);
+                        workQueue.WriteObject(envelope);
+                    }
+                });
+        }
+
         private async void DoWorkAsync(CancellationToken token)
         {
             var workQueue = new WorkQueue(configuration.WorkQueueName);
@@ -45,21 +70,19 @@
             while (!token.IsCancellationRequested)
             {
                 var workItem = await workQueue.ReadObjectAsync();
+
                 var generator = workItem as IGenerator;
                 if (generator != null)
                 {
-                    generator.Generate(null, workQueue, configuration);
-                    continue;
+                    var generatedWorkItems = generator.Generate(null, configuration);
+                    this.EnqueueWorkItems(generatedWorkItems, generator);
                 }
-                // todo: handle work object based on configuration steps
-                var workEnvelope = workItem as WorkEnvelope;
-                if (workEnvelope != null)
+                else
                 {
-                    //get next generator
-                    generator = configuration.Generators[workEnvelope.NextStep];
-                    generator.Id = workEnvelope.NextStep + 1;
-                    generator.Generate(workEnvelope.Model, workQueue, configuration);
-                    continue;
+                    var workEnvelope = (WorkEnvelope)workItem;
+                    var nextGenerator = configuration.Generators[workEnvelope.NextStep];
+                    var generatedWorkItems = nextGenerator.Generate(workEnvelope.Model, configuration);
+                    EnqueueWorkItems(generatedWorkItems, nextGenerator);
                 }
             }
         }

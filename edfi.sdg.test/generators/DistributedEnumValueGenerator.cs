@@ -7,7 +7,6 @@ namespace edfi.sdg.test.generators
 
     using edfi.sdg.configurations;
     using edfi.sdg.generators;
-    using edfi.sdg.messaging;
     using edfi.sdg.test.classes;
 
     [TestClass]
@@ -32,15 +31,17 @@ namespace edfi.sdg.test.generators
                     Property = "TestEnum",
                 };
                 var obj = new SerializableTestClass();
-                generator.Generate(obj, queue, config);
+                foreach (var tmp in generator.Generate(obj, config))
+                {
+                    queue.WriteObject(tmp);
+                }
             }
             var count = 0.0;
             while (!queue.IsEmpty)
             {
                 var task = queue.ReadObjectAsync();
                 task.Wait();
-                var env = (WorkEnvelope)task.Result;
-                var obj2 = (SerializableTestClass)env.Model;
+                var obj2 = (SerializableTestClass)task.Result;
                 switch (obj2.TestEnum)
                 {
                     case TestEnum.Alpha:
