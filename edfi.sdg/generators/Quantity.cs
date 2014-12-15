@@ -4,9 +4,10 @@ namespace edfi.sdg.generators
 {
     using System.Xml.Serialization;
 
+    using edfi.sdg.interfaces;
     using edfi.sdg.utility;
 
-    public abstract class Quantity
+    public abstract class Quantity: IQuantity
     {
         protected static readonly Random Rnd = new Random();
         public abstract int Next();

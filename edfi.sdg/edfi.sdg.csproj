@@ -63,6 +63,7 @@
     <Compile Include="interfaces\IConfiguration.cs" />
     <Compile Include="generators\TypeQuantityGenerator.cs" />
     <Compile Include="interfaces\IGenerator.cs" />
+    <Compile Include="interfaces\IQuantity.cs" />
     <Compile Include="interfaces\IQueueReader.cs" />
     <Compile Include="interfaces\IQueueWriter.cs" />
     <Compile Include="messaging\WorkEnvelope.cs" />
