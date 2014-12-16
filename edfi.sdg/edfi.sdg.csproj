@@ -53,8 +53,6 @@
     <Compile Include="AssemblyLocator.cs" />
     <Compile Include="configurations\Configuration.cs" />
     <Compile Include="configurations\Configuration.Default.cs" />
-    <Compile Include="data\ComplexObject.cs" />
-    <Compile Include="data\ComplexObjectClass.cs" />
     <Compile Include="data\DataModel.cs" />
     <Compile Include="generators\Weighting.cs" />
     <Compile Include="generators\DistributedEnumValueGenerator.cs" />

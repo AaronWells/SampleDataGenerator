@@ -1,7 +1,7 @@
 ﻿namespace edfi.sdg.utility
 {
     using System;
-    using System.Linq;
+    using System.Data.SqlClient;
 
     using edfi.sdg.data;
     using edfi.sdg.models;
@@ -12,23 +12,13 @@
         {
             using (var model = new DataModel())
             {
-                var className = obj.GetType().ToString();
-
-                var complexObjectClass = model.ComplexObjectClasses.FirstOrDefault(x => x.Name == className)
-                                         ?? new edfi.sdg.data.ComplexObjectClass { Name = className };
-
-                var complexObject = complexObjectClass.ComplexObjects.FirstOrDefault(x => x.Id == obj.id);
-
-                if (complexObject == null)
-                {
-                    complexObjectClass.ComplexObjects.Add(
-                        new ComplexObject() { Id = IdentifierGenerator.Create(), Xml = obj.ToXml() });
-                }
-                else
-                {
-                    complexObject.Xml = obj.ToXml();
-                }
-                model.SaveChanges();
+                model.Database.ExecuteSqlCommand("dbo.upsertComplexObject @identifier, @className, @xml",
+                    new object[]
+                        {
+                            new SqlParameter("@identifier", obj.id),
+                            new SqlParameter("@className", obj.GetType().ToString()),
+                            new SqlParameter("@xml", obj.ToXml())
+                        });
             }
         }
 
@@ -36,12 +26,13 @@
         {
             using (var model = new DataModel())
             {
-                var result = model.ComplexObjects.FirstOrDefault(x => x.Id == identifier);
-                return result != null ? ComplexObjectType.FromXml(result.Xml) : null;
+                //var result = model.ComplexObjects.FirstOrDefault(x => x.Id == identifier);
+                //return result != null ? ComplexObjectType.FromXml(result.Xml) : null;
             }
+            throw new NotImplementedException();
         }
 
-        public ComplexObject[] GetByExample(dynamic obj)
+        public ComplexObjectType[] GetByExample(dynamic obj)
         {
             throw new NotImplementedException();
         }

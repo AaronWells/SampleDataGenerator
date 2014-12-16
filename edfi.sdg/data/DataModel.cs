@@ -7,22 +7,12 @@ namespace edfi.sdg.data
         public DataModel()
             : base("name=DataModel")
         {
-        }
 
-        public virtual DbSet<ComplexObject> ComplexObjects { get; set; }
-        public virtual DbSet<ComplexObjectClass> ComplexObjectClasses { get; set; }
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ComplexObject>()
-                .Property(e => e.Id)
-                .IsFixedLength()
-                .IsUnicode(false);
 
-            modelBuilder.Entity<ComplexObjectClass>()
-                .HasMany(e => e.ComplexObjects)
-                .WithRequired(e => e.ComplexObjectClass)
-                .WillCascadeOnDelete(false);
         }
     }
 }

@@ -40,6 +40,10 @@
             }
             var type = input.GetType();
             type.GetProperty(Property).GetSetMethod().Invoke(input, new object[] { current });
+            
+            if (type.GetProperty(Property + "Specified") != null)
+                type.GetProperty(Property + "Specified").GetSetMethod().Invoke(input, new object[] { true });
+
             return new[] { input };
         }
     }

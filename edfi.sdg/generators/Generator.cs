@@ -5,6 +5,7 @@
 
     using edfi.sdg.interfaces;
 
+    [Serializable]
     public abstract class Generator : IGenerator
     {
         protected static readonly Random Rnd = new Random();

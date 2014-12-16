@@ -7,12 +7,14 @@ namespace edfi.sdg.generators
     using edfi.sdg.interfaces;
     using edfi.sdg.utility;
 
+    [Serializable]
     public abstract class Quantity: IQuantity
     {
         protected static readonly Random Rnd = new Random();
         public abstract int Next();
     }
 
+    [Serializable]
     public class ConstantQuantity : Quantity
     {
         [XmlAttribute]
@@ -23,6 +25,7 @@ namespace edfi.sdg.generators
         }
     }
 
+    [Serializable]
     public class RangeQuantity : Quantity
     {
         [XmlAttribute]
@@ -35,6 +38,7 @@ namespace edfi.sdg.generators
         }
     }
 
+    [Serializable]
     public class NormalQuantity : RangeQuantity
     {
         public override int Next()
@@ -47,6 +51,7 @@ namespace edfi.sdg.generators
         }
     }
 
+    [Serializable]
     public class ChiQuantity : RangeQuantity
     {
         public override int Next()
@@ -58,6 +63,7 @@ namespace edfi.sdg.generators
         }
     }
 
+    [Serializable]
     public class ChiSquareQuantity : RangeQuantity
     {
         public override int Next()
@@ -70,6 +76,7 @@ namespace edfi.sdg.generators
     }
 
 
+    [Serializable]
     public class BucketedQuantity : Quantity
     {
         public Weighting<int>[] Weightings { get; set; }

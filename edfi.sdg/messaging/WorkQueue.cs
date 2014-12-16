@@ -47,9 +47,24 @@
             var t = new TaskCompletionSource<object>();
             ReceiveCompletedEventHandler callback = (source, asyncResult) =>
                 {
-                    var q = (MessageQueue)source;
-                    var msg = q.EndReceive(asyncResult.AsyncResult);
-                    t.TrySetResult(msg.Body);
+                    try
+                    {
+                        var q = (MessageQueue)source;
+                        var msg = q.EndReceive(asyncResult.AsyncResult);
+                        t.TrySetResult(msg.Body);
+                    }
+                    catch (MessageQueueException ex)
+                    {
+                        switch (ex.MessageQueueErrorCode)
+                        {
+                            case MessageQueueErrorCode.IOTimeout:
+                                t.TrySetCanceled();
+                                break;
+                            default:
+                                t.TrySetException(ex);
+                                break;
+                        }
+                    }
                 };
             queue.ReceiveCompleted -= callback;
             queue.ReceiveCompleted += callback;

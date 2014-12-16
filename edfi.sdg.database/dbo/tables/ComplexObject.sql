@@ -1,9 +1,8 @@
 ﻿CREATE TABLE [dbo].[ComplexObject]
 (
-	[Id] CHAR(10) NOT NULL PRIMARY KEY,
-	[ComplexObjectClassId] BIGINT NOT NULL,
+	[Identifier] CHAR(25) NOT NULL PRIMARY KEY,
+	[ClassName] VARCHAR(MAX) NOT NULL,
     [Xml] XML NOT NULL, 
-    CONSTRAINT [FK_ComplexObject_ToTable] FOREIGN KEY ([ComplexObjectClassId]) REFERENCES [ComplexObjectClass]([Id])
 )
 
 GO

@@ -13,14 +13,24 @@
     using edfi.sdg.models;
     using edfi.sdg.utility;
 
+    public class ServiceParams
+    {
+        public bool Bootstrap { get; set; }
+
+        public string ConfigFile { get; set; }
+    }
+
     public class Service
     {
         private readonly CancellationTokenSource tokenSource;
         private readonly Configuration configuration;
         private readonly ConcurrentBag<Task> tasks;
+        private readonly ServiceParams serviceParams;
 
-        public Service()
+        public Service(ServiceParams serviceParams)
         {
+            this.serviceParams = serviceParams;
+            //todo: load configuration from filename in serviceParams
             configuration = Configuration.DefaultConfiguration;
             tasks = new ConcurrentBag<Task>();
             tokenSource = new CancellationTokenSource();
@@ -31,34 +41,39 @@
             var workQueue = new WorkQueue(configuration.WorkQueueName);
             var generator = configuration.Generators.First();
             var workItems = generator.Generate(workQueue, configuration);
-            EnqueueWorkItems(workItems, generator);
+            EnqueueWorkItems(workItems, generator.Id);
         }
 
         public void Start()
         {
-            for (var i = 0; i < configuration.NumThreads; i++)
-            {
+            if (serviceParams.Bootstrap)
+                this.Bootstrap();
+
+            //for (var i = 0; i < configuration.NumThreads; i++)
+            //{
                 tasks.Add(Task.Factory.StartNew(() => this.DoWorkAsync(tokenSource.Token), tokenSource.Token));
-            }
+            //}
         }
 
-        private void EnqueueWorkItems(IEnumerable<object> workItems, IGenerator generator)
+        private void EnqueueWorkItems(IEnumerable<object> workItems, int generatorId)
         {
             Parallel.ForEach(
                 workItems,
                 item =>
                 {
-                    var workQueue = new WorkQueue(configuration.WorkQueueName);
-                    var objectRepository = new ComplexObjectRepository();
-                    if (item is IGenerator)
+                    using (var workQueue = new WorkQueue(configuration.WorkQueueName))
                     {
-                        workQueue.WriteObject(item);
-                    }
-                    else
-                    {
-                        var envelope = new WorkEnvelope { NextStep = generator.Id + 1, Model = item };
-                        objectRepository.Save(item as ComplexObjectType);
-                        workQueue.WriteObject(envelope);
+                        var objectRepository = new ComplexObjectRepository();
+                        if (item is IGenerator)
+                        {
+                            workQueue.WriteObject(item);
+                        }
+                        else
+                        {
+                            var envelope = new WorkEnvelope { NextStep = generatorId, Model = item };
+                            objectRepository.Save(item as ComplexObjectType);
+                            workQueue.WriteObject(envelope);
+                        }
                     }
                 });
         }
@@ -69,20 +84,29 @@
 
             while (!token.IsCancellationRequested)
             {
-                var workItem = await workQueue.ReadObjectAsync();
-
-                var generator = workItem as IGenerator;
-                if (generator != null)
+                try
                 {
-                    var generatedWorkItems = generator.Generate(null, configuration);
-                    this.EnqueueWorkItems(generatedWorkItems, generator);
+                    var workItem = await workQueue.ReadObjectAsync();
+                    var generator = workItem as IGenerator;
+                    if (generator != null)
+                    {
+                        var generatedWorkItems = generator.Generate(null, configuration);
+                        this.EnqueueWorkItems(generatedWorkItems, generator.Id);
+                    }
+                    else
+                    {
+                        var workEnvelope = (WorkEnvelope)workItem;
+                        if (workEnvelope.NextStep <= configuration.Generators.GetUpperBound(0))
+                        {
+                            var nextGenerator = configuration.Generators[workEnvelope.NextStep];
+                            var generatedWorkItems = nextGenerator.Generate(workEnvelope.Model, configuration);
+                            EnqueueWorkItems(generatedWorkItems, nextGenerator.Id);
+                        }
+                    }
                 }
-                else
+                catch (TaskCanceledException ex)
                 {
-                    var workEnvelope = (WorkEnvelope)workItem;
-                    var nextGenerator = configuration.Generators[workEnvelope.NextStep];
-                    var generatedWorkItems = nextGenerator.Generate(workEnvelope.Model, configuration);
-                    EnqueueWorkItems(generatedWorkItems, nextGenerator);
+                    // the task is cancelled on a timeout, so we'll wait again for a message
                 }
             }
         }
