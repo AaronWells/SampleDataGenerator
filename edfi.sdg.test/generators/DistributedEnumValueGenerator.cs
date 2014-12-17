@@ -23,12 +23,15 @@ namespace edfi.sdg.test.generators
             {
                 var generator = new DistributedEnumValueGenerator<TestEnum>
                 {
-                    Weightings = new Weighting<TestEnum>[]
+                    Distribution = new BucketedDistribution<TestEnum>
                     {
-                        new Weighting<TestEnum>{Value = TestEnum.Alpha, Weight = 0.5},
-                        new Weighting<TestEnum>{Value = TestEnum.Charlie, Weight = 0.5},
+                        Weightings = new Weighting<TestEnum>[]
+                        {
+                            new Weighting<TestEnum>{Value = TestEnum.Alpha, Weight = 0.5},
+                            new Weighting<TestEnum>{Value = TestEnum.Charlie, Weight = 0.5},
+                        }
                     },
-                    Property = "TestEnum",
+                    Property = "SerializableTestClass.TestEnum",
                 };
                 var obj = new SerializableTestClass();
                 foreach (var tmp in generator.Generate(obj, config))

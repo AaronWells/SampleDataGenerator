@@ -4,7 +4,6 @@
     using System.Xml.Serialization;
 
     using edfi.sdg.interfaces;
-
     [Serializable]
     public abstract class Generator : IGenerator
     {

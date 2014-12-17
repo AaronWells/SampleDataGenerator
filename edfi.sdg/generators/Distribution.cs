@@ -3,6 +3,7 @@ using System.Linq;
 
 namespace edfi.sdg.generators
 {
+    using edfi.sdg.configurations;
     using edfi.sdg.utility;
 
     public abstract class Distribution<T> where T : struct, IConvertible
@@ -14,6 +15,7 @@ namespace edfi.sdg.generators
         public abstract T[] Shuffled();
     }
 
+    [Serializable, SerializableGeneric]
     public class ConstantDistribution<T> : Distribution<T>
         where T : struct, IConvertible
     {
@@ -30,6 +32,7 @@ namespace edfi.sdg.generators
         }
     }
 
+    [Serializable, SerializableGeneric]
     public class RangeDistribution<T> : Distribution<T> where T : struct, IConvertible
     {
         public override T Next()
@@ -48,10 +51,22 @@ namespace edfi.sdg.generators
         }
     }
 
+    [Serializable, SerializableGeneric]
     public class BucketedDistribution<T> : Distribution<T>
         where T : struct, IConvertible
     {
         public Weighting<T>[] Weightings { get; set; }
+
+        public BucketedDistribution()
+        {
+            var i = 0;
+            var values = (T[])Enum.GetValues(typeof(T));
+            Weightings = new Weighting<T>[values.Length];
+            foreach (var value in values)
+            {
+                Weightings[i++] = new Weighting<T> { Value = value, Weight = 1.0 / values.Length };
+            }
+        } 
 
         public override T Next()
         {

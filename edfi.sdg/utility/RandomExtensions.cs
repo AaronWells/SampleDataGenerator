@@ -75,7 +75,7 @@ namespace edfi.sdg.utility
         /// <returns></returns>
         public static T NextArray<T>(this Random rnd, T[] values)
         {
-            var idx = rnd.Next(values.GetLowerBound(0), values.GetUpperBound(0));
+            var idx = rnd.Next(values.GetLowerBound(0), values.GetUpperBound(0) + 1);
             return values[idx];
         }
 
@@ -87,13 +87,13 @@ namespace edfi.sdg.utility
         /// <returns></returns>
         public static int NextWeighted(this Random random, double[] weights)
         {
-            var idx = 0;
+            var idx = weights.GetLowerBound(0);
             var rnd = random.NextDouble() * weights.Sum(x => x);
             do
             {
                 rnd -= weights[idx++];
             }
-            while (rnd > 0);
+            while (rnd > 0 && idx <= weights.GetUpperBound(0));
             return idx - 1;
         }
     }

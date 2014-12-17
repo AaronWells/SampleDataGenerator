@@ -1,69 +1,62 @@
 ﻿namespace edfi.sdg.generators
 {
     using System;
-    using System.Configuration;
     using System.Linq;
     using System.Xml.Serialization;
 
+    using edfi.sdg.configurations;
     using edfi.sdg.interfaces;
+    using edfi.sdg.models;
 
-    [System.SerializableAttribute()]
-    public class DistributedEnumValueGenerator<T> : Generator where T : struct, IConvertible
+    [Serializable]
+    public class DistributedEnumValueGenerator<[SerializableGenericEnum]T> : Generator where T : struct, IConvertible
     {
-        public Weighting<T>[] Weightings { get; set; }
-
         [XmlAttribute]
         public string Property { get; set; }
 
+        [SerializableGenericEnum]
+        [XmlElement("SexTypeRangeDistribution", typeof(RangeDistribution<SexType>))]
+        [XmlElement("OldEthnicityTypeRangeDistribution", typeof(RangeDistribution<OldEthnicityType>))]
+        public object Distribution { get; set; }
+        
+        public Quantity Quantity { get; set; }
+
         public DistributedEnumValueGenerator()
         {
-            var i = 0;
-            var values = (T[])Enum.GetValues(typeof(T));
-            Weightings = new Weighting<T>[values.Length];
-            foreach (var value in values)
-            {
-                Weightings[i++] = new Weighting<T> { Value = value, Weight = 1.0 / values.Length };
-            }
+            Distribution = new RangeDistribution<T>();
+            Quantity = new ConstantQuantity() { Quantity = 1 };
         }
 
         public override object[] Generate(object input, IConfiguration configuration)
         {
             var type = input.GetType();
+
             if (Property.StartsWith(type.Name))
             {
-                var value = this.GetRandomValue();
                 var propertyName = Property.Substring(type.Name.Length + 1);
-                if (type.GetProperty(propertyName) != null)
-                {
-                    type.GetProperty(propertyName).GetSetMethod().Invoke(input, new object[] { value });
+                var property = type.GetProperty(propertyName);
 
-                    if (type.GetProperty(propertyName + "Specified") != null)
-                    {
-                        type.GetProperty(propertyName + "Specified").GetSetMethod().Invoke(input, new object[] { true });
-                    }
-                }
-                else
+                if (property != null)
                 {
-                    throw new ConfigurationErrorsException(string.Format("no property named '{0}' exists on model.", Property));
+                    if (property.PropertyType.IsArray)
+                    {
+                        var array = ((Distribution<T>)Distribution).Shuffled().Take(Quantity.Next()).ToArray();
+                        property.GetSetMethod().Invoke(input, new object[] { array });
+                    }
+                    else
+                    {
+                        var single = ((Distribution<T>)Distribution).Next();
+                        property.GetSetMethod().Invoke(input, new object[] { single });
+                        if (type.GetProperty(propertyName + "Specified") != null)
+                        {
+                            type.GetProperty(propertyName + "Specified")
+                                .GetSetMethod()
+                                .Invoke(input, new object[] { true });
+                        }
+                    }
                 }
             }
             return new[] { input };
-        }
-
-        public T GetRandomValue()
-        {
-            var result = Weightings.First().Value;
-            var r = Rnd.NextDouble();
-            foreach (var item in Weightings)
-            {
-                result = item.Value;
-                if (r >= item.Weight)
-                {
-                    r -= item.Weight;
-                }
-                else break;
-            }
-            return result;
         }
     }
 }

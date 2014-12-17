@@ -68,5 +68,43 @@ namespace edfi.sdg.test.utility
                 Console.WriteLine(new string('*', value / (Sample >> 8)));
             }
         }
+
+        [TestMethod]
+        public void NextArray()
+        {
+            var r = new Random();
+            var array = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var values = new int[array.Length];
+            const int Sample = 1 << 20;
+            for (var i = 0; i < Sample; i++)
+            {
+                var val = r.NextArray(array);
+                values[val]++;
+            }
+            foreach (var idx in array)
+            {
+                Console.Write(idx + ": ");
+                Console.WriteLine(new string('*', values[idx] / (Sample >> 8)));
+            }
+        }
+
+        [TestMethod]
+        public void NextWeighted()
+        {
+            var r = new Random();
+            var weights = new double[] { 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0};
+            var values = new int[weights.Length];
+            const int Sample = 1 << 20;
+            for (var i = 0; i < Sample; i++)
+            {
+                var idx = r.NextWeighted(weights);
+                values[idx]++;
+            }
+            for (var i = weights.GetLowerBound(0); i <= weights.GetUpperBound(0); i++)
+            {
+                Console.Write(weights[i] + ": ");
+                Console.WriteLine(new string('*', values[i] / (Sample >> 8)));
+            }
+        }
     }
 }

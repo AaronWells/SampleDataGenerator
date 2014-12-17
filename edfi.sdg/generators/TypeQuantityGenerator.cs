@@ -1,5 +1,8 @@
 ﻿namespace edfi.sdg.generators
 {
+    using System;
+
+    using edfi.sdg.configurations;
     using edfi.sdg.interfaces;
     using edfi.sdg.utility;
 
@@ -7,7 +10,7 @@
     /// Create a number of objects of type T and put them on the work queue
     /// </summary>
     /// <typeparam name="T">The type of object to generate</typeparam>
-    [System.SerializableAttribute()]
+    [Serializable, SerializableGeneric]
     public class TypeQuantityGenerator<T> : Generator
         where T : IComplexObjectType, new()
     {
