@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Numerics" />
@@ -54,6 +55,7 @@
     <Compile Include="configurations\Configuration.cs" />
     <Compile Include="configurations\Configuration.Default.cs" />
     <Compile Include="data\DataModel.cs" />
+    <Compile Include="generators\Distribution.cs" />
     <Compile Include="generators\Weighting.cs" />
     <Compile Include="generators\DistributedEnumValueGenerator.cs" />
     <Compile Include="generators\Quantity.cs" />

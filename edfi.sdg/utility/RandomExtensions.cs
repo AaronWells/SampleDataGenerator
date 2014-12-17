@@ -2,6 +2,8 @@
 
 namespace edfi.sdg.utility
 {
+    using System.Linq;
+
     /// <summary>
     /// Extension methods to the Random class.
     /// Taken from Practical Numerical Methods with C# by Jack Xu
@@ -63,6 +65,36 @@ namespace edfi.sdg.utility
                 result += Math.Pow(NextNormal(rnd, 0, sigma * sigma), 2);
             }
             return result;
+        }
+
+        /// <summary>
+        /// Return a random element from an array using a flat distribution
+        /// </summary>
+        /// <param name="rnd"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public static T NextArray<T>(this Random rnd, T[] values)
+        {
+            var idx = rnd.Next(values.GetLowerBound(0), values.GetUpperBound(0));
+            return values[idx];
+        }
+
+        /// <summary>
+        /// returns the INDEX of the array according to the provided weights
+        /// </summary>
+        /// <param name="random"></param>
+        /// <param name="weights">an array of relative weightings</param>
+        /// <returns></returns>
+        public static int NextWeighted(this Random random, double[] weights)
+        {
+            var idx = 0;
+            var rnd = random.NextDouble() * weights.Sum(x => x);
+            do
+            {
+                rnd -= weights[idx++];
+            }
+            while (rnd > 0);
+            return idx - 1;
         }
     }
 }

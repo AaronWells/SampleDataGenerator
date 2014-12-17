@@ -1,6 +1,7 @@
 ﻿namespace edfi.sdg.generators
 {
     using System;
+    using System.Configuration;
     using System.Linq;
     using System.Xml.Serialization;
 
@@ -27,24 +28,42 @@
 
         public override object[] Generate(object input, IConfiguration configuration)
         {
-            var current = Weightings.First().Value;
+            var type = input.GetType();
+            if (Property.StartsWith(type.Name))
+            {
+                var value = this.GetRandomValue();
+                var propertyName = Property.Substring(type.Name.Length + 1);
+                if (type.GetProperty(propertyName) != null)
+                {
+                    type.GetProperty(propertyName).GetSetMethod().Invoke(input, new object[] { value });
+
+                    if (type.GetProperty(propertyName + "Specified") != null)
+                    {
+                        type.GetProperty(propertyName + "Specified").GetSetMethod().Invoke(input, new object[] { true });
+                    }
+                }
+                else
+                {
+                    throw new ConfigurationErrorsException(string.Format("no property named '{0}' exists on model.", Property));
+                }
+            }
+            return new[] { input };
+        }
+
+        public T GetRandomValue()
+        {
+            var result = Weightings.First().Value;
             var r = Rnd.NextDouble();
             foreach (var item in Weightings)
             {
-                current = item.Value;
+                result = item.Value;
                 if (r >= item.Weight)
                 {
                     r -= item.Weight;
                 }
                 else break;
             }
-            var type = input.GetType();
-            type.GetProperty(Property).GetSetMethod().Invoke(input, new object[] { current });
-            
-            if (type.GetProperty(Property + "Specified") != null)
-                type.GetProperty(Property + "Specified").GetSetMethod().Invoke(input, new object[] { true });
-
-            return new[] { input };
+            return result;
         }
     }
 }
