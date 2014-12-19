@@ -8,7 +8,13 @@ namespace edfi.sdg.generators
     using edfi.sdg.utility;
 
     [Serializable]
-    public abstract class Quantity: IQuantity
+    [XmlInclude(typeof(ConstantQuantity))]
+    [XmlInclude(typeof(RangeQuantity))]
+    [XmlInclude(typeof(NormalQuantity))]
+    [XmlInclude(typeof(ChiQuantity))]
+    [XmlInclude(typeof(ChiSquareQuantity))]
+    [XmlInclude(typeof(BucketedQuantity))]
+    public abstract class Quantity : IQuantity
     {
         protected static readonly Random Rnd = new Random();
         public abstract int Next();
@@ -75,16 +81,15 @@ namespace edfi.sdg.generators
         }
     }
 
-
     [Serializable]
     public class BucketedQuantity : Quantity
     {
-        public Weighting<int>[] Weightings { get; set; }
+        public Weighting[] Weightings { get; set; }
 
         public BucketedQuantity()
         {
-            Weightings = new Weighting<int>[1];
-            Weightings[0] = new Weighting<int> { Value = default(int), Weight = 1.0 };
+            Weightings = new Weighting[1];
+            Weightings[0] = new Weighting { Value = default(int), Weight = 1.0 };
         }
 
         public override int Next()
@@ -92,7 +97,7 @@ namespace edfi.sdg.generators
             var r = Rnd.NextDouble();
             foreach (var item in Weightings)
             {
-                if (r <= item.Weight) return item.Value;
+                if (r <= item.Weight) return (int)item.Value;
                 r -= item.Weight;
             }
             throw new IndexOutOfRangeException("Empty Weightings list");

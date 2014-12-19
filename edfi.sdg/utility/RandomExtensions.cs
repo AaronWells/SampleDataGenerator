@@ -79,6 +79,12 @@ namespace edfi.sdg.utility
             return values[idx];
         }
 
+        public static object NextArray(this Random rnd, Array values)
+        {
+            var idx = rnd.Next(values.GetLowerBound(0), values.GetUpperBound(0) + 1);
+            return values.GetValue(idx);
+        }
+
         /// <summary>
         /// returns the INDEX of the array according to the provided weights
         /// </summary>

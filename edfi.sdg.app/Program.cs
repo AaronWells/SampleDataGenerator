@@ -1,7 +1,6 @@
 ﻿namespace edfi.sdg.app
 {
     using Topshelf;
-    using Topshelf.Logging;
 
     class Program
     {

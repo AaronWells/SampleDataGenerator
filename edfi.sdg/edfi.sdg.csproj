@@ -54,7 +54,7 @@
     <Compile Include="AssemblyLocator.cs" />
     <Compile Include="configurations\Configuration.cs" />
     <Compile Include="configurations\Configuration.Default.cs" />
-    <Compile Include="configurations\SerializableGeneric.cs" />
+    <Compile Include="configurations\GenericXmlElementAttribute.cs" />
     <Compile Include="data\DataModel.cs" />
     <Compile Include="generators\Distribution.cs" />
     <Compile Include="generators\Weighting.cs" />
@@ -75,9 +75,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="utility\ComplexObjectRepository.cs" />
+    <Compile Include="utility\Generics.cs" />
     <Compile Include="utility\IdentifierGenerator.cs" />
     <Compile Include="utility\RandomExtensions.cs" />
-    <Compile Include="utility\XmlSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

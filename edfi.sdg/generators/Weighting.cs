@@ -4,10 +4,10 @@
     using System.Xml.Serialization;
 
     [System.SerializableAttribute()]
-    public class Weighting<T>
+    public class Weighting
     {
-        [XmlAttribute]
-        public T Value { get; set; }
+        [XmlElement]
+        public object Value { get; set; }
         [XmlAttribute]
         public Double Weight { get; set; }
     }

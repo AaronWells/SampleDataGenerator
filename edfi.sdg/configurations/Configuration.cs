@@ -1,7 +1,5 @@
 ﻿namespace edfi.sdg.configurations
 {
-    using System.Xml.Serialization;
-
     using edfi.sdg.generators;
     using edfi.sdg.interfaces;
     using edfi.sdg.models;
@@ -21,9 +19,7 @@
         /// List of generators to run. Each generator type must exist in the attributes listed here. 
         /// Generics MUST also list every valid value for their parameters for XML serialization to work.
         /// </summary>
-        [XmlElement("StudentGenerator", typeof(TypeQuantityGenerator<Student>))]
-        [XmlElement("SexGenerator", typeof(DistributedEnumValueGenerator<SexType>))]
-        [XmlElement("OldEthnicityGenerator", typeof(DistributedEnumValueGenerator<OldEthnicityType>))]
+        [GenericXmlElementAttribute(BaseTargetType = typeof(ComplexObjectType))]
         public Generator[] Generators {
             get
             {

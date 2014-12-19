@@ -65,6 +65,7 @@
     <Compile Include="SqlDatabaseSetup.cs" />
     <Compile Include="utility\IdentifierGenerator.cs" />
     <Compile Include="utility\RandomExtensions.cs" />
+    <Compile Include="utility\Generics.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\edfi.sdg\edfi.sdg.csproj">

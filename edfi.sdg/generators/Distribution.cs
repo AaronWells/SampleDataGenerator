@@ -3,45 +3,47 @@ using System.Linq;
 
 namespace edfi.sdg.generators
 {
-    using edfi.sdg.configurations;
+    using System.Xml.Serialization;
+
     using edfi.sdg.utility;
 
-    public abstract class Distribution<T> where T : struct, IConvertible
+    [Serializable]
+    [XmlInclude(typeof(ConstantDistribution))]
+    [XmlInclude(typeof(RangeDistribution))]
+    [XmlInclude(typeof(BucketedDistribution))]
+    public abstract class Distribution
     {
-        // ReSharper disable once StaticFieldInGenericType
         protected static readonly Random Rnd = new Random();
-
-        public abstract T Next();
-        public abstract T[] Shuffled();
+        public abstract T Next<T>();
+        public abstract T[] Shuffled<T>();
     }
 
-    [Serializable, SerializableGeneric]
-    public class ConstantDistribution<T> : Distribution<T>
-        where T : struct, IConvertible
+    [Serializable]
+    public class ConstantDistribution : Distribution
     {
-        public T Value { get; set; }
+        public object Value { get; set; }
 
-        public override T Next()
+        public override T Next<T>()
         {
-            return Value;
+            return (T)Value;
         }
 
-        public override T[] Shuffled()
+        public override T[] Shuffled<T>()
         {
-            return new T[] { Value };
+            return new T[] { (T)Value };
         }
     }
 
-    [Serializable, SerializableGeneric]
-    public class RangeDistribution<T> : Distribution<T> where T : struct, IConvertible
+    [Serializable]
+    public class RangeDistribution : Distribution
     {
-        public override T Next()
+        public override T Next<T>()
         {
-            var values = (T[])Enum.GetValues(typeof(T));
-            return Rnd.NextArray<T>(values);
+            var values = Enum.GetValues(typeof(T));
+            return Rnd.NextArray<T>((T[])values);
         }
 
-        public override T[] Shuffled()
+        public override T[] Shuffled<T>()
         {
             var values = (T[])Enum.GetValues(typeof(T));
             return values.Select(x => new { order = Rnd.Next(), value = x })
@@ -51,35 +53,23 @@ namespace edfi.sdg.generators
         }
     }
 
-    [Serializable, SerializableGeneric]
-    public class BucketedDistribution<T> : Distribution<T>
-        where T : struct, IConvertible
+    [Serializable]
+    public class BucketedDistribution : Distribution
     {
-        public Weighting<T>[] Weightings { get; set; }
+        public Weighting[] Weightings { get; set; }
 
-        public BucketedDistribution()
-        {
-            var i = 0;
-            var values = (T[])Enum.GetValues(typeof(T));
-            Weightings = new Weighting<T>[values.Length];
-            foreach (var value in values)
-            {
-                Weightings[i++] = new Weighting<T> { Value = value, Weight = 1.0 / values.Length };
-            }
-        } 
-
-        public override T Next()
+        public override T Next<T>()
         {
             var weights = Weightings.Select(x => x.Weight).ToArray();
             var idx = Rnd.NextWeighted(weights);
-            return Weightings[idx].Value;
+            return (T)Weightings[idx].Value;
         }
 
-        public override T[] Shuffled()
+        public override T[] Shuffled<T>()
         {
             return Weightings.Select(x => new { order = Rnd.Next() * x.Weight, item = x })
                     .OrderByDescending(x => x.order)
-                    .Select(x => x.item.Value)
+                    .Select(x => (T)x.item.Value)
                     .ToArray();
         }
     }

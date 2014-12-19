@@ -2,7 +2,6 @@
 {
     using System;
 
-    using edfi.sdg.configurations;
     using edfi.sdg.interfaces;
     using edfi.sdg.utility;
 
@@ -10,18 +9,12 @@
     /// Create a number of objects of type T and put them on the work queue
     /// </summary>
     /// <typeparam name="T">The type of object to generate</typeparam>
-    [Serializable, SerializableGeneric]
-    public class TypeQuantityGenerator<T> : Generator
-        where T : IComplexObjectType, new()
+    [Serializable]
+    public class TypeQuantityGenerator<T> : Generator where T : IComplexObjectType, new()
     {
         /// <summary>
         /// Number of objects to create
         /// </summary>
-        [System.Xml.Serialization.XmlElementAttribute("ConstantQuantity", typeof(ConstantQuantity))]
-        [System.Xml.Serialization.XmlElementAttribute("NormalQuantity", typeof(NormalQuantity))]
-        [System.Xml.Serialization.XmlElementAttribute("ChiQuantity", typeof(ChiQuantity))]
-        [System.Xml.Serialization.XmlElementAttribute("ChiSquareQuantity", typeof(ChiSquareQuantity))]
-        [System.Xml.Serialization.XmlElementAttribute("BucketedQuantity", typeof(BucketedQuantity))]
         public Quantity QuantitySpecifier { get; set; }
 
         /// <summary>

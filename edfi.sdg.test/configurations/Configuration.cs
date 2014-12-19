@@ -3,8 +3,11 @@
 namespace edfi.sdg.test.configurations
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
 
-    using edfi.sdg.utility;
+    using edfi.sdg.configurations;
 
     [TestClass]
     public class Configuration
@@ -17,8 +20,20 @@ namespace edfi.sdg.test.configurations
         public void GenerateDefaultConfiguration()
         {
             var configuration = sdg.configurations.Configuration.DefaultConfiguration;
-            //var serializer = new System.Xml.Serialization.XmlSerializer(typeof(sdg.configurations.Configuration), XmlSerializer.XmlAttributeOverrides());
-            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(sdg.configurations.Configuration));
+
+            var knownTypes = new List<Type>();
+
+            var properties =
+                typeof(sdg.configurations.Configuration).GetProperties()
+                    .Where(p => p.GetCustomAttribute<GenericXmlElementAttribute>() != null);
+
+            foreach (var propertyInfo in properties)
+            {
+                var attrib = propertyInfo.GetCustomAttribute<GenericXmlElementAttribute>();
+                knownTypes.AddRange(attrib.GetKnownTypes(propertyInfo));
+            }
+
+            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(sdg.configurations.Configuration), knownTypes.Distinct().ToArray());
             serializer.Serialize(Console.Out, configuration);
         }
     }
