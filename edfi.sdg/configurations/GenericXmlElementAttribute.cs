@@ -62,6 +62,12 @@ namespace edfi.sdg.configurations
             return result;
         }
 
+        /// <summary>
+        /// Create a list of all combination of generic types from the current assembly 
+        /// that descend from the class described in the property info
+        /// </summary>
+        /// <param name="propertyInfo"></param>
+        /// <returns></returns>
         public IEnumerable<Type> GetKnownTypes(PropertyInfo propertyInfo)
         {
             var result = new List<Type>();
