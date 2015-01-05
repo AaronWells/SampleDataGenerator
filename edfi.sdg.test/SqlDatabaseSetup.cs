@@ -12,8 +12,8 @@ namespace edfi.sdg.test
         {
             // Setup the test database based on setting in the
             // configuration file
-            SqlDatabaseTestClass.TestService.DeployDatabaseProject();
-            SqlDatabaseTestClass.TestService.GenerateData();
+//            SqlDatabaseTestClass.TestService.DeployDatabaseProject();
+//            SqlDatabaseTestClass.TestService.GenerateData();
         }
 
     }
