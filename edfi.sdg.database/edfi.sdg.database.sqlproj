@@ -61,19 +61,32 @@
     <Folder Include="dbo\tables" />
     <Folder Include="dbo\procedures" />
     <Folder Include="dbo\data" />
+    <Folder Include="stat" />
+    <Folder Include="stat\tables" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\User Defined Types\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\tables\ComplexObject.sql" />
     <Build Include="dbo\procedures\upsertComplexObject.sql" />
-    <Build Include="dbo\tables\GivenName.sql" />
-    <Build Include="dbo\tables\FamilyName.sql" />
     <None Include="dbo\data\dbo.FamilyName.Table.sql" />
     <None Include="dbo\data\dbo.GivenName.Table.sql" />
+    <Build Include="stat.sql" />
+    <Build Include="dbo\tables\StatTemplate.sql" />
+    <Build Include="dbo\tables\ComplexObjectClass.sql" />
+    <Build Include="dbo\tables\__MigrationHistory.sql" />
+    <Build Include="stat\tables\FamilyName.sql" />
+    <Build Include="stat\tables\GivenName.sql" />
+    <Build Include="dbo\Stored Procedures\GetNextValue.sql" />
+    <Build Include="dbo\User Defined Types\AttributeList.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="edfi.sdg.database.refactorlog" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="local.publish.xml" />
   </ItemGroup>
 </Project>

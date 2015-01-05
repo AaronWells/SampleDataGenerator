@@ -1,7 +1,0 @@
-﻿CREATE TABLE [dbo].[GivenName]
-(
-	[Id] BIGINT NOT NULL PRIMARY KEY IDENTITY, 
-    [Value] NVARCHAR(MAX) NOT NULL, 
-    [Attribute] NVARCHAR(MAX) NOT NULL, 
-    [Prop100k] MONEY NOT NULL
-)

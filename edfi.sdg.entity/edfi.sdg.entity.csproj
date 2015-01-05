@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{538ACC13-7B1E-4E7C-B7A0-FA371B22FD33}</ProjectGuid>
+    <ProjectGuid>{4A2D4038-CE1D-4852-B0CA-C5770B1E9F20}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>edfi.sdg</RootNamespace>
-    <AssemblyName>edfi.sdg</AssemblyName>
+    <RootNamespace>edfi.sdg.entity</RootNamespace>
+    <AssemblyName>edfi.sdg.entity</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,17 +31,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Messaging" />
-    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -51,46 +49,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyLocator.cs" />
-    <Compile Include="configurations\Configuration.cs" />
-    <Compile Include="configurations\Configuration.Default.cs" />
-    <Compile Include="configurations\GenericXmlElementAttribute.cs" />
-    <Compile Include="data\DataModel.cs" />
-    <Compile Include="generators\Distribution.cs" />
-    <Compile Include="generators\DataTableValueGenerator.cs" />
-    <Compile Include="generators\Weighting.cs" />
-    <Compile Include="generators\DistributedEnumValueGenerator.cs" />
-    <Compile Include="generators\Quantity.cs" />
-    <Compile Include="interfaces\IComplexObjectType.cs" />
-    <Compile Include="interfaces\IConfiguration.cs" />
-    <Compile Include="generators\TypeQuantityGenerator.cs" />
-    <Compile Include="interfaces\IGenerator.cs" />
-    <Compile Include="interfaces\IQuantity.cs" />
-    <Compile Include="interfaces\IQueueReader.cs" />
-    <Compile Include="interfaces\IQueueWriter.cs" />
-    <Compile Include="messaging\WorkEnvelope.cs" />
-    <Compile Include="messaging\WorkQueue.cs" />
-    <Compile Include="models\models.cs" />
-    <Compile Include="generators\Generator.cs" />
-    <Compile Include="models\models.partial.cs" />
+    <Compile Include="DataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service.cs" />
-    <Compile Include="utility\ComplexObjectRepository.cs" />
-    <Compile Include="utility\Generics.cs" />
-    <Compile Include="utility\IdentifierGenerator.cs" />
-    <Compile Include="utility\RandomExtensions.cs" />
+    <Compile Include="StatResult.cs" />
+    <Compile Include="StatTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Compile Include="configurations\Configuration.Serialization.cs" />
-    <None Include="models\models.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\edfi.sdg.entity\edfi.sdg.entity.csproj">
-      <Project>{4a2d4038-ce1d-4852-b0ca-c5770b1e9f20}</Project>
-      <Name>edfi.sdg.entity</Name>
-    </ProjectReference>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
