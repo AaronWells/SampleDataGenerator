@@ -55,6 +55,7 @@
     <Compile Include="configurations\Configuration.cs" />
     <Compile Include="configurations\Configuration.Default.cs" />
     <Compile Include="configurations\GenericXmlElementAttribute.cs" />
+    <Compile Include="data\DataAccess.cs" />
     <Compile Include="data\DataModel.cs" />
     <Compile Include="generators\Distribution.cs" />
     <Compile Include="generators\StatTableValueGenerator.cs" />
@@ -85,12 +86,6 @@
     <Compile Include="configurations\Configuration.Serialization.cs" />
     <None Include="models\models.md" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\edfi.sdg.entity\edfi.sdg.entity.csproj">
-      <Project>{4a2d4038-ce1d-4852-b0ca-c5770b1e9f20}</Project>
-      <Name>edfi.sdg.entity</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

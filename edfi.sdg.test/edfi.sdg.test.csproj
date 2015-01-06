@@ -70,10 +70,6 @@
     <Compile Include="utility\Generics.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\edfi.sdg.entity\edfi.sdg.entity.csproj">
-      <Project>{4a2d4038-ce1d-4852-b0ca-c5770b1e9f20}</Project>
-      <Name>edfi.sdg.entity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\edfi.sdg\edfi.sdg.csproj">
       <Project>{538acc13-7b1e-4e7c-b7a0-fa371b22fd33}</Project>
       <Name>edfi.sdg</Name>
