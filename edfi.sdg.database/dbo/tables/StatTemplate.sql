@@ -3,7 +3,7 @@
     [Id]        BIGINT         NOT NULL,
     [Value]     NVARCHAR (MAX) NOT NULL,
     [Attribute] NVARCHAR (400) NOT NULL,
-    [Prop100k]  DECIMAL (8, 2) NOT NULL
+    [Prop100k]  DECIMAL (12, 4) NOT NULL
 );
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_StatTemplate_Id_Attribute]
