@@ -55,6 +55,7 @@
     <Compile Include="classes\TestEnum.cs" />
     <Compile Include="classes\TestQueue.cs" />
     <Compile Include="configurations\Configuration.cs" />
+    <Compile Include="database\UnitTests.cs" />
     <Compile Include="generators\DataTableValueGeneratorTest.cs" />
     <Compile Include="generators\TypeQuantityGenerator.cs" />
     <Compile Include="classes\SerializableTestClass.cs" />
@@ -69,6 +70,10 @@
     <Compile Include="utility\Generics.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\edfi.sdg.entity\edfi.sdg.entity.csproj">
+      <Project>{4a2d4038-ce1d-4852-b0ca-c5770b1e9f20}</Project>
+      <Name>edfi.sdg.entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\edfi.sdg\edfi.sdg.csproj">
       <Project>{538acc13-7b1e-4e7c-b7a0-fa371b22fd33}</Project>
       <Name>edfi.sdg</Name>
@@ -79,9 +84,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="database\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
