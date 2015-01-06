@@ -67,11 +67,9 @@
     <Folder Include="dbo\User Defined Types\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\tables\ComplexObject.sql" />
     <Build Include="dbo\procedures\upsertComplexObject.sql" />
     <Build Include="stat.sql" />
     <Build Include="dbo\tables\StatTemplate.sql" />
-    <Build Include="dbo\tables\ComplexObjectClass.sql" />
     <Build Include="dbo\tables\__MigrationHistory.sql" />
     <Build Include="stat\tables\FamilyName.sql" />
     <Build Include="stat\tables\GivenName.sql" />
@@ -82,6 +80,8 @@
     <None Include="dbo\data\stat.FamilyName.Part3.sql" />
     <None Include="dbo\data\stat.FamilyName.Part4.sql" />
     <None Include="dbo\data\stat.GivenName.Part1.sql" />
+    <Build Include="dbo\data\ComplexObject.sql" />
+    <Build Include="dbo\data\ComplexObjectClass.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="edfi.sdg.database.refactorlog" />
