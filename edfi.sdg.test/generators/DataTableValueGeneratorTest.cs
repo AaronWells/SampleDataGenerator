@@ -12,9 +12,9 @@ namespace edfi.sdg.test.generators
         [TestInitialize]
         public void InitTest()
         {
-            var generator = new DataTableValueGenerator
+            var generator = new StatTableValueGenerator
             {
-                DataTableName = "FamilyName",
+                StatTableName = "FamilyName",
                 Attributes = new[] { "OldEthnicityType.AsianOrPacificIslander", "OldEthnicityType.Hispanic" }
             };
 

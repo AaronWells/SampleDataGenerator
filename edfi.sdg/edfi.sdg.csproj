@@ -57,7 +57,7 @@
     <Compile Include="configurations\GenericXmlElementAttribute.cs" />
     <Compile Include="data\DataModel.cs" />
     <Compile Include="generators\Distribution.cs" />
-    <Compile Include="generators\DataTableValueGenerator.cs" />
+    <Compile Include="generators\StatTableValueGenerator.cs" />
     <Compile Include="generators\Weighting.cs" />
     <Compile Include="generators\DistributedEnumValueGenerator.cs" />
     <Compile Include="generators\Quantity.cs" />

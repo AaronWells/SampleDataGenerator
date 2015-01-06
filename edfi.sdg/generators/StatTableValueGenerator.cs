@@ -9,16 +9,16 @@ namespace edfi.sdg.generators
     /// Create a number of objects of type T and put them on the work queue
     /// </summary>
     [Serializable]
-    public class DataTableValueGenerator : Generator
+    public class StatTableValueGenerator : Generator
     {
         private readonly DataAccess _dataAccess;
 
-        public DataTableValueGenerator()
+        public StatTableValueGenerator()
         {
             _dataAccess = new DataAccess();
         }
 
-        public string DataTableName { get; set; }
+        public string StatTableName { get; set; }
 
         public IEnumerable<string> Attributes { get; set; }
 
@@ -26,7 +26,7 @@ namespace edfi.sdg.generators
         {
             var results = new object[1];
 
-            results[0] = _dataAccess.GetNextValue(DataTableName, Attributes);
+            results[0] = _dataAccess.GetNextValue(StatTableName, Attributes);
 
             return results;
         }
