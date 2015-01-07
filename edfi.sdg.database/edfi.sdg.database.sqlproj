@@ -82,6 +82,7 @@
     <None Include="dbo\data\stat.GivenName.Part1.sql" />
     <Build Include="dbo\data\ComplexObject.sql" />
     <Build Include="dbo\data\ComplexObjectClass.sql" />
+    <Build Include="dbo\Stored Procedures\ValidateStatTableSchema.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="edfi.sdg.database.refactorlog" />
