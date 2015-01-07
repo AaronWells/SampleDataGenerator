@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using edfi.sdg.entity;
 using edfi.sdg.interfaces;
 
@@ -20,13 +21,32 @@ namespace edfi.sdg.generators
 
         public string StatTableName { get; set; }
 
-        public IEnumerable<string> Attributes { get; set; }
+        public string[] PropertiesToLook { get; set; }
+
+        [XmlAttribute]
+        public string PropertyToSet { get; set; }
 
         public override object[] Generate(object input, IConfiguration configuration)
         {
-            var results = new object[1];
+            var results = new[] {input};
 
-            results[0] = _dataAccess.GetNextValue(StatTableName, Attributes);
+            // property to set:
+            var type = input.GetType();
+            var propertyToSet = type.GetProperty(PropertyToSet);
+            
+            if (propertyToSet == null) return results; //todo: log error/warning
+
+            var statAttributeList = new List<string>();
+            
+            foreach (var item in PropertiesToLook)
+            {
+                var property = type.GetProperty(item);
+                var propetyValue = property.GetValue(input);
+                statAttributeList.Add((string) propetyValue);
+            }
+
+            var result = _dataAccess.GetNextValue(StatTableName, statAttributeList);
+            propertyToSet.SetValue(input, result);
 
             return results;
         }

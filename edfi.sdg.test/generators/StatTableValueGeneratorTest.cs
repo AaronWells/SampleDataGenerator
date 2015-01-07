@@ -7,18 +7,32 @@ namespace edfi.sdg.test.generators
     [TestClass]
     public class StatTableValueGeneratorTest
     {
-        [TestMethod]
-        public void result_should_be_null()
+        public class SampleClass
         {
+            public string Name { get; set; }
+            public string Ethnicity { get; set; }
+            public string Gender { get; set; }
+        }
+
+        [TestMethod]
+        public void TestGetNextValue()
+        {
+            var input = new SampleClass
+            {
+                Ethnicity = "OldEthnicityType.AsianOrPacificIslander",
+                Gender = "M"
+            };
+
             var generator = new StatTableValueGenerator
             {
                 StatTableName = "FamilyName",
-                Attributes = new[] { "OldEthnicityType.AsianOrPacificIslander", "OldEthnicityType.Hispanic" }
+                PropertyToSet = "Name",
+                PropertiesToLook = new[] { "Ethnicity", "Gender" }
             };
 
-            var result = (string) generator.Generate(null, null)[0];
-            Assert.AreNotEqual(null, result);
-            Console.WriteLine(result);
+            generator.Generate(input, null);
+            Assert.AreNotEqual(null, input.Name);
+            Console.WriteLine(input.Name);
         }
     }
 }

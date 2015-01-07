@@ -56,7 +56,7 @@
     <Compile Include="classes\TestQueue.cs" />
     <Compile Include="configurations\Configuration.cs" />
     <Compile Include="database\UnitTests.cs" />
-    <Compile Include="generators\DataTableValueGeneratorTest.cs" />
+    <Compile Include="generators\StatTableValueGeneratorTest.cs" />
     <Compile Include="generators\TypeQuantityGenerator.cs" />
     <Compile Include="classes\SerializableTestClass.cs" />
     <Compile Include="generators\DistributedEnumValueGenerator.cs" />
