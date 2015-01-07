@@ -16,7 +16,12 @@ namespace edfi.sdg.test.generators
         {
             var allPassed = true;
             var assembly = Assembly.GetAssembly(typeof(AssemblyLocator));
-            foreach (var type in assembly.GetTypes().Where(t => t.Namespace == "edfi.sdg.generators" && !t.IsAbstract && !t.IsGenericTypeDefinition).OrderBy(t => t.Name))
+            var typesToBeSerialized = assembly.GetTypes()
+                .Where(t => t.Namespace == "edfi.sdg.generators" && !t.IsAbstract && !t.IsGenericTypeDefinition)
+                .Where(t => !t.Name.StartsWith("<>")) // to exclude anonymous types
+                .OrderBy(t => t.Name);
+
+            foreach (var type in typesToBeSerialized)
                 using (var stream = new MemoryStream())
                 {
                     try

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Serialization;
-using edfi.sdg.entity;
 using edfi.sdg.interfaces;
+using edfi.sdg.utility;
 
 namespace edfi.sdg.generators
 {
@@ -12,14 +12,7 @@ namespace edfi.sdg.generators
     [Serializable]
     public class StatTableValueGenerator : Generator
     {
-        private readonly DataAccess _dataAccess;
-
-        public StatTableValueGenerator()
-        {
-            _dataAccess = new DataAccess();
-        }
-
-        public string StatTableName { get; set; }
+        public StatDataProviderBase DataProvider { get; set; }
 
         public string[] PropertiesToLook { get; set; }
 
@@ -30,23 +23,11 @@ namespace edfi.sdg.generators
         {
             var results = new[] {input};
 
-            // property to set:
-            var type = input.GetType();
-            var propertyToSet = type.GetProperty(PropertyToSet);
-            
-            if (propertyToSet == null) return results; //todo: log error/warning
+            var statAttributeList = PropertiesToLook.Select(property => (string) input.GetValue(property)).ToArray();
 
-            var statAttributeList = new List<string>();
+            var result = DataProvider.GetNextValue(statAttributeList);
             
-            foreach (var item in PropertiesToLook)
-            {
-                var property = type.GetProperty(item);
-                var propetyValue = property.GetValue(input);
-                statAttributeList.Add((string) propetyValue);
-            }
-
-            var result = _dataAccess.GetNextValue(StatTableName, statAttributeList);
-            propertyToSet.SetValue(input, result);
+            input.SetValue(PropertyToSet, result);
 
             return results;
         }

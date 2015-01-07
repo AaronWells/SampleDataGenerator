@@ -55,6 +55,9 @@
     <Compile Include="classes\TestEnum.cs" />
     <Compile Include="classes\TestQueue.cs" />
     <Compile Include="configurations\Configuration.cs" />
+    <Compile Include="database\GetNextValue.cs">
+      <SubType>Designer</SubType>
+    </Compile>
     <Compile Include="database\UnitTests.cs" />
     <Compile Include="generators\StatTableValueGeneratorTest.cs" />
     <Compile Include="generators\TypeQuantityGenerator.cs" />
@@ -80,7 +83,11 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="database\GetNextValue.resx">
+      <DependentUpon>GetNextValue.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -58,6 +58,9 @@
     <Compile Include="data\DataAccess.cs" />
     <Compile Include="data\DataModel.cs" />
     <Compile Include="generators\Distribution.cs" />
+    <Compile Include="utility\InvalidPropertyException.cs" />
+    <Compile Include="generators\MemoryStatDataProvider.cs" />
+    <Compile Include="utility\ObjectExtensions.cs" />
     <Compile Include="generators\StatTableValueGenerator.cs" />
     <Compile Include="generators\Weighting.cs" />
     <Compile Include="generators\DistributedEnumValueGenerator.cs" />
@@ -69,6 +72,7 @@
     <Compile Include="interfaces\IQuantity.cs" />
     <Compile Include="interfaces\IQueueReader.cs" />
     <Compile Include="interfaces\IQueueWriter.cs" />
+    <Compile Include="interfaces\IStatDataProvider.cs" />
     <Compile Include="messaging\WorkEnvelope.cs" />
     <Compile Include="messaging\WorkQueue.cs" />
     <Compile Include="models\models.cs" />

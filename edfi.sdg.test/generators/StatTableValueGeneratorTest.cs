@@ -1,9 +1,20 @@
 ﻿using edfi.sdg.generators;
+using edfi.sdg.interfaces;
+using edfi.sdg.utility;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace edfi.sdg.test.generators
 {
+    [Serializable]
+    public class MemoryStatDataProvider : StatDataProviderBase
+    {
+        public override string GetNextValue(string[] lookupProperties)
+        {
+            return "test";
+        }
+    }
+
     [TestClass]
     public class StatTableValueGeneratorTest
     {
@@ -15,7 +26,7 @@ namespace edfi.sdg.test.generators
         }
 
         [TestMethod]
-        public void TestGetNextValue()
+        public void TestWithGoodPropertyName()
         {
             var input = new SampleClass
             {
@@ -25,14 +36,30 @@ namespace edfi.sdg.test.generators
 
             var generator = new StatTableValueGenerator
             {
-                StatTableName = "FamilyName",
+                DataProvider = new MemoryStatDataProvider(),
                 PropertyToSet = "Name",
                 PropertiesToLook = new[] { "Ethnicity", "Gender" }
             };
 
             generator.Generate(input, null);
-            Assert.AreNotEqual(null, input.Name);
+            Assert.AreEqual("test", input.Name);
             Console.WriteLine(input.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidPropertyException))]
+        public void TestWithBadPropertyName()
+        {
+            var input = new SampleClass();
+
+            var generator = new StatTableValueGenerator
+            {
+                DataProvider = new MemoryStatDataProvider(),
+                PropertyToSet = "UnknownPropertyName",
+                PropertiesToLook = new string[] { }
+            };
+
+            generator.Generate(input, null);
         }
     }
 }
