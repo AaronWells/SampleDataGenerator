@@ -8,7 +8,7 @@ namespace edfi.sdg.test.database
     public class UnitTests
     {
         [TestMethod]
-        public void next_random_family_name_should_not_be_null()
+        public void TestGetNextValue()
         {
             var value = new DataAccess().GetNextValue("FamilyName", new []{"OldEthnicityType.AsianOrPacificIslander", "OldEthnicityType.Hispanic"});
 
