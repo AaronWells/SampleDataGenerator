@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7.App", "7.App", "{5757E3A7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Service", "5.Service", "{BA031760-AD41-45E2-B6B3-5FA66575A8AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "edfi.sdg.database.test", "edfi.sdg.database.test\edfi.sdg.database.test.csproj", "{886C58B2-7F0E-4308-88D1-90655508F0A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{D535B687-EC0D-4715-9D70-C84D5BD4BA19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D535B687-EC0D-4715-9D70-C84D5BD4BA19}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D535B687-EC0D-4715-9D70-C84D5BD4BA19}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{886C58B2-7F0E-4308-88D1-90655508F0A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{886C58B2-7F0E-4308-88D1-90655508F0A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{886C58B2-7F0E-4308-88D1-90655508F0A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{886C58B2-7F0E-4308-88D1-90655508F0A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,5 +60,6 @@ Global
 		{15C85A07-72E7-4301-99F3-E8BE99668ED5} = {5757E3A7-91C7-4B48-BD78-AF539D14A2D9}
 		{375A7289-ABB5-41FF-B7ED-381C09EAA28F} = {D2BB25A8-45E3-42A4-A395-DAE39CC9274A}
 		{D535B687-EC0D-4715-9D70-C84D5BD4BA19} = {56546829-9D8F-406E-9A3A-0787EC0B23C8}
+		{886C58B2-7F0E-4308-88D1-90655508F0A9} = {D2BB25A8-45E3-42A4-A395-DAE39CC9274A}
 	EndGlobalSection
 EndGlobal
