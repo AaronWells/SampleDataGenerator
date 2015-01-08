@@ -1,4 +1,6 @@
-﻿namespace edfi.sdg.generators
+﻿using edfi.sdg.utility;
+
+namespace edfi.sdg.generators
 {
     using System;
     using System.Linq;
@@ -26,28 +28,27 @@
         {
             var type = input.GetType();
 
-            if (Property.StartsWith(type.Name))
-            {
-                var propertyName = Property.Substring(type.Name.Length + 1);
-                var property = type.GetProperty(propertyName);
+            if (Property.FirstSegment() != type.Name) return new[] {input};
 
-                if (property != null)
+            var propertyName = Property.LastSegment();
+            var property = type.GetProperty(propertyName);
+
+            if (property != null)
+            {
+                if (property.PropertyType.IsArray)
                 {
-                    if (property.PropertyType.IsArray)
+                    var array = Distribution.Shuffled<T>().Take(Quantity.Next()).ToArray();
+                    property.GetSetMethod().Invoke(input, new object[] { array });
+                }
+                else
+                {
+                    var single = Distribution.Next<T>();
+                    property.GetSetMethod().Invoke(input, new object[] { single });
+                    if (type.GetProperty(propertyName + "Specified") != null)
                     {
-                        var array = Distribution.Shuffled<T>().Take(Quantity.Next()).ToArray();
-                        property.GetSetMethod().Invoke(input, new object[] { array });
-                    }
-                    else
-                    {
-                        var single = Distribution.Next<T>();
-                        property.GetSetMethod().Invoke(input, new object[] { single });
-                        if (type.GetProperty(propertyName + "Specified") != null)
-                        {
-                            type.GetProperty(propertyName + "Specified")
-                                .GetSetMethod()
-                                .Invoke(input, new object[] { true });
-                        }
+                        type.GetProperty(propertyName + "Specified")
+                            .GetSetMethod()
+                            .Invoke(input, new object[] { true });
                     }
                 }
             }

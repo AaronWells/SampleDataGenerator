@@ -17,5 +17,16 @@ namespace edfi.sdg.utility
             if(property == null) throw new InvalidPropertyException(propertyName);
             property.SetValue(o, value);
         }
+
+        public static string FirstSegment(this string propertyName)
+        {
+            return propertyName.Split(new[] {'.'})[0];
+        }
+
+        public static string LastSegment(this string propertyName)
+        {
+            var splitted = propertyName.Split(new[] {'.'});
+            return splitted[splitted.Length - 1];
+        }
     }
 }
