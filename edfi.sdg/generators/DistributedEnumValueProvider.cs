@@ -7,7 +7,7 @@
     using edfi.sdg.interfaces;
 
     [Serializable]
-    public class DistributedEnumValueGenerator<T> : Generator where T : struct, IConvertible
+    public class DistributedEnumValueProvider<T> : WorkItem where T : struct, IConvertible
     {
         [XmlAttribute]
         public string Property { get; set; }
@@ -16,13 +16,13 @@
         
         public Quantity Quantity { get; set; }
 
-        public DistributedEnumValueGenerator()
+        public DistributedEnumValueProvider()
         {
             Distribution = new RangeDistribution(); // RangeDistribution<T>();
             Quantity = new ConstantQuantity() { Quantity = 1 };
         }
 
-        public override object[] Generate(object input, IConfiguration configuration)
+        public override object[] DoWork(object input, IConfiguration configuration)
         {
             var type = input.GetType();
 

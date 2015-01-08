@@ -34,14 +34,14 @@ namespace edfi.sdg.test.generators
                 Gender = "M"
             };
 
-            var generator = new StatTableValueGenerator
+            var generator = new StatTableValueProvider
             {
                 DataProvider = new MemoryStatDataProvider(),
                 PropertyToSet = "Name",
                 PropertiesToLook = new[] { "Ethnicity", "Gender" }
             };
 
-            generator.Generate(input, null);
+            generator.DoWork(input, null);
             Assert.AreEqual("test", input.Name);
             Console.WriteLine(input.Name);
         }
@@ -52,14 +52,14 @@ namespace edfi.sdg.test.generators
         {
             var input = new SampleClass();
 
-            var generator = new StatTableValueGenerator
+            var generator = new StatTableValueProvider
             {
                 DataProvider = new MemoryStatDataProvider(),
                 PropertyToSet = "UnknownPropertyName",
                 PropertiesToLook = new string[] { }
             };
 
-            generator.Generate(input, null);
+            generator.DoWork(input, null);
         }
     }
 }

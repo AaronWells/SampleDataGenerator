@@ -21,7 +21,7 @@ namespace edfi.sdg.test.generators
 
             for (var i = 0; i < 10000; i++)
             {
-                var generator = new DistributedEnumValueGenerator<TestEnum>
+                var generator = new DistributedEnumValueProvider<TestEnum>
                 {
                     Distribution = new BucketedDistribution()
                     {
@@ -34,7 +34,7 @@ namespace edfi.sdg.test.generators
                     Property = "SerializableTestClass.TestEnum",
                 };
                 var obj = new SerializableTestClass();
-                foreach (var tmp in generator.Generate(obj, config))
+                foreach (var tmp in generator.DoWork(obj, config))
                 {
                     queue.WriteObject(tmp);
                 }

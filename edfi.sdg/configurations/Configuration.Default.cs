@@ -3,6 +3,8 @@ using edfi.sdg.models;
 
 namespace edfi.sdg.configurations
 {
+    using System.Collections.Generic;
+
     public partial class Configuration
     {
         public static Configuration DefaultConfiguration
@@ -14,11 +16,17 @@ namespace edfi.sdg.configurations
                     MaxQueueWrites = 10,
                     NumThreads = 1,
                     WorkQueueName = @".\Private$\edfi.sdg",
-                    Generators = new Generator[]
+                    ValueRules = new ValueRule[]
                     {
-                        new TypeQuantityGenerator<Student> {QuantitySpecifier = new ConstantQuantity {Quantity = 200}},
-                        new DistributedEnumValueGenerator<SexType> {Property = "Student.Sex"},
-                        new DistributedEnumValueGenerator<OldEthnicityType> {Property = "Student.OldEthnicity"},
+                        new ValueRule{Criteria = "Sex", ValueProvider = new SampleValueProvider{MyValue = "foobar"} }
+                    },
+                    WorkItems = new WorkItem[]
+                    {
+                        new TypeQuantityWorkItem<Student> {QuantitySpecifier = new ConstantQuantity {Quantity = 200}},
+                        new PropertyPopulatorWorkItem{Classes = new string[]{"Student"}},
+
+                        new DistributedEnumValueProvider<SexType> {Property = "Student.Sex"},
+                        new DistributedEnumValueProvider<OldEthnicityType> {Property = "Student.OldEthnicity"},
 
 //                        new StatTableValueGenerator {PropertyToSet = "Name", PropertiesToLook = new[] {"Student.OldEthnicity", "Student.Sex"}, DataProvider = new DatabaseStatDataProvider{ StatTableName = "GivenName" }},
 
