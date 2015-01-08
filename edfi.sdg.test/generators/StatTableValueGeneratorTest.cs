@@ -37,8 +37,8 @@ namespace edfi.sdg.test.generators
             var generator = new StatTableValueGenerator
             {
                 DataProvider = new MemoryStatDataProvider(),
-                PropertyToSet = "Name",
-                PropertiesToLook = new[] { "Ethnicity", "Gender" }
+                PropertyToSet = "SampleClass.Name",
+                PropertiesToLook = new[] { "SampleClass.Ethnicity", "SampleClass.Gender" }
             };
 
             generator.Generate(input, null);
@@ -55,7 +55,7 @@ namespace edfi.sdg.test.generators
             var generator = new StatTableValueGenerator
             {
                 DataProvider = new MemoryStatDataProvider(),
-                PropertyToSet = "UnknownPropertyName",
+                PropertyToSet = "SampleClass.UnknownPropertyName",
                 PropertiesToLook = new string[] { }
             };
 

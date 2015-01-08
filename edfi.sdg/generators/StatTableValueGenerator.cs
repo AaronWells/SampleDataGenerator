@@ -23,11 +23,13 @@ namespace edfi.sdg.generators
         {
             var results = new[] {input};
 
-            var statAttributeList = PropertiesToLook.Select(property => (string) input.GetValue(property)).ToArray();
+            if (PropertyToSet.FirstSegment() != input.GetType().Name) return new[] { input };
+
+            var statAttributeList = PropertiesToLook.Select(property => (string) input.GetValue(property.LastSegment())).ToArray();
 
             var result = DataProvider.GetNextValue(statAttributeList);
             
-            input.SetValue(PropertyToSet, result);
+            input.SetValue(PropertyToSet.LastSegment(), result);
 
             return results;
         }
