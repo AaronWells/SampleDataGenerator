@@ -25,7 +25,15 @@ namespace edfi.sdg.generators
 
             if (PropertyToSet.FirstSegment() != input.GetType().Name) return new[] { input };
 
-            var statAttributeList = PropertiesToLook.Select(property => (string) input.GetValue(property.LastSegment())).ToArray();
+            var statAttributeList = PropertiesToLook.Select(property =>
+            {
+                var propertyName = property.LastSegment();
+                var propertyValue = input.GetValue(propertyName);
+                if (propertyValue.GetType().IsEnum)
+                    return string.Format("{0}.{1}", propertyValue.GetType().Name, propertyValue);
+
+                return (string) input.GetValue(propertyName);
+            }).ToArray();
 
             var result = DataProvider.GetNextValue(statAttributeList);
             

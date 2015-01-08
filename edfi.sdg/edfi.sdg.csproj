@@ -59,7 +59,7 @@
     <Compile Include="data\DataModel.cs" />
     <Compile Include="generators\Distribution.cs" />
     <Compile Include="utility\InvalidPropertyException.cs" />
-    <Compile Include="generators\MemoryStatDataProvider.cs" />
+    <Compile Include="generators\DatabaseStatDataProvider.cs" />
     <Compile Include="utility\ObjectExtensions.cs" />
     <Compile Include="generators\StatTableValueGenerator.cs" />
     <Compile Include="generators\Weighting.cs" />

@@ -30,7 +30,7 @@ namespace edfi.sdg.test.generators
         {
             var input = new SampleClass
             {
-                Ethnicity = "OldEthnicityType.AsianOrPacificIslander",
+                Ethnicity = "Ethnicity.AsianOrPacificIslander",
                 Gender = "M"
             };
 

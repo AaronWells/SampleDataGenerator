@@ -9,7 +9,7 @@ namespace edfi.sdg.entity
     {
         public string GetNextValue(string statTableName, IEnumerable<string> attributes)
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["EdFiSdg"].ConnectionString;
+            var connectionString = ConfigurationManager.ConnectionStrings["DataModel"].ConnectionString;
 
             using (var connection = new SqlConnection(connectionString))
             {
