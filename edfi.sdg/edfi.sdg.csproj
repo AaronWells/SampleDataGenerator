@@ -62,6 +62,7 @@
     <Compile Include="generators\Generator.cs" />
     <Compile Include="generators\PropertyPopulatorWorkItem.cs" />
     <Compile Include="generators\ValueProvider.cs" />
+    <Compile Include="interfaces\IValueProvider.cs" />
     <Compile Include="utility\InvalidPropertyException.cs" />
     <Compile Include="generators\DatabaseStatDataProvider.cs" />
     <Compile Include="utility\ObjectExtensions.cs" />

@@ -18,15 +18,16 @@ namespace edfi.sdg.configurations
                     WorkQueueName = @".\Private$\edfi.sdg",
                     ValueRules = new ValueRule[]
                     {
-                        new ValueRule{Criteria = "Sex", ValueProvider = new SampleValueProvider{MyValue = "foobar"} }
+                        new ValueRule{Criteria = "Sex", ValueProvider = new DistributedEnumValueProvider<SexType>()},
+                        new ValueRule{Criteria = "OldEthnicity", ValueProvider = new DistributedEnumValueProvider<OldEthnicityType>()},
                     },
                     WorkItems = new WorkItem[]
                     {
                         new TypeQuantityWorkItem<Student> {QuantitySpecifier = new ConstantQuantity {Quantity = 200}},
                         new PropertyPopulatorWorkItem{Classes = new string[]{"Student"}},
 
-                        new DistributedEnumValueProvider<SexType> {Property = "Student.Sex"},
-                        new DistributedEnumValueProvider<OldEthnicityType> {Property = "Student.OldEthnicity"},
+                        new DistributedEnumWorkItem<SexType> {Property = "Student.Sex"},
+                        new DistributedEnumWorkItem<OldEthnicityType> {Property = "Student.OldEthnicity"},
 
 //                        new StatTableValueGenerator {PropertyToSet = "Name", PropertiesToLook = new[] {"Student.OldEthnicity", "Student.Sex"}, DataProvider = new DatabaseStatDataProvider{ StatTableName = "GivenName" }},
 

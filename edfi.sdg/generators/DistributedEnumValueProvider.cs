@@ -6,8 +6,32 @@
 
     using edfi.sdg.interfaces;
 
+    public class DistributedEnumValueProvider<T> : ValueProvider
+        where T : struct, IConvertible
+    {
+        public Distribution Distribution { get; set; }
+        
+        public Quantity Quantity { get; set; }
+
+        public DistributedEnumValueProvider()
+        {
+            Distribution = new RangeDistribution(); 
+            Quantity = new ConstantQuantity() { Quantity = 1 };
+        }
+        
+        public override object GetValue()
+        {
+            if (typeof(T).IsArray)
+            {
+                return Distribution.Shuffled<T>().Take(Quantity.Next()).ToArray();
+            }
+            return this.Distribution.Next<T>();
+        }
+    }
+
+    [Obsolete]
     [Serializable]
-    public class DistributedEnumValueProvider<T> : WorkItem where T : struct, IConvertible
+    public class DistributedEnumWorkItem<T> : WorkItem where T : struct, IConvertible
     {
         [XmlAttribute]
         public string Property { get; set; }
@@ -16,7 +40,7 @@
         
         public Quantity Quantity { get; set; }
 
-        public DistributedEnumValueProvider()
+        public DistributedEnumWorkItem()
         {
             Distribution = new RangeDistribution(); // RangeDistribution<T>();
             Quantity = new ConstantQuantity() { Quantity = 1 };

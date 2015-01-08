@@ -10,7 +10,7 @@ namespace edfi.sdg.test.generators
     using edfi.sdg.test.classes;
 
     [TestClass]
-    public class DistributedEnumValueGenerator
+    public class DistributedEnumWorkItem
     {
         [TestMethod]
         public void TestRandomDistribution()
@@ -21,7 +21,7 @@ namespace edfi.sdg.test.generators
 
             for (var i = 0; i < 10000; i++)
             {
-                var generator = new DistributedEnumValueProvider<TestEnum>
+                var generator = new DistributedEnumWorkItem<TestEnum>
                 {
                     Distribution = new BucketedDistribution()
                     {

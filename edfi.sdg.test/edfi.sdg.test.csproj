@@ -58,7 +58,7 @@
     <Compile Include="generators\StatTableValueGeneratorTest.cs" />
     <Compile Include="generators\TypeQuantityGenerator.cs" />
     <Compile Include="classes\SerializableTestClass.cs" />
-    <Compile Include="generators\DistributedEnumValueGenerator.cs" />
+    <Compile Include="generators\DistributedEnumWorkItem.cs" />
     <Compile Include="generators\Quantity.cs" />
     <Compile Include="messaging\WorkQueue.cs" />
     <Compile Include="models\Models.cs" />

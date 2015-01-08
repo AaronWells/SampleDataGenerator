@@ -4,12 +4,12 @@ namespace edfi.sdg.generators
 {
     using System.Xml.Serialization;
 
+    using edfi.sdg.interfaces;
+
     [Serializable]
-    [XmlInclude(typeof(SampleValueProvider))]
-    public abstract class ValueProvider
+    public abstract class ValueProvider: IValueProvider
     {
         public abstract object GetValue();
-        public abstract object[] GetValues();
     }
 
     public class SampleValueProvider : ValueProvider
@@ -20,11 +20,6 @@ namespace edfi.sdg.generators
         public override object GetValue()
         {
             return MyValue;
-        }
-
-        public override object[] GetValues()
-        {
-            return new object[] { MyValue + "1", MyValue + "2" };
         }
     }
 }
