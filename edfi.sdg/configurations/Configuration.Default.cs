@@ -3,8 +3,6 @@ using edfi.sdg.models;
 
 namespace edfi.sdg.configurations
 {
-    using System.Collections.Generic;
-
     public partial class Configuration
     {
         public static Configuration DefaultConfiguration
@@ -25,21 +23,6 @@ namespace edfi.sdg.configurations
                     {
                         new TypeQuantityWorkItem<Student> {QuantitySpecifier = new ConstantQuantity {Quantity = 200}},
                         new PropertyPopulatorWorkItem{ClassFilterRegex = @"^edfi\.sdg\.models\.((Student)|(Parent))$"},
-                        new StatTableValueGenerator {PropertyToSet = "Student.Name", PropertiesToLook = new[] {"Student.OldEthnicity", "Student.Sex"}, DataProvider = new DatabaseStatDataProvider{ StatTableName = "GivenName" }},
-
-/*
- * to do composition
- * one way
-                        new StatTableValueGenerator {PropertyToSet = "Name", PropertiesToLook = new[] {"Student.OldEthnicity", "Student.Sex"}, DataProvider = new DatabaseStatDataProvider{ StatTableName = "FamilyName" }, Action = "Append" },
-* the other way
-                        new FullNameGenerator
-                        {
-                            PropertyToSet = "Name", 
-                            Format = "{1}, {0}"
-                            new StatTableValueGenerator {PropertyToSet = "Name", PropertiesToLook = new[] {"Student.OldEthnicity", "Student.Sex"}, DataProvider = new DatabaseStatDataProvider{ StatTableName = "GivenName" }},
-                            new StatTableValueGenerator {PropertyToSet = "Name", PropertiesToLook = new[] {"Student.OldEthnicity", "Student.Sex"}, DataProvider = new DatabaseStatDataProvider{ StatTableName = "FamilyName" }},
-                        }
-*/
                     }
                 };
             }
