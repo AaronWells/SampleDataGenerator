@@ -10,9 +10,57 @@ namespace edfi.sdg.test.generators
     using edfi.sdg.test.classes;
 
     [TestClass]
-    public class DistributedEnumValueGenerator
+    public class DistributedEnumValueProvider
     {
         [TestMethod]
+        public void TestDistribution()
+        {
+            var count = 0.0;
+            for (var i = 0; i < 10000; i++)
+            {
+                var valueProvider = new edfi.sdg.generators.DistributedEnumValueProvider<TestEnum>()
+                    {
+                        Distribution = new BucketedDistribution
+                            {
+                                Weightings = new Weighting[]
+                                    {
+                                        new Weighting{Value = TestEnum.Alpha, Weight = 0.5},
+                                        new Weighting{Value = TestEnum.Charlie, Weight = 0.5},
+                                    }
+                            }
+                    };
+
+                var value = (TestEnum)valueProvider.GetValue();
+
+                switch (value)
+                {
+                    case TestEnum.Alpha:
+                        count += 1.0;
+                        break;
+                    case TestEnum.Bravo:
+                        break;
+                    case TestEnum.Charlie:
+                        break;
+                    case TestEnum.Delta:
+                        break;
+                    case TestEnum.Foxtrot:
+                        break;
+                    case TestEnum.Golf:
+                        break;
+                    case TestEnum.Hotel:
+                        break;
+                    case TestEnum.Igloo:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            var result = count / 10000.0;
+            Debug.WriteLine("{0} percent were alpha", result);
+            Assert.IsTrue(Math.Abs(result - 0.5) < 0.05);
+        }
+
+        [TestMethod, Obsolete]
         public void TestRandomDistribution()
         {
 
@@ -21,7 +69,7 @@ namespace edfi.sdg.test.generators
 
             for (var i = 0; i < 10000; i++)
             {
-                var generator = new DistributedEnumValueGenerator<TestEnum>
+                var generator = new DistributedEnumWorkItem<TestEnum>
                 {
                     Distribution = new BucketedDistribution()
                     {
@@ -34,7 +82,7 @@ namespace edfi.sdg.test.generators
                     Property = "SerializableTestClass.TestEnum",
                 };
                 var obj = new SerializableTestClass();
-                foreach (var tmp in generator.Generate(obj, config))
+                foreach (var tmp in generator.DoWork(obj, config))
                 {
                     queue.WriteObject(tmp);
                 }
@@ -67,7 +115,6 @@ namespace edfi.sdg.test.generators
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-
             }
             var result = count / 10000.0;
             Debug.WriteLine("{0} percent were alpha", result);

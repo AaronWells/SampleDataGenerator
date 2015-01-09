@@ -1,5 +1,7 @@
 ﻿namespace edfi.sdg.configurations
 {
+    using System.Collections.Generic;
+
     using edfi.sdg.generators;
     using edfi.sdg.interfaces;
     using edfi.sdg.models;
@@ -13,23 +15,28 @@
 
         public string WorkQueueName { get; set; }
 
-        private Generator[] generators;
+        /// <summary>
+        /// string is the matching criteria (*.Name.FirstName)
+        /// </summary>
+        public ValueRule[] ValueRules { get; set; }
+
+        private WorkItem[] workItems;
 
         /// <summary>
         /// List of generators to run. Each generator type must exist in the attributes listed here. 
         /// Generics MUST also list every valid value for their parameters for XML serialization to work.
         /// </summary>
         [GenericXmlElementAttribute(BaseTargetType = typeof(ComplexObjectType))]
-        public Generator[] Generators {
+        public WorkItem[] WorkItems {
             get
             {
-                return this.generators;
+                return this.workItems;
             }
             set
             {
                 var idx = 1;
-                this.generators = value;
-                foreach (var generator in this.generators)
+                this.workItems = value;
+                foreach (var generator in this.workItems)
                 {
                     generator.Id = idx++;
                 }

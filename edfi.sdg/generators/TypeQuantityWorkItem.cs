@@ -10,7 +10,7 @@
     /// </summary>
     /// <typeparam name="T">The type of object to generate</typeparam>
     [Serializable]
-    public class TypeQuantityGenerator<T> : Generator where T : IComplexObjectType, new()
+    public class TypeQuantityWorkItem<T> : WorkItem where T : IComplexObjectType, new()
     {
         /// <summary>
         /// Number of objects to create
@@ -25,7 +25,7 @@
         /// <param name="input">ignored</param>
         /// <param name="configuration">uses MaxQueueWrites property</param>
         /// <returns>an array of work items</returns>
-        public override object[] Generate(object input, IConfiguration configuration)
+        protected override object[] DoWorkImplementation(object input, IConfiguration configuration)
         {
             object[] results;
             var qty = QuantitySpecifier.Next();
@@ -33,8 +33,8 @@
             {
                 results = new object[]
                               {
-                                  new TypeQuantityGenerator<T> { Id = this.Id, QuantitySpecifier = new ConstantQuantity { Quantity = qty / 2 } },
-                                  new TypeQuantityGenerator<T> { Id = this.Id, QuantitySpecifier = new ConstantQuantity { Quantity = qty / 2 + qty % 2 } }
+                                  new TypeQuantityWorkItem<T> { Id = this.Id, QuantitySpecifier = new ConstantQuantity { Quantity = qty / 2 } },
+                                  new TypeQuantityWorkItem<T> { Id = this.Id, QuantitySpecifier = new ConstantQuantity { Quantity = qty / 2 + qty % 2 } }
                               };
             }
             else

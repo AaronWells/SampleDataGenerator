@@ -8,8 +8,37 @@ namespace edfi.sdg.generators
 
     using edfi.sdg.interfaces;
 
+    public class DistributedEnumValueProvider<T> : ValueProvider
+        where T : struct, IConvertible
+    {
+        public Distribution Distribution { get; set; }
+        
+        public Quantity Quantity { get; set; }
+
+        public DistributedEnumValueProvider()
+        {
+            Distribution = new RangeDistribution(); 
+            Quantity = new ConstantQuantity() { Quantity = 1 };
+        }
+        
+        public override object GetValue(params string[] lookupPropertyValues)
+        {
+            return this.GetValue();
+        }
+
+        public override object GetValue()
+        {
+            if (typeof(T).IsArray)
+            {
+                return Distribution.Shuffled<T>().Take(Quantity.Next()).ToArray();
+            }
+            return this.Distribution.Next<T>();
+        }
+    }
+
+    [Obsolete]
     [Serializable]
-    public class DistributedEnumValueGenerator<T> : Generator where T : struct, IConvertible
+    public class DistributedEnumWorkItem<T> : WorkItem where T : struct, IConvertible
     {
         [XmlAttribute]
         public string Property { get; set; }
@@ -18,13 +47,13 @@ namespace edfi.sdg.generators
         
         public Quantity Quantity { get; set; }
 
-        public DistributedEnumValueGenerator()
+        public DistributedEnumWorkItem()
         {
             Distribution = new RangeDistribution(); // RangeDistribution<T>();
             Quantity = new ConstantQuantity() { Quantity = 1 };
         }
 
-        public override object[] Generate(object input, IConfiguration configuration)
+        protected override object[] DoWorkImplementation(object input, IConfiguration configuration)
         {
             var type = input.GetType();
 

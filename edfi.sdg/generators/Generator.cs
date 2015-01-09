@@ -1,17 +1,16 @@
-﻿namespace edfi.sdg.generators
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace edfi.sdg.generators
 {
-    using System;
-    using System.Xml.Serialization;
-
-    using edfi.sdg.interfaces;
-    [Serializable]
-    public abstract class Generator : IGenerator
+    public class Generator
     {
-        protected static readonly Random Rnd = new Random();
-
-        [XmlIgnore]
-        public int Id { get; set; }
-
-        public abstract object[] Generate(object input, IConfiguration configuration);
+        public static void Populate(object input)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

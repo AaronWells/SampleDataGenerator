@@ -16,7 +16,7 @@ namespace edfi.sdg.test.generators
     }
 
     [TestClass]
-    public class StatTableValueGeneratorTest
+    public class StatTableValueGenerator
     {
         public class SampleClass
         {
@@ -25,7 +25,7 @@ namespace edfi.sdg.test.generators
             public string Gender { get; set; }
         }
 
-        [TestMethod]
+        [TestMethod, Obsolete]
         public void TestWithGoodPropertyName()
         {
             var input = new SampleClass
@@ -34,32 +34,32 @@ namespace edfi.sdg.test.generators
                 Gender = "M"
             };
 
-            var generator = new StatTableValueGenerator
+            var generator = new StatTableWorkItem
             {
                 DataProvider = new MemoryStatDataProvider(),
                 PropertyToSet = "SampleClass.Name",
                 PropertiesToLook = new[] { "SampleClass.Ethnicity", "SampleClass.Gender" }
             };
 
-            generator.Generate(input, null);
+            generator.DoWork(input, null);
             Assert.AreEqual("test", input.Name);
             Console.WriteLine(input.Name);
         }
 
-        [TestMethod]
+        [TestMethod, Obsolete]
         [ExpectedException(typeof(InvalidPropertyException))]
         public void TestWithBadPropertyName()
         {
             var input = new SampleClass();
 
-            var generator = new StatTableValueGenerator
+            var generator = new StatTableWorkItem
             {
                 DataProvider = new MemoryStatDataProvider(),
                 PropertyToSet = "SampleClass.UnknownPropertyName",
                 PropertiesToLook = new string[] { }
             };
 
-            generator.Generate(input, null);
+            generator.DoWork(input, null);
         }
     }
 }

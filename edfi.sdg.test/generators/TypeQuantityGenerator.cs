@@ -28,13 +28,13 @@ namespace edfi.sdg.test.generators
                                         MaxQueueWrites = 50
                                     };
 
-            var generator = (IGenerator)new edfi.sdg.generators.TypeQuantityGenerator<SerializableTestClass>()
+            var generator = (IWorkItem)new edfi.sdg.generators.TypeQuantityWorkItem<SerializableTestClass>()
                                 {
                                     Id = 1,
                                     QuantitySpecifier = new ConstantQuantity { Quantity = SpecifiedQuantity },
                                 };
 
-            foreach (var tmp in generator.Generate(null, configuration))
+            foreach (var tmp in generator.DoWork(null, configuration))
             {
                 queue.WriteObject(tmp);
             }
@@ -43,14 +43,14 @@ namespace edfi.sdg.test.generators
             {
                 var task = queue.ReadObjectAsync();
                 task.Wait();
-                var obj = task.Result as IGenerator;
+                var obj = task.Result as IWorkItem;
                 if (obj == null)
                 {
                     generatedQuantity++; //count one item
                 }
                 else
                 {
-                    foreach (var tmp in obj.Generate(null, configuration))
+                    foreach (var tmp in obj.DoWork(null, configuration))
                     {
                         queue.WriteObject(tmp);
                     }

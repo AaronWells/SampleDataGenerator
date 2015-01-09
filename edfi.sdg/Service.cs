@@ -39,8 +39,8 @@
         public void Bootstrap()
         {
             var workQueue = new WorkQueue(configuration.WorkQueueName);
-            var generator = configuration.Generators.First();
-            var workItems = generator.Generate(workQueue, configuration);
+            var generator = configuration.WorkItems.First();
+            var workItems = generator.DoWork(workQueue, configuration);
             EnqueueWorkItems(workItems, generator.Id);
         }
 
@@ -64,7 +64,7 @@
                     using (var workQueue = new WorkQueue(configuration.WorkQueueName))
                     {
                         var objectRepository = new ComplexObjectRepository();
-                        if (item is IGenerator)
+                        if (item is IWorkItem)
                         {
                             workQueue.WriteObject(item);
                         }
@@ -87,24 +87,24 @@
                 try
                 {
                     var workItem = await workQueue.ReadObjectAsync();
-                    var generator = workItem as IGenerator;
+                    var generator = workItem as IWorkItem;
                     if (generator != null)
                     {
-                        var generatedWorkItems = generator.Generate(null, configuration);
+                        var generatedWorkItems = generator.DoWork(null, configuration);
                         this.EnqueueWorkItems(generatedWorkItems, generator.Id);
                     }
                     else
                     {
                         var workEnvelope = (WorkEnvelope)workItem;
-                        if (workEnvelope.NextStep <= configuration.Generators.GetUpperBound(0))
+                        if (workEnvelope.NextStep <= configuration.WorkItems.GetUpperBound(0))
                         {
-                            var nextGenerator = configuration.Generators[workEnvelope.NextStep];
-                            var generatedWorkItems = nextGenerator.Generate(workEnvelope.Model, configuration);
+                            var nextGenerator = configuration.WorkItems[workEnvelope.NextStep];
+                            var generatedWorkItems = nextGenerator.DoWork(workEnvelope.Model, configuration);
                             EnqueueWorkItems(generatedWorkItems, nextGenerator.Id);
                         }
                     }
                 }
-                catch (TaskCanceledException ex)
+                catch (TaskCanceledException)
                 {
                     // the task is cancelled on a timeout, so we'll wait again for a message
                 }
