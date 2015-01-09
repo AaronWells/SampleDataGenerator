@@ -13,7 +13,7 @@ namespace edfi.sdg.configurations
         {
             var knownTypes = new List<Type>();
 
-            var properties = Assembly.GetAssembly(typeof(AssemblyLocator)).GetTypes().SelectMany(x => x.GetProperties())
+            var properties = Assembly.GetExecutingAssembly().GetTypes().SelectMany(x => x.GetProperties())
                     .Where(p => p.GetCustomAttribute<GenericXmlElementAttribute>() != null);
 
             foreach (var propertyInfo in properties)

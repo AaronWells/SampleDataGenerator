@@ -2,6 +2,8 @@
 {
     public interface IValueProvider
     {
-        object GetValue();
+        string[] LookupProperties { get; set; }
+
+        object GetValue(params string[] lookupPropertyValues);
     }
 }

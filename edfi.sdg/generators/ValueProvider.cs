@@ -7,9 +7,12 @@ namespace edfi.sdg.generators
     using edfi.sdg.interfaces;
 
     [Serializable]
-    public abstract class ValueProvider: IValueProvider
+    public abstract class ValueProvider : IValueProvider
     {
-        public abstract object GetValue();
+        [XmlArray]
+        public string[] LookupProperties { get; set; }
+
+        public abstract object GetValue(string[] lookupPropertyValues);
     }
 
     public class SampleValueProvider : ValueProvider
@@ -17,7 +20,7 @@ namespace edfi.sdg.generators
         [XmlAttribute]
         public string MyValue { get; set; }
 
-        public override object GetValue()
+        public override object GetValue(string[] lookupPropertyValues)
         {
             return MyValue;
         }

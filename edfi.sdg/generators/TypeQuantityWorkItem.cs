@@ -25,7 +25,7 @@
         /// <param name="input">ignored</param>
         /// <param name="configuration">uses MaxQueueWrites property</param>
         /// <returns>an array of work items</returns>
-        public override object[] DoWork(object input, IConfiguration configuration)
+        protected override object[] DoWorkImplementation(object input, IConfiguration configuration)
         {
             object[] results;
             var qty = QuantitySpecifier.Next();

@@ -34,7 +34,7 @@ namespace edfi.sdg.test.generators
                 Gender = "M"
             };
 
-            var generator = new StatTableValueProvider
+            var generator = new StatTableWorkItem
             {
                 DataProvider = new MemoryStatDataProvider(),
                 PropertyToSet = "Name",
@@ -52,7 +52,7 @@ namespace edfi.sdg.test.generators
         {
             var input = new SampleClass();
 
-            var generator = new StatTableValueProvider
+            var generator = new StatTableWorkItem
             {
                 DataProvider = new MemoryStatDataProvider(),
                 PropertyToSet = "UnknownPropertyName",

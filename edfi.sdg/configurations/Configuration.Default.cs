@@ -24,10 +24,10 @@ namespace edfi.sdg.configurations
                     WorkItems = new WorkItem[]
                     {
                         new TypeQuantityWorkItem<Student> {QuantitySpecifier = new ConstantQuantity {Quantity = 200}},
-                        new PropertyPopulatorWorkItem{Classes = new string[]{"Student"}},
+                        new PropertyPopulatorWorkItem{ClassFilterRegex = @"^edfi\.sdg\.models\.((Student)|(Parent))$"},
 
-                        new DistributedEnumWorkItem<SexType> {Property = "Student.Sex"},
-                        new DistributedEnumWorkItem<OldEthnicityType> {Property = "Student.OldEthnicity"},
+                        //new DistributedEnumWorkItem<SexType> {Property = "Student.Sex"},
+                        //new DistributedEnumWorkItem<OldEthnicityType> {Property = "Student.OldEthnicity"},
 
 //                        new StatTableValueGenerator {PropertyToSet = "Name", PropertiesToLook = new[] {"Student.OldEthnicity", "Student.Sex"}, DataProvider = new DatabaseStatDataProvider{ StatTableName = "GivenName" }},
 

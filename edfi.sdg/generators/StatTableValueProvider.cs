@@ -6,11 +6,26 @@ using edfi.sdg.utility;
 
 namespace edfi.sdg.generators
 {
+    [Serializable]
+    public class StatTableValueProvider : ValueProvider
+    {
+        public StatDataProviderBase DataProvider { get; set; }
+
+        public string[] LookupValues { get; set; }
+
+        public override object GetValue(string[] lookupPropertyValues)
+        {
+            return DataProvider.GetNextValue(lookupPropertyValues);
+        }
+    }
+
+
     /// <summary>
     /// Create a number of objects of type T and put them on the work queue
     /// </summary>
     [Serializable]
-    public class StatTableValueProvider : WorkItem
+    [Obsolete]
+    public class StatTableWorkItem : WorkItem
     {
         public StatDataProviderBase DataProvider { get; set; }
 
@@ -19,7 +34,7 @@ namespace edfi.sdg.generators
         [XmlAttribute]
         public string PropertyToSet { get; set; }
 
-        public override object[] DoWork(object input, IConfiguration configuration)
+        protected override object[] DoWorkImplementation(object input, IConfiguration configuration)
         {
             var results = new[] {input};
 

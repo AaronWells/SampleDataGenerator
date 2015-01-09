@@ -1,17 +1,13 @@
 ﻿namespace edfi.sdg.generators
 {
-    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Xml.Serialization;
 
     public class PropertyPopulatorWorkItem : WorkItem
     {
-        public string[] Classes { get; set; }
-
-        public override object[] DoWork(object input, interfaces.IConfiguration configuration)
+        protected override object[] DoWorkImplementation(object input, interfaces.IConfiguration configuration)
         {
-            if (Classes.Contains(input.GetType().Name))
-            {
-                Generator.Populate(input);
-            }
+            Generator.Populate(input);
             return new object[] { input };
         }
     }

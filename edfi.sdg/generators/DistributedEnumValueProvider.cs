@@ -19,7 +19,7 @@
             Quantity = new ConstantQuantity() { Quantity = 1 };
         }
         
-        public override object GetValue()
+        public override object GetValue(params string[] lookupPropertyValues)
         {
             if (typeof(T).IsArray)
             {
@@ -46,7 +46,7 @@
             Quantity = new ConstantQuantity() { Quantity = 1 };
         }
 
-        public override object[] DoWork(object input, IConfiguration configuration)
+        protected override object[] DoWorkImplementation(object input, IConfiguration configuration)
         {
             var type = input.GetType();
 
