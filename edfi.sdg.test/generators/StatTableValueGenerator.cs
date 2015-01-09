@@ -16,7 +16,7 @@ namespace edfi.sdg.test.generators
     }
 
     [TestClass]
-    public class StatTableValueGeneratorTest
+    public class StatTableValueGenerator
     {
         public class SampleClass
         {
@@ -25,7 +25,7 @@ namespace edfi.sdg.test.generators
             public string Gender { get; set; }
         }
 
-        [TestMethod]
+        [TestMethod, Obsolete]
         public void TestWithGoodPropertyName()
         {
             var input = new SampleClass
@@ -46,7 +46,7 @@ namespace edfi.sdg.test.generators
             Console.WriteLine(input.Name);
         }
 
-        [TestMethod]
+        [TestMethod, Obsolete]
         [ExpectedException(typeof(InvalidPropertyException))]
         public void TestWithBadPropertyName()
         {

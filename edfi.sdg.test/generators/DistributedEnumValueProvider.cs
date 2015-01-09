@@ -16,7 +16,7 @@ namespace edfi.sdg.test.generators
         public void TestDistribution()
         {
             var count = 0.0;
-            for (int i = 0; i < 10000; i++)
+            for (var i = 0; i < 10000; i++)
             {
                 var valueProvider = new edfi.sdg.generators.DistributedEnumValueProvider<TestEnum>()
                     {
