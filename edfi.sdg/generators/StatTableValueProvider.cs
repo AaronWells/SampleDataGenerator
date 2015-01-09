@@ -11,8 +11,6 @@ namespace edfi.sdg.generators
     {
         public StatDataProviderBase DataProvider { get; set; }
 
-        public string[] LookupValues { get; set; }
-
         public override object GetValue()
         {
             var empty = new string[] { };

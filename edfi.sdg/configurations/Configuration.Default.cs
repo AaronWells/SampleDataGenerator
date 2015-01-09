@@ -18,6 +18,7 @@ namespace edfi.sdg.configurations
                     {
                         new ValueRule{Criteria = "Sex", ValueProvider = new DistributedEnumValueProvider<SexType>()},
                         new ValueRule{Criteria = "OldEthnicity", ValueProvider = new DistributedEnumValueProvider<OldEthnicityType>()},
+                        new ValueRule{Criteria = "FirstName", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"..Sex"}, DataProvider = new DatabaseStatDataProvider{StatTableName = "GivenName"}}}
                     },
                     WorkItems = new WorkItem[]
                     {
