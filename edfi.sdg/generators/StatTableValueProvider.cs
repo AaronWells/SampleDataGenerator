@@ -13,7 +13,13 @@ namespace edfi.sdg.generators
 
         public string[] LookupValues { get; set; }
 
-        public override object GetValue(string[] lookupPropertyValues)
+        public override object GetValue()
+        {
+            var empty = new string[] { };
+            return DataProvider.GetNextValue(empty);
+        }
+
+        public override object GetValue(params string[] lookupPropertyValues)
         {
             return DataProvider.GetNextValue(lookupPropertyValues);
         }
@@ -36,12 +42,12 @@ namespace edfi.sdg.generators
 
         protected override object[] DoWorkImplementation(object input, IConfiguration configuration)
         {
-            var results = new[] {input};
+            var results = new[] { input };
 
-            var statAttributeList = PropertiesToLook.Select(property => (string) input.GetValue(property)).ToArray();
+            var statAttributeList = PropertiesToLook.Select(property => (string)input.GetValue(property)).ToArray();
 
             var result = DataProvider.GetNextValue(statAttributeList);
-            
+
             input.SetValue(PropertyToSet, result);
 
             return results;

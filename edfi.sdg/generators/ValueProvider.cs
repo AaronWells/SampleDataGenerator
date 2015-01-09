@@ -12,7 +12,9 @@ namespace edfi.sdg.generators
         [XmlArray]
         public string[] LookupProperties { get; set; }
 
-        public abstract object GetValue(string[] lookupPropertyValues);
+        public abstract object GetValue();
+
+        public abstract object GetValue(params string[] lookupPropertyValues);
     }
 
     public class SampleValueProvider : ValueProvider
@@ -20,7 +22,12 @@ namespace edfi.sdg.generators
         [XmlAttribute]
         public string MyValue { get; set; }
 
-        public override object GetValue(string[] lookupPropertyValues)
+        public override object GetValue()
+        {
+            return this.GetValue(string.Empty);
+        }
+
+        public override object GetValue(params string[] lookupPropertyValues)
         {
             return MyValue;
         }

@@ -104,7 +104,7 @@
                         }
                     }
                 }
-                catch (TaskCanceledException ex)
+                catch (TaskCanceledException)
                 {
                     // the task is cancelled on a timeout, so we'll wait again for a message
                 }

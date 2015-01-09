@@ -21,6 +21,11 @@
         
         public override object GetValue(params string[] lookupPropertyValues)
         {
+            return this.GetValue();
+        }
+
+        public override object GetValue()
+        {
             if (typeof(T).IsArray)
             {
                 return Distribution.Shuffled<T>().Take(Quantity.Next()).ToArray();
