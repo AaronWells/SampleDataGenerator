@@ -10,7 +10,7 @@
         {
             if (Classes.Contains(input.GetType().Name))
             {
-                Generator.Populate(input);
+                new Generator().Populate(input);
             }
             return new object[] { input };
         }

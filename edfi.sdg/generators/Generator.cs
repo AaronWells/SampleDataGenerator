@@ -8,19 +8,57 @@ namespace edfi.sdg.generators
 {
     public class Generator
     {
-        private readonly Assembly _assembly;
-
-        public Generator(Assembly assembly)
+        public Generator()
         {
-            _assembly = assembly;
+        }
+
+        public Generator(Assembly defaultAssembly)
+        {
+            DefaultAssembly = defaultAssembly;
             RuleSets = new List<RuleSet>();
         }
 
+        public Assembly DefaultAssembly { get; set; }
+    
         public List<RuleSet> RuleSets { get; set; }
 
-        public static void Populate(object input)
+        public void Populate(object input)
         {
-            throw new NotImplementedException();
+            // could not use this since enum is a value type
+/*
+            //check for system types
+            var type = input.GetType();
+            if (type.Namespace == "System")
+            {
+                throw new ArgumentException(string.Format("cannot populate System type: '{0}'", type.FullName));
+            }
+            if(type.IsValueType)
+            {
+                throw new ArgumentException(string.Format("cannot populate Value type: '{0}'", type.FullName));
+            }
+
+            var properties = type.GetProperties();
+            foreach (var property in properties)
+            {
+                object value;
+
+                //if RuleSet contains trigger for this property:
+                var propFullName = type.FullName + "." + property.Name;
+                var rule = RuleSets.SingleOrDefault(r => r.RuleTrigger == propFullName);
+                if (rule != null)
+                {
+                    //use the rule
+                    Console.WriteLine("check the rules against {0}", rule.RuleName);
+                    value = rule.Action();
+
+                }
+                else
+                    value = GetMeA(property.PropertyType.FullName);
+
+               input.SetPropertyValue(property.Name, value);
+            }
+*/
+
         }
 
         public object GetMeA(string @namespace, string typeName)
@@ -31,23 +69,33 @@ namespace edfi.sdg.generators
 
         public object GetMeA(string typeFullName)
         {
+            //check for rules:
+/*
+            if (typeFullName.HasSpecialRule)
+            {
+                return typeFullName.SpecialRule.Action();
+            }
+*/
+
             //check for system types
             if (typeFullName.FirstSegment() == "System")
             {
-                return null;
+                return Assembly.GetAssembly(typeof (int))
+                    .GetType(typeFullName)
+                    .GetDefaultValue();
             }
-
-            var type = _assembly.GetType(typeFullName);
-
+            // else it is a class type
+            var type = DefaultAssembly.GetType(typeFullName);
 
             var o = Activator.CreateInstance(type);
 
+            // populate object
             var properties = type.GetProperties();
             foreach (var property in properties)
             {
                 object value;
 
-                //if ruleset contains trigger for this property:
+                //if RuleSet contains trigger for this property:
                 var propFullName = typeFullName + "." + property.Name;
                 var rule = RuleSets.SingleOrDefault(r => r.RuleTrigger == propFullName);
                 if (rule != null)
@@ -60,21 +108,10 @@ namespace edfi.sdg.generators
                 else
                     value = GetMeA(property.PropertyType.FullName);
 
-                o.SetValue(property.Name, value);
+                o.SetPropertyValue(property.Name, value);
             }
 
             return o;
-        }
-
-        private static IEnumerable<PropertyInfo> GetSystemProperties(Type type)
-        {
-            return type.GetProperties().Where(p => p.PropertyType.Namespace == "System");
-        }
-
-        private static IEnumerable<PropertyInfo> GetCompositeProperties(Type type)
-        {
-            return type.GetProperties().Where(
-                p => !p.PropertyType.IsArray && p.PropertyType.Namespace != "System" && p.PropertyType.IsClass);
         }
     }
 }

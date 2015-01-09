@@ -28,16 +28,16 @@ namespace edfi.sdg.generators
             var statAttributeList = PropertiesToLook.Select(property =>
             {
                 var propertyName = property.LastSegment();
-                var propertyValue = input.GetValue(propertyName);
+                var propertyValue = input.GetPropertyValue(propertyName);
                 if (propertyValue.GetType().IsEnum)
                     return string.Format("{0}.{1}", propertyValue.GetType().Name, propertyValue);
 
-                return (string) input.GetValue(propertyName);
+                return (string) input.GetPropertyValue(propertyName);
             }).ToArray();
 
             var result = DataProvider.GetNextValue(statAttributeList);
             
-            input.SetValue(PropertyToSet.LastSegment(), result);
+            input.SetPropertyValue(PropertyToSet.LastSegment(), result);
 
             return results;
         }
