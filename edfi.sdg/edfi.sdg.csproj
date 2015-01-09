@@ -60,7 +60,6 @@
     <Compile Include="generators\Distribution.cs" />
     <Compile Include="generators\Generator.cs" />
     <Compile Include="generators\PropertyPopulatorWorkItem.cs" />
-    <Compile Include="generators\RuleSet.cs" />
     <Compile Include="generators\ValueProvider.cs" />
     <Compile Include="interfaces\IValueProvider.cs" />
     <Compile Include="utility\InvalidPropertyException.cs" />

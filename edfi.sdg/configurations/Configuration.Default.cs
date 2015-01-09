@@ -3,8 +3,6 @@ using edfi.sdg.models;
 
 namespace edfi.sdg.configurations
 {
-    using System.Collections.Generic;
-
     public partial class Configuration
     {
         public static Configuration DefaultConfiguration
@@ -16,7 +14,7 @@ namespace edfi.sdg.configurations
                     MaxQueueWrites = 10,
                     NumThreads = 1,
                     WorkQueueName = @".\Private$\edfi.sdg",
-                    ValueRules = new ValueRule[]
+                    ValueRules = new []
                     {
                         new ValueRule{Criteria = "Sex", ValueProvider = new DistributedEnumValueProvider<SexType>()},
                         new ValueRule{Criteria = "OldEthnicity", ValueProvider = new DistributedEnumValueProvider<OldEthnicityType>()},

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace edfi.sdg.generators
+namespace Temporary.Generator
 {
     public class RuleSet
     {

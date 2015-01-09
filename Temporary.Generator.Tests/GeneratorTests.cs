@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using edfi.sdg.generators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Temporary.Generator;
 
 namespace edfi.sdg.test.generators
 {

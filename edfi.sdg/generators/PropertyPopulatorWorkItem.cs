@@ -7,7 +7,7 @@
     {
         protected override object[] DoWorkImplementation(object input, interfaces.IConfiguration configuration)
         {
-            Generator.Populate(input);
+            new Generator().Populate(input);
             return new object[] { input };
         }
     }
