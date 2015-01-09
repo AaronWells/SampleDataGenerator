@@ -10,7 +10,7 @@ namespace edfi.sdg.generators
     /// Create a number of objects of type T and put them on the work queue
     /// </summary>
     [Serializable]
-    public class StatTableValueGenerator : Generator
+    public class StatTableValueProvider : WorkItem
     {
         public StatDataProviderBase DataProvider { get; set; }
 
@@ -19,7 +19,7 @@ namespace edfi.sdg.generators
         [XmlAttribute]
         public string PropertyToSet { get; set; }
 
-        public override object[] Generate(object input, IConfiguration configuration)
+        public override object[] DoWork(object input, IConfiguration configuration)
         {
             var results = new[] {input};
 
