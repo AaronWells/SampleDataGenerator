@@ -21,6 +21,11 @@ namespace edfi.sdg.generators
             Quantity = new ConstantQuantity() { Quantity = 1 };
         }
         
+        public override object GetValue(params string[] lookupPropertyValues)
+        {
+            return this.GetValue();
+        }
+
         public override object GetValue()
         {
             if (typeof(T).IsArray)
@@ -48,7 +53,7 @@ namespace edfi.sdg.generators
             Quantity = new ConstantQuantity() { Quantity = 1 };
         }
 
-        public override object[] DoWork(object input, IConfiguration configuration)
+        protected override object[] DoWorkImplementation(object input, IConfiguration configuration)
         {
             var type = input.GetType();
 

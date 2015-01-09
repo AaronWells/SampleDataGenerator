@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyLocator.cs" />
     <Compile Include="configurations\Configuration.cs" />
     <Compile Include="configurations\Configuration.Default.cs" />
     <Compile Include="configurations\GenericXmlElementAttribute.cs" />

@@ -9,13 +9,13 @@ namespace edfi.sdg.test.generators
     using System.Xml.Serialization;
 
     [TestClass]
-    public class Quantity
+    public class Serialization
     {
         [TestMethod]
         public void SerializationTests()
         {
             var allPassed = true;
-            var assembly = Assembly.GetAssembly(typeof(AssemblyLocator));
+            var assembly = Assembly.Load(new AssemblyName("edfi.sdg"));
             var typesToBeSerialized = assembly.GetTypes()
                 .Where(t => t.Namespace == "edfi.sdg.generators" && !t.IsAbstract && !t.IsGenericTypeDefinition)
                 .Where(t => !t.Name.StartsWith("<>")) // to exclude anonymous types
