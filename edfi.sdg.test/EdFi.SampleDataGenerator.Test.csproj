@@ -6,8 +6,8 @@
     <ProjectGuid>{375A7289-ABB5-41FF-B7ED-381C09EAA28F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>edfi.sdg.test</RootNamespace>
-    <AssemblyName>edfi.sdg.test</AssemblyName>
+    <RootNamespace>EdFi.SampleDataGenerator.Test</RootNamespace>
+    <AssemblyName>EdFi.SampleDataGenerator.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -52,20 +52,20 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="classes\TestEnum.cs" />
-    <Compile Include="classes\TestQueue.cs" />
-    <Compile Include="configurations\Configuration.cs" />
-    <Compile Include="generators\StatTableValueGenerator.cs" />
-    <Compile Include="generators\TypeQuantityGenerator.cs" />
-    <Compile Include="classes\SerializableTestClass.cs" />
-    <Compile Include="generators\DistributedEnumValueProvider.cs" />
-    <Compile Include="generators\Serialization.cs" />
-    <Compile Include="messaging\WorkQueue.cs" />
-    <Compile Include="models\Models.cs" />
+    <Compile Include="Classes\TestEnum.cs" />
+    <Compile Include="Classes\TestQueue.cs" />
+    <Compile Include="Configurations\Configuration.cs" />
+    <Compile Include="Generators\StatTableValueGenerator.cs" />
+    <Compile Include="Generators\TypeQuantityGenerator.cs" />
+    <Compile Include="Classes\SerializableTestClass.cs" />
+    <Compile Include="Generators\DistributedEnumValueProvider.cs" />
+    <Compile Include="Generators\Serialization.cs" />
+    <Compile Include="Messaging\WorkQueue.cs" />
+    <Compile Include="Models\Models.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="utility\IdentifierGenerator.cs" />
-    <Compile Include="utility\RandomExtensions.cs" />
-    <Compile Include="utility\Generics.cs" />
+    <Compile Include="Utility\IdentifierGenerator.cs" />
+    <Compile Include="Utility\RandomExtensions.cs" />
+    <Compile Include="Utility\Generics.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\edfi.sdg\Edfi.SampleDataGenerator.csproj">

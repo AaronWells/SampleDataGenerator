@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edfi.SampleDataGenerator", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "edfi.sdg.app", "edfi.sdg.app\edfi.sdg.app.csproj", "{15C85A07-72E7-4301-99F3-E8BE99668ED5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "edfi.sdg.test", "edfi.sdg.test\edfi.sdg.test.csproj", "{375A7289-ABB5-41FF-B7ED-381C09EAA28F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdFi.SampleDataGenerator.Test", "edfi.sdg.test\EdFi.SampleDataGenerator.Test.csproj", "{375A7289-ABB5-41FF-B7ED-381C09EAA28F}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "edfi.sdg.database", "edfi.sdg.database\edfi.sdg.database.sqlproj", "{D535B687-EC0D-4715-9D70-C84D5BD4BA19}"
 EndProject

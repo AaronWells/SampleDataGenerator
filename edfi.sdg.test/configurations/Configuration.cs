@@ -1,9 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace edfi.sdg.test.configurations
+namespace EdFi.SampleDataGenerator.Test.Configurations
 {
-    using System;
-
     [TestClass]
     public class Configuration
     {
@@ -14,8 +13,8 @@ namespace edfi.sdg.test.configurations
         [TestMethod]
         public void GenerateDefaultConfiguration()
         {
-            var configuration = EdFi.SampleDataGenerator.Configurations.Configuration.DefaultConfiguration;
-            var serializer = EdFi.SampleDataGenerator.Configurations.Configuration.ConfigurationSerializer();
+            var configuration = SampleDataGenerator.Configurations.Configuration.DefaultConfiguration;
+            var serializer = SampleDataGenerator.Configurations.Configuration.ConfigurationSerializer();
             serializer.Serialize(Console.Out, configuration);
         }
     }

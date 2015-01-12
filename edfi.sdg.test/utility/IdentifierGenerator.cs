@@ -1,17 +1,17 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace edfi.sdg.test.utility
+namespace EdFi.SampleDataGenerator.Test.Utility
 {
     [TestClass]
     public class IdentifierGenerator
     {
         [TestMethod]
-        public void RoundtripGuidValue()
+        public void RoundTripGuidValue()
         {
             var expected = Guid.NewGuid();
-            var identifier = EdFi.SampleDataGenerator.Utility.IdentifierGenerator.Create(expected);
-            var actual = EdFi.SampleDataGenerator.Utility.IdentifierGenerator.ToGuid(identifier);
+            var identifier = SampleDataGenerator.Utility.IdentifierGenerator.Create(expected);
+            var actual = SampleDataGenerator.Utility.IdentifierGenerator.ToGuid(identifier);
             Assert.AreEqual(expected, actual);
         }
     }

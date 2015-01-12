@@ -1,7 +1,8 @@
-﻿using EdFi.SampleDataGenerator.Utility;
+﻿// ReSharper disable UnusedTypeParameter
+using EdFi.SampleDataGenerator.Utility;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace edfi.sdg.test.utility
+namespace EdFi.SampleDataGenerator.Test.Utility
 {
     [TestClass]
     public class Generics
@@ -12,8 +13,8 @@ namespace edfi.sdg.test.utility
         protected interface IBaseGeneric<T> { }
         protected class ChildGeneric : BaseGeneric<Class1> { }
         protected interface IChildGeneric : IBaseGeneric<Class1> { }
-        protected class ChildGeneric2<Class1> : BaseGeneric<Class1> { }
-        protected interface IChildGeneric2<Class1> : IBaseGeneric<Class1> { }
+        protected class ChildGeneric2<TClass1> : BaseGeneric<TClass1> { }
+        protected interface IChildGeneric2<TClass1> : IBaseGeneric<TClass1> { }
 
         protected class WrongBaseGeneric<T> { }
         protected interface IWrongBaseGeneric<T> { }
@@ -25,15 +26,15 @@ namespace edfi.sdg.test.utility
         protected class ClassC { }
         protected class BaseGenericA<T, U> : IBaseGenericA<T, U> { }
         protected class BaseGenericB<T, U, V> { }
-        protected interface IBaseGenericB<ClassA, ClassB, ClassC> { }
+        protected interface IBaseGenericB<TClassA, TClassB, TClassC> { }
         protected class BaseGenericA2<T, U> : IBaseGenericA<T, U>, IInterfaceBidonA { }
         protected interface IBaseGenericA<T, U> { }
         protected class ChildGenericA : BaseGenericA<ClassA, ClassB> { }
         protected interface IChildGenericA : IBaseGenericA<ClassA, ClassB> { }
-        protected class ChildGenericA2<ClassA, ClassB> : BaseGenericA<ClassA, ClassB> { }
-        protected class ChildGenericA3<ClassA, ClassB> : BaseGenericB<ClassA, ClassB, ClassC> { }
-        protected class ChildGenericA4<ClassA, ClassB> : IBaseGenericB<ClassA, ClassB, ClassC> { }
-        protected interface IChildGenericA2<ClassA, ClassB> : IBaseGenericA<ClassA, ClassB> { }
+        protected class ChildGenericA2<TClassA, TClassB> : BaseGenericA<TClassA, TClassB> { }
+        protected class ChildGenericA3<TClassA, TClassB> : BaseGenericB<TClassA, TClassB, ClassC> { }
+        protected class ChildGenericA4<TClassA, TClassB> : IBaseGenericB<TClassA, TClassB, ClassC> { }
+        protected interface IChildGenericA2<TClassA, TClassB> : IBaseGenericA<TClassA, TClassB> { }
 
         protected class WrongBaseGenericA<T, U> { }
         protected interface IWrongBaseGenericA<T, U> { }
@@ -117,3 +118,4 @@ namespace edfi.sdg.test.utility
         }
     }
 }
+// ReSharper restore UnusedTypeParameter

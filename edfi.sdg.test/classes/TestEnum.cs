@@ -1,4 +1,4 @@
-﻿namespace edfi.sdg.test.classes
+﻿namespace EdFi.SampleDataGenerator.Test.Classes
 {
     public enum TestEnum
     {

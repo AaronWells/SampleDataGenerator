@@ -1,10 +1,9 @@
-﻿using EdFi.SampleDataGenerator.Messaging;
+﻿using System.Collections.Concurrent;
+using System.Threading.Tasks;
+using EdFi.SampleDataGenerator.Messaging;
 
-namespace edfi.sdg.test.classes
+namespace EdFi.SampleDataGenerator.Test.Classes
 {
-    using System.Collections.Concurrent;
-    using System.Threading.Tasks;
-
     /// <summary>
     /// Thread-safe, non-transactional, local, memory-based worker queue for testing purposes
     /// </summary>
@@ -12,6 +11,8 @@ namespace edfi.sdg.test.classes
     {
         private readonly ConcurrentQueue<object> _objects = new ConcurrentQueue<object>();// Stack();
 
+        /// <summary>
+        /// </summary>
         public bool IsEmpty
         {
             get
@@ -20,16 +21,20 @@ namespace edfi.sdg.test.classes
             }
         }
 
+        /// <summary>
+        /// </summary>
         public void WriteObject(object obj)
         {
             _objects.Enqueue(obj);
         }
 
+        /// <summary>
+        /// </summary>
         public Task<object> ReadObjectAsync()
         {
             object result;
             var t = new TaskCompletionSource<object>();
-            t.TrySetResult(this._objects.TryDequeue(out result) ? result : null);
+            t.TrySetResult(_objects.TryDequeue(out result) ? result : null);
             return t.Task;
         }
     }

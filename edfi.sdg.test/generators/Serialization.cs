@@ -1,14 +1,13 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Xml.Serialization;
 using EdFi.SampleDataGenerator.Utility;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace edfi.sdg.test.generators
+namespace EdFi.SampleDataGenerator.Test.Generators
 {
-    using System.IO;
-    using System.Linq;
-    using System.Reflection;
-    using System.Xml.Serialization;
-
     [TestClass]
     public class Serialization
     {

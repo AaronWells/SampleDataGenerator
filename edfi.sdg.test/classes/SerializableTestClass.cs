@@ -1,10 +1,9 @@
-﻿using EdFi.SampleDataGenerator.Models;
+﻿using System;
+using EdFi.SampleDataGenerator.Models;
 
-namespace edfi.sdg.test.classes
+namespace EdFi.SampleDataGenerator.Test.Classes
 {
-    using System;
-
-    [Serializable()]
+    [Serializable]
     public class SerializableTestClass: IComplexObjectType
     {
         public string id { get; set; }
@@ -13,7 +12,7 @@ namespace edfi.sdg.test.classes
         public SerializableTestClass()
         {
             var guid = Guid.NewGuid();
-            this.id = guid.ToString("N");
+            id = guid.ToString("N");
         }
     }
 }

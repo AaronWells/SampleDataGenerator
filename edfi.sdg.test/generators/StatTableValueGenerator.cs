@@ -1,9 +1,9 @@
-﻿using EdFi.SampleDataGenerator.Utility;
+﻿using System;
+using EdFi.SampleDataGenerator.Utility;
 using EdFi.SampleDataGenerator.ValueProvider;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
-namespace edfi.sdg.test.generators
+namespace EdFi.SampleDataGenerator.Test.Generators
 {
     [Serializable]
     public class MemoryStatDataValueProvider : StatDataValueProviderBase

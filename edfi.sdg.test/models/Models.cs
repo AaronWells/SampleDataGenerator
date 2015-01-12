@@ -1,13 +1,12 @@
-﻿namespace edfi.sdg.test.models
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Xml.Serialization;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace EdFi.SampleDataGenerator.Test.Models
 {
-    using System;
-    using System.IO;
-    using System.Linq;
-    using System.Reflection;
-    using System.Xml.Serialization;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     [TestClass]
     public class Models
     {

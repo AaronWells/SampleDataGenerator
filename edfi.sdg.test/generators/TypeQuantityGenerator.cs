@@ -1,11 +1,10 @@
 ﻿using EdFi.SampleDataGenerator.Configurations;
 using EdFi.SampleDataGenerator.Quantity;
+using EdFi.SampleDataGenerator.Test.Classes;
 using EdFi.SampleDataGenerator.WorkItems;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using edfi.sdg.test.classes;
 
-
-namespace edfi.sdg.test.generators
+namespace EdFi.SampleDataGenerator.Test.Generators
 {
     [TestClass]
     public class TypeQuantityGenerator
