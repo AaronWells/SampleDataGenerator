@@ -1,9 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using EdFi.SampleDataGenerator.Utility;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace edfi.sdg.test.utility
 {
-    using edfi.sdg.utility;
-
     [TestClass]
     public class Generics
     {

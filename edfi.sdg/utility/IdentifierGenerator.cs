@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 
-namespace edfi.sdg.utility
+namespace EdFi.SampleDataGenerator.Utility
 {
-    using System.Numerics;
-
     public static class IdentifierGenerator
     {
         static readonly BigInteger Base36 = new BigInteger(36);

@@ -1,13 +1,12 @@
-﻿using edfi.sdg.generators;
-using edfi.sdg.interfaces;
-using edfi.sdg.utility;
+﻿using EdFi.SampleDataGenerator.Utility;
+using EdFi.SampleDataGenerator.ValueProvider;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace edfi.sdg.test.generators
 {
     [Serializable]
-    public class MemoryStatDataProvider : StatDataProviderBase
+    public class MemoryStatDataValueProvider : StatDataValueProviderBase
     {
         public override string GetNextValue(string[] lookupProperties)
         {
@@ -36,9 +35,9 @@ namespace edfi.sdg.test.generators
 
             var generator = new StatTableWorkItem
             {
-                DataProvider = new MemoryStatDataProvider(),
-                PropertyToSet = "SampleClass.Name",
-                PropertiesToLook = new[] { "SampleClass.Ethnicity", "SampleClass.Gender" }
+                DataValueProvider = new MemoryStatDataValueProvider(),
+                PropertyToSet = "Name",
+                PropertiesToLook = new[] { "Ethnicity", "Gender" },
             };
 
             generator.DoWork(input, null);
@@ -54,7 +53,7 @@ namespace edfi.sdg.test.generators
 
             var generator = new StatTableWorkItem
             {
-                DataProvider = new MemoryStatDataProvider(),
+                DataValueProvider = new MemoryStatDataValueProvider(),
                 PropertyToSet = "SampleClass.UnknownPropertyName",
                 PropertiesToLook = new string[] { }
             };

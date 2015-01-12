@@ -1,7 +1,9 @@
-﻿using edfi.sdg.generators;
-using edfi.sdg.models;
+﻿using EdFi.SampleDataGenerator.Models;
+using EdFi.SampleDataGenerator.Quantity;
+using EdFi.SampleDataGenerator.ValueProvider;
+using EdFi.SampleDataGenerator.WorkItems;
 
-namespace edfi.sdg.configurations
+namespace EdFi.SampleDataGenerator.Configurations
 {
     public partial class Configuration
     {
@@ -12,18 +14,19 @@ namespace edfi.sdg.configurations
                 return new Configuration
                 {
                     MaxQueueWrites = 10,
-                    NumThreads = 1,
+                    ThreadCount = 1,
                     WorkQueueName = @".\Private$\edfi.sdg",
                     ValueRules = new []
                     {
                         new ValueRule{Criteria = "Sex", ValueProvider = new DistributedEnumValueProvider<SexType>()},
                         new ValueRule{Criteria = "OldEthnicity", ValueProvider = new DistributedEnumValueProvider<OldEthnicityType>()},
-                        new ValueRule{Criteria = "FirstName", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"..Sex"}, DataProvider = new DatabaseStatDataProvider{StatTableName = "GivenName"}}}
+                        new ValueRule{Criteria = "FirstName", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"..Sex"}, DataValueProvider = new DatabaseStatDataValueProvider {StatTableName = "GivenName"}}},
+//                        new ValueRule{Criteria = "FirstName", ValueProvider = new TestValueProvider()}
                     },
-                    WorkItems = new WorkItem[]
+                    WorkFlow = new WorkItem[]
                     {
-                        new TypeQuantityWorkItem<Student> {QuantitySpecifier = new ConstantQuantity {Quantity = 200}},
-                        new PropertyPopulatorWorkItem{ClassFilterRegex = @"^edfi\.sdg\.models\.((Student)|(Parent))$"},
+                        new TypeQuantityWorkItem<Student> {QuantitySpecifier = new ConstantQuantity {Quantity = 3}},
+                        new PropertyPopulatorWorkItem{ClassFilterRegex = @"^edfi\.sdg\.models\.((Student)|(Parent))$"}
                     }
                 };
             }

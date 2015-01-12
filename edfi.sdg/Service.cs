@@ -1,17 +1,17 @@
-﻿namespace edfi.sdg
-{
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using EdFi.SampleDataGenerator.Configurations;
+using EdFi.SampleDataGenerator.Messaging;
+using EdFi.SampleDataGenerator.Models;
+using EdFi.SampleDataGenerator.Utility;
+using EdFi.SampleDataGenerator.WorkItems;
 
-    using edfi.sdg.configurations;
-    using edfi.sdg.interfaces;
-    using edfi.sdg.messaging;
-    using edfi.sdg.models;
-    using edfi.sdg.utility;
+namespace EdFi.SampleDataGenerator
+{
 
     public class ServiceParams
     {
@@ -22,36 +22,36 @@
 
     public class Service
     {
-        private readonly CancellationTokenSource tokenSource;
-        private readonly Configuration configuration;
-        private readonly ConcurrentBag<Task> tasks;
-        private readonly ServiceParams serviceParams;
+        private readonly CancellationTokenSource _tokenSource;
+        private readonly Configuration _configuration;
+        private readonly ConcurrentBag<Task> _tasks;
+        private readonly ServiceParams _serviceParams;
 
         public Service(ServiceParams serviceParams)
         {
-            this.serviceParams = serviceParams;
+            _serviceParams = serviceParams;
             //todo: load configuration from filename in serviceParams
-            configuration = Configuration.DefaultConfiguration;
-            tasks = new ConcurrentBag<Task>();
-            tokenSource = new CancellationTokenSource();
+            _configuration = Configuration.DefaultConfiguration;
+            _tasks = new ConcurrentBag<Task>();
+            _tokenSource = new CancellationTokenSource();
         }
 
         public void Bootstrap()
         {
-            var workQueue = new WorkQueue(configuration.WorkQueueName);
-            var generator = configuration.WorkItems.First();
-            var workItems = generator.DoWork(workQueue, configuration);
+            var workQueue = new WorkQueue(_configuration.WorkQueueName);
+            var generator = _configuration.WorkFlow.First();
+            var workItems = generator.DoWork(workQueue, _configuration);
             EnqueueWorkItems(workItems, generator.Id);
         }
 
         public void Start()
         {
-            if (serviceParams.Bootstrap)
-                this.Bootstrap();
+            if (_serviceParams.Bootstrap)
+                Bootstrap();
 
-            //for (var i = 0; i < configuration.NumThreads; i++)
+            //for (var i = 0; i < configuration.ThreadCount; i++)
             //{
-                tasks.Add(Task.Factory.StartNew(() => this.DoWorkAsync(tokenSource.Token), tokenSource.Token));
+                _tasks.Add(Task.Factory.StartNew(() => DoWorkAsync(_tokenSource.Token), _tokenSource.Token));
             //}
         }
 
@@ -61,7 +61,7 @@
                 workItems,
                 item =>
                 {
-                    using (var workQueue = new WorkQueue(configuration.WorkQueueName))
+                    using (var workQueue = new WorkQueue(_configuration.WorkQueueName))
                     {
                         var objectRepository = new ComplexObjectRepository();
                         if (item is IWorkItem)
@@ -80,7 +80,7 @@
 
         private async void DoWorkAsync(CancellationToken token)
         {
-            var workQueue = new WorkQueue(configuration.WorkQueueName);
+            var workQueue = new WorkQueue(_configuration.WorkQueueName);
 
             while (!token.IsCancellationRequested)
             {
@@ -90,16 +90,16 @@
                     var generator = workItem as IWorkItem;
                     if (generator != null)
                     {
-                        var generatedWorkItems = generator.DoWork(null, configuration);
-                        this.EnqueueWorkItems(generatedWorkItems, generator.Id);
+                        var generatedWorkItems = generator.DoWork(null, _configuration);
+                        EnqueueWorkItems(generatedWorkItems, generator.Id);
                     }
                     else
                     {
                         var workEnvelope = (WorkEnvelope)workItem;
-                        if (workEnvelope.NextStep <= configuration.WorkItems.GetUpperBound(0))
+                        if (workEnvelope.NextStep <= _configuration.WorkFlow.GetUpperBound(0))
                         {
-                            var nextGenerator = configuration.WorkItems[workEnvelope.NextStep];
-                            var generatedWorkItems = nextGenerator.DoWork(workEnvelope.Model, configuration);
+                            var nextGenerator = _configuration.WorkFlow[workEnvelope.NextStep];
+                            var generatedWorkItems = nextGenerator.DoWork(workEnvelope.Model, _configuration);
                             EnqueueWorkItems(generatedWorkItems, nextGenerator.Id);
                         }
                     }
@@ -113,10 +113,10 @@
 
         public void Stop()
         {
-            tokenSource.Cancel();
+            _tokenSource.Cancel();
             try
             {
-                Task.WaitAll(tasks.ToArray());
+                Task.WaitAll(_tasks.ToArray());
             }
             catch (AggregateException e)
             {

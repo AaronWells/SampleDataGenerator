@@ -18,8 +18,8 @@
         public void SerializationTests()
         {
             var allPassed = true;
-            var assembly = Assembly.Load(new AssemblyName("edfi.sdg"));
-            foreach (var type in assembly.GetTypes().Where(t => t.Namespace == "edfi.sdg.models" && !t.IsAbstract).OrderBy(t => t.Name))
+            var assembly = Assembly.Load(new AssemblyName("EdFi.SampleDataGenerator"));
+            foreach (var type in assembly.GetTypes().Where(t => t.Namespace == "EdFi.SampleDataGenerator.Models" && !t.IsAbstract).OrderBy(t => t.Name))
                 using (var stream = new MemoryStream())
                 {
                     try

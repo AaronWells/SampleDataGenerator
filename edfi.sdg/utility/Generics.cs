@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
-namespace edfi.sdg.utility
+namespace EdFi.SampleDataGenerator.Utility
 {
-    using System.Reflection;
-
     public static class Generics
     {
         public static bool IsSubClassOfGeneric(this Type child, Type parent)
@@ -22,19 +22,24 @@ namespace edfi.sdg.utility
             while (child != null && child != typeof(object))
             {
                 var cur = GetFullTypeDefinition(child);
-                if (parent == cur || (isParameterLessGeneric && cur.GetInterfaces().Select(i => GetFullTypeDefinition(i)).Contains(GetFullTypeDefinition(parent))))
+                if (parent == cur || (isParameterLessGeneric && cur.GetInterfaces().Select(GetFullTypeDefinition).Contains(GetFullTypeDefinition(parent))))
                     return true;
-                else if (!isParameterLessGeneric)
+                if (!isParameterLessGeneric)
                     if (GetFullTypeDefinition(parent) == cur && !cur.IsInterface)
                     {
                         if (VerifyGenericArguments(GetFullTypeDefinition(parent), cur))
                             return true;
                     }
                     else
-                        foreach (var item in child.GetInterfaces().Where(i => GetFullTypeDefinition(parent) == GetFullTypeDefinition(i)))
-                            if (VerifyGenericArguments(parent, item))
-                                return true;
-
+                    {
+                        var list = child.GetInterfaces()
+                            .Where(i => GetFullTypeDefinition(parent) == GetFullTypeDefinition(i));
+                        
+                        if (list.Any(item => VerifyGenericArguments(parent, item)))
+                        {
+                            return true;
+                        }
+                    }
                 child = child.BaseType;
             }
 
@@ -58,6 +63,19 @@ namespace edfi.sdg.utility
                     ).Any();
 
             return false;
+        }
+    }
+
+    public static class GenericExtensions
+    {
+        public static bool In<T>(this T value, IEnumerable<T> list)
+        {
+            return list != null && list.Contains(value);
+        }
+
+        public static bool In<T>(this T value, params T[] list)
+        {
+            return value.In((IEnumerable<T>)list);
         }
     }
 }

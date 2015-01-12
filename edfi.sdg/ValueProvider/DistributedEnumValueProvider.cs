@@ -1,29 +1,30 @@
-﻿using edfi.sdg.utility;
+﻿using System;
+using System.Linq;
+using System.Xml.Serialization;
+using EdFi.SampleDataGenerator.Configurations;
+using EdFi.SampleDataGenerator.Distributions;
+using EdFi.SampleDataGenerator.Quantity;
+using EdFi.SampleDataGenerator.Utility;
+using EdFi.SampleDataGenerator.WorkItems;
 
-namespace edfi.sdg.generators
+namespace EdFi.SampleDataGenerator.ValueProvider
 {
-    using System;
-    using System.Linq;
-    using System.Xml.Serialization;
-
-    using edfi.sdg.interfaces;
-
-    public class DistributedEnumValueProvider<T> : ValueProvider
+    public class DistributedEnumValueProvider<T> : ValueProviderBase
         where T : struct, IConvertible
     {
-        public Distribution Distribution { get; set; }
+        public DistributionBase Distribution { get; set; }
         
-        public Quantity Quantity { get; set; }
+        public QuantityBase Quantity { get; set; }
 
         public DistributedEnumValueProvider()
         {
             Distribution = new RangeDistribution(); 
-            Quantity = new ConstantQuantity() { Quantity = 1 };
+            Quantity = new ConstantQuantity { Quantity = 1 };
         }
         
         public override object GetValue(params string[] lookupPropertyValues)
         {
-            return this.GetValue();
+            return GetValue();
         }
 
         public override object GetValue()
@@ -32,7 +33,7 @@ namespace edfi.sdg.generators
             {
                 return Distribution.Shuffled<T>().Take(Quantity.Next()).ToArray();
             }
-            return this.Distribution.Next<T>();
+            return Distribution.Next<T>();
         }
     }
 
@@ -43,14 +44,14 @@ namespace edfi.sdg.generators
         [XmlAttribute]
         public string Property { get; set; }
 
-        public Distribution Distribution { get; set; }
+        public DistributionBase Distribution { get; set; }
         
-        public Quantity Quantity { get; set; }
+        public QuantityBase Quantity { get; set; }
 
         public DistributedEnumWorkItem()
         {
             Distribution = new RangeDistribution(); // RangeDistribution<T>();
-            Quantity = new ConstantQuantity() { Quantity = 1 };
+            Quantity = new ConstantQuantity { Quantity = 1 };
         }
 
         protected override object[] DoWorkImplementation(object input, IConfiguration configuration)

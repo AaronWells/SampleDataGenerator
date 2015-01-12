@@ -1,4 +1,5 @@
 ﻿using System;
+using EdFi.SampleDataGenerator.Utility;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace edfi.sdg.test.generators
@@ -15,9 +16,10 @@ namespace edfi.sdg.test.generators
         public void SerializationTests()
         {
             var allPassed = true;
-            var assembly = Assembly.Load(new AssemblyName("edfi.sdg"));
+            var assembly = Assembly.Load(new AssemblyName("EdFi.SampleDataGenerator"));
             var typesToBeSerialized = assembly.GetTypes()
-                .Where(t => t.Namespace == "edfi.sdg.generators" && !t.IsAbstract && !t.IsGenericTypeDefinition)
+                .Where(t => t.Namespace.In("EdFi.SampleDataGenerator.WorkItems", "EdFi.SampleDataGenerator.ValueProvider"))
+                .Where(t => !t.IsAbstract && !t.IsGenericTypeDefinition)
                 .Where(t => !t.Name.StartsWith("<>")) // to exclude anonymous types
                 .OrderBy(t => t.Name);
 

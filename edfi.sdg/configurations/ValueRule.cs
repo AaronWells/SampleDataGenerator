@@ -1,19 +1,16 @@
 ﻿using System;
+using System.Xml.Serialization;
+using EdFi.SampleDataGenerator.Models;
 
-namespace edfi.sdg.configurations
+namespace EdFi.SampleDataGenerator.Configurations
 {
-    using System.Xml.Serialization;
-
-    using edfi.sdg.generators;
-    using edfi.sdg.models;
-
     [Serializable]
     public class ValueRule
     {
         [XmlAttribute]
         public string Criteria { get; set; }
 
-        [GenericXmlElementAttribute(BaseTargetType = typeof(ComplexObjectType))]
-        public ValueProvider ValueProvider { get; set; }
+        [GenericXmlElement(BaseTargetType = typeof(ComplexObjectType))]
+        public ValueProvider.ValueProviderBase ValueProvider { get; set; }
     }
 }

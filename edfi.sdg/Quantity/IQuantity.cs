@@ -1,4 +1,4 @@
-﻿namespace edfi.sdg.interfaces
+﻿namespace EdFi.SampleDataGenerator.Quantity
 {
     public interface IQuantity
     {

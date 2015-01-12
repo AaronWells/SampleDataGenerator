@@ -1,4 +1,4 @@
-﻿namespace edfi.sdg.interfaces
+﻿namespace EdFi.SampleDataGenerator.ValueProvider
 {
     public interface IValueProvider
     {

@@ -1,15 +1,14 @@
 ﻿using System;
-using edfi.sdg.entity;
-using edfi.sdg.interfaces;
+using EdFi.SampleDataGenerator.Data;
 
-namespace edfi.sdg.generators
+namespace EdFi.SampleDataGenerator.ValueProvider
 {
     [Serializable]
-    public class DatabaseStatDataProvider : StatDataProviderBase
+    public class DatabaseStatDataValueProvider : StatDataValueProviderBase
     {
         private readonly DataAccess _dataAccess;
 
-        public DatabaseStatDataProvider()
+        public DatabaseStatDataValueProvider()
         {
             _dataAccess = new DataAccess();
         }

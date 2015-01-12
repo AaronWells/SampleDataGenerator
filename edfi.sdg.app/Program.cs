@@ -1,4 +1,6 @@
-﻿namespace edfi.sdg.app
+﻿using EdFi.SampleDataGenerator;
+
+namespace edfi.sdg.app
 {
     using Topshelf;
 

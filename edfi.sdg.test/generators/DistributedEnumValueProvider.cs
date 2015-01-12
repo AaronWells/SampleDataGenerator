@@ -1,14 +1,14 @@
 ﻿using System;
+using EdFi.SampleDataGenerator.Configurations;
+using EdFi.SampleDataGenerator.Distributions;
+using EdFi.SampleDataGenerator.Generators;
+using EdFi.SampleDataGenerator.ValueProvider;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics;
+using edfi.sdg.test.classes;
 
 namespace edfi.sdg.test.generators
 {
-    using System.Diagnostics;
-
-    using edfi.sdg.configurations;
-    using edfi.sdg.generators;
-    using edfi.sdg.test.classes;
-
     [TestClass]
     public class DistributedEnumValueProvider
     {
@@ -18,17 +18,17 @@ namespace edfi.sdg.test.generators
             var count = 0.0;
             for (var i = 0; i < 10000; i++)
             {
-                var valueProvider = new edfi.sdg.generators.DistributedEnumValueProvider<TestEnum>()
+                var valueProvider = new DistributedEnumValueProvider<TestEnum>()
+                {
+                    Distribution = new BucketedDistribution
                     {
-                        Distribution = new BucketedDistribution
-                            {
-                                Weightings = new Weighting[]
-                                    {
-                                        new Weighting{Value = TestEnum.Alpha, Weight = 0.5},
-                                        new Weighting{Value = TestEnum.Charlie, Weight = 0.5},
-                                    }
-                            }
-                    };
+                        Weightings = new[]
+                        {
+                            new Weighting {Value = TestEnum.Alpha, Weight = 0.5},
+                            new Weighting {Value = TestEnum.Charlie, Weight = 0.5},
+                        }
+                    }
+                };
 
                 var value = (TestEnum)valueProvider.GetValue();
 

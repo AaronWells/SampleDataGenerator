@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Xml.Serialization;
+using EdFi.SampleDataGenerator.Utility;
 
-namespace edfi.sdg.configurations
+namespace EdFi.SampleDataGenerator.Configurations
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Xml.Serialization;
-
-    using edfi.sdg.utility;
-
     [AttributeUsage(AttributeTargets.Property)]
     public class GenericXmlElementAttribute : Attribute
     {
@@ -91,7 +89,7 @@ namespace edfi.sdg.configurations
                 {
                     var constraints = type.GetGenericArguments().SelectMany(x => x.GetGenericParameterConstraints()).ToArray();
                     var isEnum = constraints.All(y => y == typeof(ValueType) || y == typeof(IConvertible));
-                    result.AddRange(from enumType in isEnum ? enumTypes : modelTypes select type.MakeGenericType(new Type[] { enumType }));
+                    result.AddRange(from enumType in isEnum ? enumTypes : modelTypes select type.MakeGenericType(new [] { enumType }));
                 }
                 else
                 {

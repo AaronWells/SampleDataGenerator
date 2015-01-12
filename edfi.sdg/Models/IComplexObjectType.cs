@@ -1,4 +1,4 @@
-﻿namespace edfi.sdg.interfaces
+﻿namespace EdFi.SampleDataGenerator.Models
 {
     public interface IComplexObjectType
     {

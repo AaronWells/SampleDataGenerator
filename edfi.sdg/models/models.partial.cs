@@ -1,15 +1,14 @@
-﻿namespace edfi.sdg.models
-{
-    using System.IO;
-    using System.Xml.Serialization;
+﻿using System.IO;
+using System.Xml.Serialization;
 
-    using edfi.sdg.interfaces;
+namespace EdFi.SampleDataGenerator.Models
+{
 
     public abstract partial class ComplexObjectType : IComplexObjectType
     {
         public string ToXml()
         {
-            var serializer = new XmlSerializer(this.GetType());
+            var serializer = new XmlSerializer(GetType());
             var textWriter = new StringWriter();
             serializer.Serialize(textWriter, this);
             return textWriter.ToString();

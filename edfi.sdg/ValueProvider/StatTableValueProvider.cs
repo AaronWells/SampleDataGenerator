@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Linq;
 using System.Xml.Serialization;
-using edfi.sdg.interfaces;
-using edfi.sdg.utility;
+using EdFi.SampleDataGenerator.Configurations;
+using EdFi.SampleDataGenerator.Utility;
+using EdFi.SampleDataGenerator.WorkItems;
 
-namespace edfi.sdg.generators
+namespace EdFi.SampleDataGenerator.ValueProvider
 {
     [Serializable]
-    public class StatTableValueProvider : ValueProvider
+    public class StatTableValueProvider : ValueProviderBase
     {
-        public StatDataProviderBase DataProvider { get; set; }
+        public StatDataValueProviderBase DataValueProvider { get; set; }
 
         public override object GetValue()
         {
             var empty = new string[] { };
-            return DataProvider.GetNextValue(empty);
+            return DataValueProvider.GetNextValue(empty);
         }
 
         public override object GetValue(params string[] lookupPropertyValues)
         {
-            return DataProvider.GetNextValue(lookupPropertyValues);
+            return DataValueProvider.GetNextValue(lookupPropertyValues);
         }
     }
 
@@ -31,7 +32,7 @@ namespace edfi.sdg.generators
     [Obsolete]
     public class StatTableWorkItem : WorkItem
     {
-        public StatDataProviderBase DataProvider { get; set; }
+        public StatDataValueProviderBase DataValueProvider { get; set; }
 
         public string[] PropertiesToLook { get; set; }
 
@@ -44,7 +45,7 @@ namespace edfi.sdg.generators
 
             var statAttributeList = PropertiesToLook.Select(property => (string)input.GetPropertyValue(property)).ToArray();
 
-            var result = DataProvider.GetNextValue(statAttributeList);
+            var result = DataValueProvider.GetNextValue(statAttributeList);
 
             input.SetPropertyValue(PropertyToSet, result);
 

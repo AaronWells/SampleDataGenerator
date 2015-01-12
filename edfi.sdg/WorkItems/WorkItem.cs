@@ -1,24 +1,24 @@
-﻿namespace edfi.sdg.generators
-{
-    using System;
-    using System.Text.RegularExpressions;
-    using System.Xml.Serialization;
+﻿using System;
+using System.Text.RegularExpressions;
+using System.Xml.Serialization;
+using EdFi.SampleDataGenerator.Configurations;
 
-    using edfi.sdg.interfaces;
+namespace EdFi.SampleDataGenerator.WorkItems
+{
     [Serializable]
     public abstract class WorkItem : IWorkItem
     {
         /// <summary>
         /// classes is a regular expression of type names that this generator should work on.
         /// for example:
-        ///     ^edfi\.sdg\.models\.((Student)|(Parent))$
+        ///     ^EdFi\.SampleDataGenerator\.Models\.((Student)|(Parent))$
         /// matches:
-        ///     edfi.sdg.models.Student
-        ///     edfi.sdg.models.Parent
+        ///     EdFi.SampleDataGenerator.Models.Student
+        ///     EdFi.SampleDataGenerator.Models.Parent
         /// but not:
-        ///     edfi.sdg.models.Students
-        ///     edfi.sdg.models4Student
-        ///     edfi.sdg.models.Parent.Other
+        ///     EdFi.SampleDataGenerator.Models.Students
+        ///     EdFi.SampleDataGenerator.Models4Student
+        ///     EdFi.SampleDataGenerator.Models.Parent.Other
         /// </summary>
         [XmlAttribute]
         public string ClassFilterRegex { get; set; }

@@ -1,8 +1,8 @@
-﻿namespace edfi.sdg.test.classes
+﻿using EdFi.SampleDataGenerator.Models;
+
+namespace edfi.sdg.test.classes
 {
     using System;
-
-    using edfi.sdg.interfaces;
 
     [Serializable()]
     public class SerializableTestClass: IComplexObjectType

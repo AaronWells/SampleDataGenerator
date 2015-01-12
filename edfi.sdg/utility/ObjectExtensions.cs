@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using edfi.sdg.generators;
 
-namespace edfi.sdg.utility
+namespace EdFi.SampleDataGenerator.Utility
 {
     public static class ObjectExtensions
     {
@@ -46,12 +45,17 @@ namespace edfi.sdg.utility
 
     public static class TypeExtensions
     {
-        private static IEnumerable<PropertyInfo> GetSystemProperties(this Type type)
+        public static bool IsSystemType(this Type type)
+        {
+            return type.Namespace == "System";
+        }
+
+        public static IEnumerable<PropertyInfo> GetSystemProperties(this Type type)
         {
             return type.GetProperties().Where(p => p.PropertyType.Namespace == "System");
         }
 
-        private static IEnumerable<PropertyInfo> GetCompositeProperties(this Type type)
+        public static IEnumerable<PropertyInfo> GetCompositeProperties(this Type type)
         {
             return type.GetProperties().Where(
                 p => !p.PropertyType.IsArray && p.PropertyType.Namespace != "System" && p.PropertyType.IsClass);

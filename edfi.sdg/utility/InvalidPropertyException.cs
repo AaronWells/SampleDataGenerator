@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace edfi.sdg.utility
+namespace EdFi.SampleDataGenerator.Utility
 {
     public class InvalidPropertyException : Exception
     {

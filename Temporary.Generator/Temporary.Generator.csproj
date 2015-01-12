@@ -44,9 +44,9 @@
     <Compile Include="RuleSet.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\edfi.sdg\edfi.sdg.csproj">
+    <ProjectReference Include="..\edfi.sdg\Edfi.SampleDataGenerator.csproj">
       <Project>{538ACC13-7B1E-4E7C-B7A0-FA371B22FD33}</Project>
-      <Name>edfi.sdg</Name>
+      <Name>Edfi.SampleDataGenerator</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

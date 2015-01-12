@@ -1,10 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using EdFi.SampleDataGenerator.Messaging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using edfi.sdg.test.classes;
 
 namespace edfi.sdg.test.messaging
 {
-    using edfi.sdg.interfaces;
-    using edfi.sdg.test.classes;
-
     [TestClass]
     public class WorkQueue
     {
@@ -15,12 +14,12 @@ namespace edfi.sdg.test.messaging
         {
             var obj1 = new SerializableTestClass();
 
-            using (var writer = new edfi.sdg.messaging.WorkQueue(WorkQueueName))
+            using (var writer = new EdFi.SampleDataGenerator.Messaging.WorkQueue(WorkQueueName))
             {
                 (writer as IQueueWriter).WriteObject(obj1);
             }
 
-            using (var reader = new edfi.sdg.messaging.WorkQueue(WorkQueueName))
+            using (var reader = new EdFi.SampleDataGenerator.Messaging.WorkQueue(WorkQueueName))
             {
                 var task = (reader as IQueueReader).ReadObjectAsync();
                 task.Wait();

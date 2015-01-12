@@ -1,4 +1,6 @@
-﻿namespace edfi.sdg.interfaces
+﻿using EdFi.SampleDataGenerator.Configurations;
+
+namespace EdFi.SampleDataGenerator.WorkItems
 {
     public interface IWorkItem
     {

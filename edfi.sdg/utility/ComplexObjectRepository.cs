@@ -1,11 +1,10 @@
-﻿namespace edfi.sdg.utility
+﻿using System;
+using System.Data.SqlClient;
+using EdFi.SampleDataGenerator.Data;
+using EdFi.SampleDataGenerator.Models;
+
+namespace EdFi.SampleDataGenerator.Utility
 {
-    using System;
-    using System.Data.SqlClient;
-
-    using edfi.sdg.data;
-    using edfi.sdg.models;
-
     public class ComplexObjectRepository
     {
         public void Save(ComplexObjectType obj)
@@ -22,13 +21,15 @@
             }
         }
 
-        public ComplexObjectType GetbyId(string identifier)
+        public ComplexObjectType GetById(string identifier)
         {
+/*
             using (var model = new DataModel())
             {
-                //var result = model.ComplexObjects.FirstOrDefault(x => x.Id == identifier);
-                //return result != null ? ComplexObjectType.FromXml(result.Xml) : null;
+                var result = model.ComplexObjects.FirstOrDefault(x => x.Id == identifier);
+                return result != null ? ComplexObjectType.FromXml(result.Xml) : null;
             }
+*/
             throw new NotImplementedException();
         }
 

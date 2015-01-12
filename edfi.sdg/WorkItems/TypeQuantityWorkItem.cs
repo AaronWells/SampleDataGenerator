@@ -1,10 +1,11 @@
-﻿namespace edfi.sdg.generators
+﻿using System;
+using EdFi.SampleDataGenerator.Configurations;
+using EdFi.SampleDataGenerator.Models;
+using EdFi.SampleDataGenerator.Quantity;
+using EdFi.SampleDataGenerator.Utility;
+
+namespace EdFi.SampleDataGenerator.WorkItems
 {
-    using System;
-
-    using edfi.sdg.interfaces;
-    using edfi.sdg.utility;
-
     /// <summary>
     /// Create a number of objects of type T and put them on the work queue
     /// </summary>
@@ -15,7 +16,7 @@
         /// <summary>
         /// Number of objects to create
         /// </summary>
-        public Quantity QuantitySpecifier { get; set; }
+        public QuantityBase QuantitySpecifier { get; set; }
 
         /// <summary>
         /// Create a number of objects and place them on the queue, 
@@ -32,17 +33,17 @@
             if (qty > configuration.MaxQueueWrites)
             {
                 results = new object[]
-                              {
-                                  new TypeQuantityWorkItem<T> { Id = this.Id, QuantitySpecifier = new ConstantQuantity { Quantity = qty / 2 } },
-                                  new TypeQuantityWorkItem<T> { Id = this.Id, QuantitySpecifier = new ConstantQuantity { Quantity = qty / 2 + qty % 2 } }
-                              };
+                {
+                    new TypeQuantityWorkItem<T> {Id = Id, QuantitySpecifier = new ConstantQuantity {Quantity = qty/2}},
+                    new TypeQuantityWorkItem<T> {Id = Id, QuantitySpecifier = new ConstantQuantity {Quantity = qty/2 + qty%2}}
+                };
             }
             else
             {
                 results = new object[qty];
                 for (var i = 0; i < qty; i++)
                 {
-                    results[i] = new T() { id = IdentifierGenerator.Create() };
+                    results[i] = new T { id = IdentifierGenerator.Create() };
                 }
             }
             return results;

@@ -1,9 +1,9 @@
-﻿namespace edfi.sdg.generators
-{
-    using System;
-    using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
-    [System.SerializableAttribute()]
+namespace EdFi.SampleDataGenerator.Distributions
+{
+    [Serializable]
     public class Weighting
     {
         [XmlElement]

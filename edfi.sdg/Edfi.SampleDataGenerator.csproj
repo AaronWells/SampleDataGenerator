@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{538ACC13-7B1E-4E7C-B7A0-FA371B22FD33}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EdFi.SampleDataGenerator</RootNamespace>
+    <AssemblyName>EdFi.SampleDataGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configurations\Configuration.cs" />
+    <Compile Include="Configurations\Configuration.Default.cs" />
+    <Compile Include="Configurations\GenericXmlElementAttribute.cs" />
+    <Compile Include="Quantity\BucketedQuantity.cs" />
+    <Compile Include="Quantity\ChiQuantity.cs" />
+    <Compile Include="Quantity\ChiSquareQuantity.cs" />
+    <Compile Include="Quantity\ConstantQuantity.cs" />
+    <Compile Include="Quantity\NormalQuantity.cs" />
+    <Compile Include="Quantity\RangeQuantity.cs" />
+    <Compile Include="ValueProvider\TestValueProvider.cs" />
+    <Compile Include="Configurations\ValueRule.cs" />
+    <Compile Include="Data\DataAccess.cs" />
+    <Compile Include="Data\DataModel.cs" />
+    <Compile Include="Distributions\BucketedDistribution.cs" />
+    <Compile Include="Distributions\ConstantDistribution.cs" />
+    <Compile Include="Distributions\RangeDistribution.cs" />
+    <Compile Include="Generators\CustomGenerators\FirstNameGenerator.cs" />
+    <Compile Include="Distributions\DistributionBase.cs" />
+    <Compile Include="Generators\Generator.cs" />
+    <Compile Include="Generators\StandardGenerators\ArrayTypeGenerator.cs" />
+    <Compile Include="Generators\StandardGenerators\ClassTypeGenerator.cs" />
+    <Compile Include="Generators\StandardGenerators\IGenerator.cs" />
+    <Compile Include="WorkItems\PropertyPopulatorWorkItem.cs" />
+    <Compile Include="Generators\StandardGenerators\NullValueGenerator.cs" />
+    <Compile Include="Generators\StandardGenerators\StandardGenerator.cs" />
+    <Compile Include="Generators\StandardGenerators\SystemDataType.cs" />
+    <Compile Include="ValueProvider\SampleValueProvider.cs" />
+    <Compile Include="ValueProvider\ValueProviderBase.cs" />
+    <Compile Include="ValueProvider\IValueProvider.cs" />
+    <Compile Include="Utility\InvalidPropertyException.cs" />
+    <Compile Include="ValueProvider\DatabaseStatDataValueProvider.cs" />
+    <Compile Include="Utility\ObjectExtensions.cs" />
+    <Compile Include="ValueProvider\StatTableValueProvider.cs" />
+    <Compile Include="Distributions\Weighting.cs" />
+    <Compile Include="ValueProvider\DistributedEnumValueProvider.cs" />
+    <Compile Include="Quantity\QuantityBase.cs" />
+    <Compile Include="Models\IComplexObjectType.cs" />
+    <Compile Include="Configurations\IConfiguration.cs" />
+    <Compile Include="WorkItems\TypeQuantityWorkItem.cs" />
+    <Compile Include="WorkItems\IWorkItem.cs" />
+    <Compile Include="Quantity\IQuantity.cs" />
+    <Compile Include="Messaging\IQueueReader.cs" />
+    <Compile Include="Messaging\IQueueWriter.cs" />
+    <Compile Include="ValueProvider\IStatDataProvider.cs" />
+    <Compile Include="Messaging\WorkEnvelope.cs" />
+    <Compile Include="Messaging\WorkQueue.cs" />
+    <Compile Include="Models\Models.cs" />
+    <Compile Include="WorkItems\WorkItem.cs" />
+    <Compile Include="Models\Models.partial.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service.cs" />
+    <Compile Include="Utility\ComplexObjectRepository.cs" />
+    <Compile Include="Utility\Generics.cs" />
+    <Compile Include="Utility\IdentifierGenerator.cs" />
+    <Compile Include="Utility\RandomExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <Compile Include="Configurations\Configuration.Serialization.cs" />
+    <None Include="Models\models.md" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

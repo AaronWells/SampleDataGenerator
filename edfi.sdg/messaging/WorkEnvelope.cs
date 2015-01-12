@@ -1,6 +1,6 @@
-﻿namespace edfi.sdg.messaging
+﻿namespace EdFi.SampleDataGenerator.Messaging
 {
-    [System.SerializableAttribute()]
+    [System.SerializableAttribute]
     public class WorkEnvelope
     {
         public int NextStep { get; set; }

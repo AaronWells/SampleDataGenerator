@@ -1,4 +1,4 @@
-﻿namespace edfi.sdg.interfaces
+﻿namespace EdFi.SampleDataGenerator.Configurations
 {
     public interface IConfiguration
     {
@@ -8,8 +8,10 @@
         int MaxQueueWrites { get; set; }
 
         /// <summary>
-        /// The msmq address of the worker queue
+        /// The MSMQ address of the worker queue
         /// </summary>
         string WorkQueueName { get; set; }
+
+        ValueRule[] GetValueRules();
     }
 }

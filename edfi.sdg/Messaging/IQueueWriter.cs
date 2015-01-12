@@ -1,4 +1,4 @@
-namespace edfi.sdg.interfaces
+namespace EdFi.SampleDataGenerator.Messaging
 {
     public interface IQueueWriter
     {

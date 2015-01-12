@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Xml.Serialization;
 
-namespace edfi.sdg.configurations
+namespace EdFi.SampleDataGenerator.Configurations
 {
-    using System.Reflection;
-    using System.Xml.Serialization;
-
     public partial class Configuration
     {
         public static XmlSerializer ConfigurationSerializer()

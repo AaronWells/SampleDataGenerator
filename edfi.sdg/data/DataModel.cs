@@ -1,8 +1,8 @@
-namespace edfi.sdg.data
-{
-    using System.Data.Entity;
+using System.Data.Entity;
 
-    public partial class DataModel : DbContext
+namespace EdFi.SampleDataGenerator.Data
+{
+    public class DataModel : DbContext
     {
         public DataModel()
             : base("name=DataModel")

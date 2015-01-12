@@ -10,8 +10,8 @@ namespace edfi.sdg.test.utility
         public void RoundtripGuidValue()
         {
             var expected = Guid.NewGuid();
-            var identifier = sdg.utility.IdentifierGenerator.Create(expected);
-            var actual = sdg.utility.IdentifierGenerator.ToGuid(identifier);
+            var identifier = EdFi.SampleDataGenerator.Utility.IdentifierGenerator.Create(expected);
+            var actual = EdFi.SampleDataGenerator.Utility.IdentifierGenerator.ToGuid(identifier);
             Assert.AreEqual(expected, actual);
         }
     }

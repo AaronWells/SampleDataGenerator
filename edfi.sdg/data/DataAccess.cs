@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace edfi.sdg.entity
+namespace EdFi.SampleDataGenerator.Data
 {
     public class DataAccess
     {

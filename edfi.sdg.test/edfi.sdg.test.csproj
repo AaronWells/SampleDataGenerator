@@ -68,9 +68,9 @@
     <Compile Include="utility\Generics.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\edfi.sdg\edfi.sdg.csproj">
+    <ProjectReference Include="..\edfi.sdg\Edfi.SampleDataGenerator.csproj">
       <Project>{538acc13-7b1e-4e7c-b7a0-fa371b22fd33}</Project>
-      <Name>edfi.sdg</Name>
+      <Name>Edfi.SampleDataGenerator</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

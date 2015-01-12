@@ -1,9 +1,8 @@
 ﻿using System;
+using System.Linq;
 
-namespace edfi.sdg.utility
+namespace EdFi.SampleDataGenerator.Utility
 {
-    using System.Linq;
-
     /// <summary>
     /// Extension methods to the Random class.
     /// Taken from Practical Numerical Methods with C# by Jack Xu
@@ -13,7 +12,7 @@ namespace edfi.sdg.utility
         /// <summary>
         /// Returns a random value that conforms to a standard deviation curve
         /// </summary>
-        /// <param name="rnd">Random number generaror</param>
+        /// <param name="rnd">Random number generator</param>
         /// <param name="mu">Average value of population</param>
         /// <param name="sigma">Value of one standard deviation</param>
         /// <returns>the next random number in the sequence</returns>
@@ -33,7 +32,7 @@ namespace edfi.sdg.utility
         /// <summary>
         /// Returns a random number corresponding to the Chi distribution
         /// </summary>
-        /// <param name="rnd">Random number generaror</param>
+        /// <param name="rnd">Random number generator</param>
         /// <param name="n">Degrees of freedom</param>
         /// <param name="sigma">Value of one standard deviation</param>
         /// <returns>the next random number in the sequence</returns>
@@ -45,7 +44,7 @@ namespace edfi.sdg.utility
         /// <summary>
         /// Returns a random number corresponding to the Chi squared distribution
         /// </summary>
-        /// <param name="rnd">Random number generaror</param>
+        /// <param name="rnd">Random number generator</param>
         /// <param name="n">Degrees of freedom</param>
         /// <param name="sigma">Value of one standard deviation</param>
         /// <returns>the next random number in the sequence</returns>
@@ -86,7 +85,7 @@ namespace edfi.sdg.utility
         }
 
         /// <summary>
-        /// returns the INDEX of the array according to the provided weights
+        /// returns the INDEX of the array according to the provided <paramref name="weights"/>
         /// </summary>
         /// <param name="random"></param>
         /// <param name="weights">an array of relative weightings</param>

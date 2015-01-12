@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Xml.Serialization;
-using edfi.sdg.generators;
 
-namespace edfi.sdg.interfaces
+namespace EdFi.SampleDataGenerator.ValueProvider
 {
     [Serializable]
-    [XmlInclude(typeof(DatabaseStatDataProvider))]
-    public abstract class StatDataProviderBase
+    [XmlInclude(typeof(DatabaseStatDataValueProvider))]
+    public abstract class StatDataValueProviderBase
     {
         public abstract string GetNextValue(string[] lookupProperties);
     }
