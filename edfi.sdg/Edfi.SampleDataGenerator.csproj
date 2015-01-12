@@ -67,7 +67,7 @@
     <Compile Include="Distributions\BucketedDistribution.cs" />
     <Compile Include="Distributions\ConstantDistribution.cs" />
     <Compile Include="Distributions\RangeDistribution.cs" />
-    <Compile Include="Generators\CustomGenerators\FirstNameGenerator.cs" />
+    <Compile Include="Generators\CustomGenerators\RuleBaseGenerator.cs" />
     <Compile Include="Distributions\DistributionBase.cs" />
     <Compile Include="Generators\Generator.cs" />
     <Compile Include="Generators\StandardGenerators\ArrayTypeGenerator.cs" />
