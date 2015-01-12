@@ -1,4 +1,6 @@
-﻿namespace EdFi.SampleDataGenerator.Configurations
+﻿using EdFi.SampleDataGenerator.ValueProvider;
+
+namespace EdFi.SampleDataGenerator.Configurations
 {
     public interface IConfiguration
     {

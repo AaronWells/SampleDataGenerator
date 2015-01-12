@@ -1,4 +1,5 @@
 ﻿using EdFi.SampleDataGenerator.Models;
+using EdFi.SampleDataGenerator.ValueProvider;
 using EdFi.SampleDataGenerator.WorkItems;
 
 namespace EdFi.SampleDataGenerator.Configurations
