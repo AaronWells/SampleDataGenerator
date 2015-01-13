@@ -61,8 +61,11 @@
     <Compile Include="Quantity\NormalQuantity.cs" />
     <Compile Include="Quantity\RangeQuantity.cs" />
     <Compile Include="Utility\TypeExtensions.cs" />
+    <Compile Include="Utility\DirectedGraph.cs" />
     <Compile Include="Utility\Utility.cs" />
     <Compile Include="ValueProvider\ValueRule.cs" />
+    <Compile Include="ValueProvider\TestValueProvider.cs" />
+    <Compile Include="Configurations\ValueRule.cs" />
     <Compile Include="Data\DataAccess.cs" />
     <Compile Include="Data\DataModel.cs" />
     <Compile Include="Distributions\BucketedDistribution.cs" />
