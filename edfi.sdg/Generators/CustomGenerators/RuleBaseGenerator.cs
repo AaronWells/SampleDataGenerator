@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -42,7 +41,7 @@ namespace EdFi.SampleDataGenerator.Generators.CustomGenerators
                 : new NullValueGenerator().Handle(property);
         }
 
-        private static bool MatchesCriteria(string criteria, List<string> possibilites)
+        private static bool MatchesCriteria(string criteria, ICollection<string> possibilites)
         {
             return possibilites != null && possibilites.Contains(criteria);
         }
