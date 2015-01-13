@@ -9,8 +9,6 @@ namespace EdFi.SampleDataGenerator.ValueProvider
         [XmlArray]
         public string[] LookupProperties { get; set; }
 
-        public abstract object GetValue();
-
         public abstract object GetValue(params string[] lookupPropertyValues);
     }
 }

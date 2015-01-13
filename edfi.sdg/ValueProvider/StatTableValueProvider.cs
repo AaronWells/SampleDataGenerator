@@ -12,12 +12,6 @@ namespace EdFi.SampleDataGenerator.ValueProvider
     {
         public StatDataValueProviderBase DataValueProvider { get; set; }
 
-        public override object GetValue()
-        {
-            var empty = new string[] { };
-            return DataValueProvider.GetNextValue(empty);
-        }
-
         public override object GetValue(params string[] lookupPropertyValues)
         {
             return DataValueProvider.GetNextValue(lookupPropertyValues);

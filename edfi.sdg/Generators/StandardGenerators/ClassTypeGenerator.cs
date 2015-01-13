@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using EdFi.SampleDataGenerator.Utility;
 
 namespace EdFi.SampleDataGenerator.Generators.StandardGenerators
 {
@@ -7,7 +8,7 @@ namespace EdFi.SampleDataGenerator.Generators.StandardGenerators
     {
         public bool CanHandle(PropertyInfo property)
         {
-            return property.PropertyType.IsClass;
+            return property.PropertyType.IsCompositeType();
         }
 
         public object Handle(PropertyInfo property)

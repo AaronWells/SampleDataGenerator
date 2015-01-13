@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace EdFi.SampleDataGenerator.Utility
 {
@@ -41,25 +39,11 @@ namespace EdFi.SampleDataGenerator.Utility
             var splitted = propertyName.Split(new[] {'.'});
             return splitted[splitted.Length - 1];
         }
-    }
 
-    public static class TypeExtensions
-    {
-        public static bool IsSystemType(this Type type)
+        public static string ExcludeFirstSegment(this string propertyName)
         {
-            return type.Namespace == "System";
+            var breakDown = propertyName.Split(new[] { '.' });
+            return breakDown.Length < 2 ? propertyName : string.Join(".", breakDown.Skip(1));
         }
-
-        public static IEnumerable<PropertyInfo> GetSystemProperties(this Type type)
-        {
-            return type.GetProperties().Where(p => p.PropertyType.Namespace == "System");
-        }
-
-        public static IEnumerable<PropertyInfo> GetCompositeProperties(this Type type)
-        {
-            return type.GetProperties().Where(
-                p => !p.PropertyType.IsArray && p.PropertyType.Namespace != "System" && p.PropertyType.IsClass);
-        }
-
     }
 }
