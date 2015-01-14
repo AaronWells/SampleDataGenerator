@@ -21,6 +21,11 @@ namespace EdFi.SampleDataGenerator.Generators
 
         public void Populate(object input)
         {
+            var propertyExtract = PropertyExtractor.ExtractPropertyMetadata(input.GetType());
+            GenerateObjectHierarchy(input);
+
+            // traverse rules and create dependency graph
+
             _breadCrumb = new LinkedList<TraceObject>();
             _breadCrumb.AddFirst(new TraceObject
             {
@@ -72,6 +77,34 @@ namespace EdFi.SampleDataGenerator.Generators
                 input.SetPropertyValue(property.Name, value);
 
             }
+        }
+
+        private static void GenerateObjectHierarchy(object input)
+        {
+            var type = input.GetType();
+            // can't generate hierarchy for non-class types
+            if (!type.IsClass)
+            {
+                throw new ArgumentException(string.Format("cannot populate non-class type: '{0}'", type.FullName));
+            }
+
+            var properties = type.GetProperties();
+
+            foreach (var property in properties.Where(p=>p.PropertyType.IsCompositeType()))
+            {
+                input.SetPropertyValue(property.Name, GetMeA(property.PropertyType));
+            }
+        }
+
+        private static object GetMeA(Type propertyType)
+        {
+            var instance = Activator.CreateInstance(propertyType);
+            var properties = propertyType.GetProperties(); 
+            foreach (var property in properties.Where(p => p.PropertyType.IsCompositeType()))
+            {
+                instance.SetPropertyValue(property.Name, GetMeA(propertyType));
+            }
+            return instance;
         }
     }
 
