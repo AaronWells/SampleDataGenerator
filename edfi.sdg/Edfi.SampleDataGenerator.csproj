@@ -54,6 +54,7 @@
     <Compile Include="Configurations\Configuration.cs" />
     <Compile Include="Configurations\Configuration.Default.cs" />
     <Compile Include="Configurations\GenericXmlElementAttribute.cs" />
+    <Compile Include="Generators\PropertyExtractor.cs" />
     <Compile Include="Quantity\BucketedQuantity.cs" />
     <Compile Include="Quantity\ChiQuantity.cs" />
     <Compile Include="Quantity\ChiSquareQuantity.cs" />

@@ -60,6 +60,7 @@
     <Compile Include="Classes\SerializableTestClass.cs" />
     <Compile Include="Generators\DistributedEnumValueProvider.cs" />
     <Compile Include="Generators\Serialization.cs" />
+    <Compile Include="Generators\PropertyExtractor.cs" />
     <Compile Include="Messaging\WorkQueue.cs" />
     <Compile Include="Models\Models.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
