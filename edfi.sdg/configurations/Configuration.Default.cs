@@ -1,5 +1,6 @@
 ﻿using EdFi.SampleDataGenerator.Models;
 using EdFi.SampleDataGenerator.Quantity;
+using EdFi.SampleDataGenerator.Repository;
 using EdFi.SampleDataGenerator.ValueProvider;
 using EdFi.SampleDataGenerator.WorkItems;
 
@@ -20,7 +21,7 @@ namespace EdFi.SampleDataGenerator.Configurations
                     {
                         new ValueRule{Class = "*", PropertySpecifier = "Sex", ValueProvider = new DistributedEnumValueProvider<SexType>()},
                         new ValueRule{Class = "*", PropertySpecifier = "OldEthnicity", ValueProvider = new DistributedEnumValueProvider<OldEthnicityType>()},
-                        new ValueRule{Class = "*", PropertySpecifier = "FirstName", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"..Sex"}, DataValueProvider = new DatabaseStatDataValueProvider {StatTableName = "GivenName"}}},
+                        new ValueRule{Class = "*", PropertySpecifier = "FirstName", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"..Sex"}, DataRepository = new DatabaseStatDataRepository {StatTableName = "GivenName"}}},
 //                        new ValueRule{Criteria = "FirstName", ValueProvider = new TestValueProvider()}
                     },
                     WorkFlow = new WorkItem[]

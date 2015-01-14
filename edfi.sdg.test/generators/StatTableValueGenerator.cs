@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EdFi.SampleDataGenerator.Generators;
 using EdFi.SampleDataGenerator.Models;
+using EdFi.SampleDataGenerator.Repository;
 using EdFi.SampleDataGenerator.Utility;
 using EdFi.SampleDataGenerator.ValueProvider;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,7 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace EdFi.SampleDataGenerator.Test.Generators
 {
     [Serializable]
-    public class MemoryStatDataValueProvider : StatDataValueProviderBase
+    public class MemoryStatDataRepository : StatDataRepositoryBase
     {
         public override string GetNextValue(string[] lookupProperties)
         {
@@ -50,7 +51,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
 
             var generator = new StatTableWorkItem
             {
-                DataValueProvider = new MemoryStatDataValueProvider(),
+                DataRepository = new MemoryStatDataRepository(),
                 PropertyToSet = "Name",
                 PropertiesToLook = new[] { "Ethnicity", "Gender" },
             };
@@ -68,7 +69,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
 
             var generator = new StatTableWorkItem
             {
-                DataValueProvider = new MemoryStatDataValueProvider(),
+                DataRepository = new MemoryStatDataRepository(),
                 PropertyToSet = "SampleClass.UnknownPropertyName",
                 PropertiesToLook = new string[] { }
             };
@@ -89,7 +90,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                     PropertySpecifier = "StringProperty2",
                     ValueProvider = new StatTableValueProvider
                     {
-                        DataValueProvider = new MemoryStatDataValueProvider(),
+                        DataRepository = new MemoryStatDataRepository(),
                         LookupProperties = new string[] {}
                     }
                 }
@@ -114,7 +115,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                     PropertySpecifier = "StringProperty2",
                     ValueProvider = new StatTableValueProvider
                     {
-                        DataValueProvider = new MemoryStatDataValueProvider(),
+                        DataRepository = new MemoryStatDataRepository(),
                         LookupProperties = new[] {"StringProperty1"}
                     }
                 }

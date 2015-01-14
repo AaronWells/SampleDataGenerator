@@ -64,6 +64,7 @@
     <Compile Include="Utility\TypeExtensions.cs" />
     <Compile Include="Utility\DirectedGraph.cs" />
     <Compile Include="Utility\Utility.cs" />
+    <Compile Include="Repository\StatDataRepositoryBase.cs" />
     <Compile Include="ValueProvider\ValueRule.cs" />
     <Compile Include="Data\DataAccess.cs" />
     <Compile Include="Data\DataModel.cs" />
@@ -84,7 +85,7 @@
     <Compile Include="ValueProvider\ValueProviderBase.cs" />
     <Compile Include="ValueProvider\IValueProvider.cs" />
     <Compile Include="Utility\InvalidPropertyException.cs" />
-    <Compile Include="ValueProvider\DatabaseStatDataValueProvider.cs" />
+    <Compile Include="Repository\DatabaseStatDataRepository.cs" />
     <Compile Include="Utility\ObjectExtensions.cs" />
     <Compile Include="ValueProvider\StatTableValueProvider.cs" />
     <Compile Include="Distributions\Weighting.cs" />
@@ -97,7 +98,6 @@
     <Compile Include="Quantity\IQuantity.cs" />
     <Compile Include="Messaging\IQueueReader.cs" />
     <Compile Include="Messaging\IQueueWriter.cs" />
-    <Compile Include="ValueProvider\StatDataValueProviderBase.cs" />
     <Compile Include="Messaging\WorkEnvelope.cs" />
     <Compile Include="Messaging\WorkQueue.cs" />
     <Compile Include="Models\Models.cs" />

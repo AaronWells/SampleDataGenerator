@@ -1,14 +1,14 @@
 ﻿using System;
 using EdFi.SampleDataGenerator.Data;
 
-namespace EdFi.SampleDataGenerator.ValueProvider
+namespace EdFi.SampleDataGenerator.Repository
 {
     [Serializable]
-    public class DatabaseStatDataValueProvider : StatDataValueProviderBase
+    public class DatabaseStatDataRepository : StatDataRepositoryBase
     {
         private readonly DataAccess _dataAccess;
 
-        public DatabaseStatDataValueProvider()
+        public DatabaseStatDataRepository()
         {
             _dataAccess = new DataAccess();
         }
@@ -20,5 +20,4 @@ namespace EdFi.SampleDataGenerator.ValueProvider
             return _dataAccess.GetNextValue(StatTableName, lookupProperties);
         }
     }
-
 }
