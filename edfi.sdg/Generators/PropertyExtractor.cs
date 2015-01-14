@@ -6,6 +6,8 @@ namespace EdFi.SampleDataGenerator.Generators
 {
     using System.Reflection;
 
+    using EdFi.SampleDataGenerator.Utility;
+
     public struct PropertyPath
     {
         private readonly Type type;
@@ -51,7 +53,7 @@ namespace EdFi.SampleDataGenerator.Generators
         {
             this.type = type;
             this.propertyInfo = null;
-            this.propertyPaths = new PropertyPath[] { };
+            this.propertyPaths = new PropertyPath[] { new PropertyPath(this.type, new String[] { }), };
         }
 
         public PropertyMetadata(Type parentType, PropertyMetadata parentPropertyMetadata, PropertyInfo propertyInfo, IEnumerable<PropertyPath> parentPropertyPaths)
@@ -83,9 +85,22 @@ namespace EdFi.SampleDataGenerator.Generators
         public int CompareTo(string other)
         {
             var paths = this.PropertyPaths.Select(p => p.ToString());
-            //todo: match a this propertyMedatadata to a string path that includes parent.parent. navigation, 
-            // other.replace("parent", this.parentProperty.propertyname... or something
             return paths.Any(x => System.String.Compare(x, other, System.StringComparison.Ordinal) == 0) ? 0 : 1;
+        }
+
+        public string ResolveRelativePath(string relativePath)
+        {
+            // ReSharper disable once InconsistentNaming
+            const string PARENT = "{parent}.";
+            var currentMetadata = this.parentPropertyMetadata;
+            while (relativePath.StartsWith(PARENT) && this.parentPropertyMetadata != null)
+            {
+                currentMetadata = currentMetadata.ParentPropertyMetadata;
+                relativePath = relativePath.ExcludeFirstSegment();
+            }
+            var paths = new List<string>(currentMetadata.propertyPaths.Last().Path) { relativePath };
+            var parentPropPath = new PropertyPath(currentMetadata.Type, paths);
+            return parentPropPath.ToString();
         }
     }
 

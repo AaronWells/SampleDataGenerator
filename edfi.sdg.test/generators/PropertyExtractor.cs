@@ -3,6 +3,7 @@
 namespace EdFi.SampleDataGenerator.Test.Generators
 {
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
     [TestClass]
     public class PropertyExtractor
@@ -29,7 +30,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
         public void RetrievesAllPropertyPaths()
         {
             var result = EdFi.SampleDataGenerator.Generators.PropertyExtractor.ExtractPropertyMetadata(typeof(ClassC));
-            var propertyPaths = result.SelectMany(x => x.PropertyPaths.Select(y=> y.ToString())).ToArray();
+            var propertyPaths = result.SelectMany(x => x.PropertyPaths.Select(y => y.ToString())).ToArray();
             Assert.IsTrue(propertyPaths.Contains("ClassC::DoubleProperty"));
             Assert.IsTrue(propertyPaths.Contains("ClassC::ClassAProperty"));
             Assert.IsTrue(propertyPaths.Contains("ClassA::StringProperty"));
@@ -67,10 +68,18 @@ namespace EdFi.SampleDataGenerator.Test.Generators
         public void ParentPropertiesAreSet()
         {
             var result = EdFi.SampleDataGenerator.Generators.PropertyExtractor.ExtractPropertyMetadata(typeof(ClassC));
-            var parentTypes = result.Where(y=> y.Type == typeof(ClassA)).Select(x=> x.ParentPropertyMetadata.Type).Distinct().ToArray();
+            var parentTypes = result.Where(y => y.Type == typeof(ClassA)).Select(x => x.ParentPropertyMetadata.Type).Distinct().ToArray();
             Assert.IsTrue(parentTypes.Contains(typeof(ClassC)));
             Assert.IsFalse(parentTypes.Contains(typeof(ClassB)));
             Assert.IsFalse(parentTypes.Contains(typeof(ClassA)));
+        }
+
+        [TestMethod]
+        public void FindDependentAttribute()
+        {
+            var metadatas = EdFi.SampleDataGenerator.Generators.PropertyExtractor.ExtractPropertyMetadata(typeof(ClassC));
+            var propMetadata = metadatas.First(x => x.CompareTo("ClassA::StringProperty") == 0);
+            var absolutePath = propMetadata.ResolveRelativePath("{parent}.DoubleProperty");
         }
 
     }
