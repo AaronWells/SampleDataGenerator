@@ -56,10 +56,16 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlDatabaseSetup.cs" />
+    <Compile Include="ValidateStatTableSchema.cs">
+      <SubType>Designer</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GetNextValue.resx">
       <DependentUpon>GetNextValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ValidateStatTableSchema.resx">
+      <DependentUpon>ValidateStatTableSchema.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
