@@ -4,7 +4,7 @@ using EdFi.SampleDataGenerator.Data;
 namespace EdFi.SampleDataGenerator.Repository
 {
     [Serializable]
-    public class DatabaseStatDataRepository : StatDataRepositoryBase
+    public class DatabaseStatDataRepository : StatDataRepository
     {
         private readonly DataAccess _dataAccess;
 

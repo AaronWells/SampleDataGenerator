@@ -15,7 +15,7 @@ namespace EdFi.SampleDataGenerator.ValueProvider
         public string PropertySpecifier { get; set; }
 
         [GenericXmlElement(BaseTargetType = typeof(ComplexObjectType))]
-        public ValueProviderBase ValueProvider { get; set; }
+        public ValueProvider ValueProvider { get; set; }
 
         [XmlIgnore]
         public string Path

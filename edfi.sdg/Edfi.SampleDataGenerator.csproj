@@ -64,7 +64,8 @@
     <Compile Include="Utility\TypeExtensions.cs" />
     <Compile Include="Utility\DirectedGraph.cs" />
     <Compile Include="Utility\Utility.cs" />
-    <Compile Include="Repository\StatDataRepositoryBase.cs" />
+    <Compile Include="Repository\StatDataRepository.cs" />
+    <Compile Include="WorkItems\StatTableWorkItem.cs" />
     <Compile Include="ValueProvider\ValueRule.cs" />
     <Compile Include="Data\DataAccess.cs" />
     <Compile Include="Data\DataModel.cs" />
@@ -82,8 +83,7 @@
     <Compile Include="Generators\StandardGenerators\StandardGenerator.cs" />
     <Compile Include="Generators\StandardGenerators\SystemDataType.cs" />
     <Compile Include="ValueProvider\SampleValueProvider.cs" />
-    <Compile Include="ValueProvider\ValueProviderBase.cs" />
-    <Compile Include="ValueProvider\IValueProvider.cs" />
+    <Compile Include="ValueProvider\ValueProvider.cs" />
     <Compile Include="Utility\InvalidPropertyException.cs" />
     <Compile Include="Repository\DatabaseStatDataRepository.cs" />
     <Compile Include="Utility\ObjectExtensions.cs" />

@@ -5,12 +5,13 @@ using EdFi.SampleDataGenerator.Models;
 using EdFi.SampleDataGenerator.Repository;
 using EdFi.SampleDataGenerator.Utility;
 using EdFi.SampleDataGenerator.ValueProvider;
+using EdFi.SampleDataGenerator.WorkItems;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EdFi.SampleDataGenerator.Test.Generators
 {
     [Serializable]
-    public class MemoryStatDataRepository : StatDataRepositoryBase
+    public class MemoryStatDataRepository : StatDataRepository
     {
         public override string GetNextValue(string[] lookupProperties)
         {

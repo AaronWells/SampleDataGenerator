@@ -5,7 +5,7 @@ namespace EdFi.SampleDataGenerator.Repository
 {
     [Serializable]
     [XmlInclude(typeof(DatabaseStatDataRepository))]
-    public abstract class StatDataRepositoryBase
+    public abstract class StatDataRepository
     {
         public abstract string GetNextValue(string[] lookupProperties);
     }

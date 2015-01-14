@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace EdFi.SampleDataGenerator.ValueProvider
 {
-    public class SampleValueProvider : ValueProviderBase
+    public class SampleValueProvider : ValueProvider
     {
         [XmlAttribute]
         public string MyValue { get; set; }

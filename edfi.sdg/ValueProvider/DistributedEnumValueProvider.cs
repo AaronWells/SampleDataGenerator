@@ -9,7 +9,7 @@ using EdFi.SampleDataGenerator.WorkItems;
 
 namespace EdFi.SampleDataGenerator.ValueProvider
 {
-    public class DistributedEnumValueProvider<T> : ValueProviderBase
+    public class DistributedEnumValueProvider<T> : ValueProvider
         where T : struct, IConvertible
     {
         public DistributionBase Distribution { get; set; }
