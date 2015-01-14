@@ -29,12 +29,14 @@ namespace EdFi.SampleDataGenerator.Test.Generators
         public void RetrievesAllPropertyPaths()
         {
             var result = EdFi.SampleDataGenerator.Generators.PropertyExtractor.ExtractPropertyMetadata(typeof(ClassC));
-            var propertyPaths = result.Select(x => x.PropertyPath).ToArray();
-            Assert.IsTrue(propertyPaths.Contains("ClassAProperty"));
-            Assert.IsTrue(propertyPaths.Contains("StringArrayProperty"));
-            Assert.IsTrue(propertyPaths.Contains("ClassAProperty.StringProperty"));
-            Assert.IsTrue(propertyPaths.Contains("ClassAProperty.IntProperty"));
-            Assert.IsTrue(propertyPaths.Contains("DoubleProperty"));
+            var propertyPaths = result.SelectMany(x => x.PropertyPaths.Select(y=> y.ToString())).ToArray();
+            Assert.IsTrue(propertyPaths.Contains("ClassC::DoubleProperty"));
+            Assert.IsTrue(propertyPaths.Contains("ClassC::ClassAProperty"));
+            Assert.IsTrue(propertyPaths.Contains("ClassA::StringProperty"));
+            Assert.IsTrue(propertyPaths.Contains("ClassC::ClassAProperty.StringProperty"));
+            Assert.IsTrue(propertyPaths.Contains("ClassA::IntProperty"));
+            Assert.IsTrue(propertyPaths.Contains("ClassC::ClassAProperty.IntProperty"));
+            Assert.IsTrue(propertyPaths.Contains("ClassC::StringArrayProperty"));
         }
 
         [TestMethod]
@@ -60,5 +62,16 @@ namespace EdFi.SampleDataGenerator.Test.Generators
             Assert.IsTrue(propertyTypes.Contains(typeof(int)));
             Assert.IsTrue(propertyTypes.Contains(typeof(double)));
         }
+
+        [TestMethod]
+        public void ParentPropertiesAreSet()
+        {
+            var result = EdFi.SampleDataGenerator.Generators.PropertyExtractor.ExtractPropertyMetadata(typeof(ClassC));
+            var parentTypes = result.Where(y=> y.Type == typeof(ClassA)).Select(x=> x.ParentPropertyMetadata.Type).Distinct().ToArray();
+            Assert.IsTrue(parentTypes.Contains(typeof(ClassC)));
+            Assert.IsFalse(parentTypes.Contains(typeof(ClassB)));
+            Assert.IsFalse(parentTypes.Contains(typeof(ClassA)));
+        }
+
     }
 }

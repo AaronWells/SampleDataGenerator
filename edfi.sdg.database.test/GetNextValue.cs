@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Text;
-using Microsoft.Data.Tools.Schema.Sql.UnitTesting;
-using Microsoft.Data.Tools.Schema.Sql.UnitTesting.Conditions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace edfi.sdg.test.database
+﻿namespace edfi.sdg.database.test
 {
+    using Microsoft.Data.Tools.Schema.Sql.UnitTesting;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass()]
     public class GetNextValue : SqlDatabaseTestClass
     {
 
         public GetNextValue()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         [TestInitialize()]

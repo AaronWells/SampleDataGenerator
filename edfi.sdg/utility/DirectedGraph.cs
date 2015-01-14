@@ -101,7 +101,6 @@ namespace EdFi.SampleDataGenerator.Utility
                 case VertexColor.Grey:
                     // currently visiting
                     throw new GraphCycleException();
-                    break;
                 case VertexColor.Black:
                     // already evaluated, do nothing
                     break;
