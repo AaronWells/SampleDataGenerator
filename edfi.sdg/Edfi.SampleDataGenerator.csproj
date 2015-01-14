@@ -97,7 +97,7 @@
     <Compile Include="Quantity\IQuantity.cs" />
     <Compile Include="Messaging\IQueueReader.cs" />
     <Compile Include="Messaging\IQueueWriter.cs" />
-    <Compile Include="ValueProvider\IStatDataProvider.cs" />
+    <Compile Include="ValueProvider\StatDataValueProviderBase.cs" />
     <Compile Include="Messaging\WorkEnvelope.cs" />
     <Compile Include="Messaging\WorkQueue.cs" />
     <Compile Include="Models\Models.cs" />
