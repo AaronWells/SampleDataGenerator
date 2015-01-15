@@ -65,6 +65,9 @@
     <Compile Include="Utility\DirectedGraph.cs" />
     <Compile Include="Utility\Utility.cs" />
     <Compile Include="Repository\StatDataRepository.cs" />
+    <Compile Include="ValueProvider\CopyPropertyValueProvider.cs" />
+    <Compile Include="WorkItems\FinalizeWorkItem.cs" />
+    <Compile Include="WorkItems\ReferenceCreationWorkItem.cs" />
     <Compile Include="WorkItems\StatTableWorkItem.cs" />
     <Compile Include="ValueProvider\ValueRule.cs" />
     <Compile Include="Data\DataAccess.cs" />
