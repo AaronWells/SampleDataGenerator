@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace EdFi.SampleDataGenerator.Generators
 {
+    using System.Data;
     using System.Reflection;
 
     using EdFi.SampleDataGenerator.Utility;
@@ -91,14 +92,19 @@ namespace EdFi.SampleDataGenerator.Generators
         public string ResolveRelativePath(string relativePath)
         {
             // ReSharper disable once InconsistentNaming
-            const string PARENT = "{parent}.";
+            const string PARENT = "{parent}";
+            var workingPath = relativePath.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             var currentMetadata = this.parentPropertyMetadata;
-            while (relativePath.StartsWith(PARENT) && this.parentPropertyMetadata != null)
+            while (workingPath.First().StartsWith(PARENT) && this.parentPropertyMetadata != null)
             {
                 currentMetadata = currentMetadata.ParentPropertyMetadata;
-                relativePath = relativePath.ExcludeFirstSegment();
+                workingPath.RemoveAt(0);
             }
-            var paths = new List<string>(currentMetadata.propertyPaths.Last().Path) { relativePath };
+            if (workingPath.Any(x => x.StartsWith(PARENT)) || currentMetadata == null)
+            {
+                throw new InvalidExpressionException(string.Format("'{0}' is not a valid relative path for '{1}'", relativePath, PropertyPaths.Last()));
+            }
+            var paths = new List<string>(currentMetadata.propertyPaths.Last().Path.Concat(workingPath));
             var parentPropPath = new PropertyPath(currentMetadata.Type, paths);
             return parentPropPath.ToString();
         }

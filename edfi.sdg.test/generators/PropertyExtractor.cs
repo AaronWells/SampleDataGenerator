@@ -2,6 +2,7 @@
 
 namespace EdFi.SampleDataGenerator.Test.Generators
 {
+    using System.Data;
     using System.Linq;
     using System.Runtime.CompilerServices;
 
@@ -80,7 +81,25 @@ namespace EdFi.SampleDataGenerator.Test.Generators
             var metadatas = EdFi.SampleDataGenerator.Generators.PropertyExtractor.ExtractPropertyMetadata(typeof(ClassC));
             var propMetadata = metadatas.First(x => x.CompareTo("ClassA::StringProperty") == 0);
             var absolutePath = propMetadata.ResolveRelativePath("{parent}.DoubleProperty");
+            Assert.AreEqual("ClassC::DoubleProperty", absolutePath);
         }
 
+        [TestMethod]
+        public void PathToSiblingProperty()
+        {
+            var metadatas = EdFi.SampleDataGenerator.Generators.PropertyExtractor.ExtractPropertyMetadata(typeof(ClassC));
+            var propMetadata = metadatas.First(x => x.CompareTo("ClassA::StringProperty") == 0);
+            var absolutePath = propMetadata.ResolveRelativePath("IntProperty");
+            Assert.AreEqual("ClassC::ClassAProperty.IntProperty", absolutePath);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidExpressionException))]
+        public void InvalidRelativePath()
+        {
+            var metadatas = EdFi.SampleDataGenerator.Generators.PropertyExtractor.ExtractPropertyMetadata(typeof(ClassC));
+            var propMetadata = metadatas.First(x => x.CompareTo("ClassA::StringProperty") == 0);
+            var absolutePath = propMetadata.ResolveRelativePath("{parent}.{parent}.IntProperty");
+        }
     }
 }
