@@ -7,24 +7,24 @@ namespace EdFi.SampleDataGenerator.Utility
 
     public class GraphCycleException : Exception { }
 
+    internal enum VertexColor
+    {
+        /// <summary>
+        /// Not visited
+        /// </summary>
+        White,
+        /// <summary>
+        /// Currently being visited
+        /// </summary>
+        Grey,
+        /// <summary>
+        /// Already visited
+        /// </summary>
+        Black
+    }
+
     public class DirectedGraph<TKey> where TKey : IComparable
     {
-        private enum VertexColor
-        {
-            /// <summary>
-            /// Not visited
-            /// </summary>
-            White,
-            /// <summary>
-            /// Currently being visited
-            /// </summary>
-            Grey,
-            /// <summary>
-            /// Already visited
-            /// </summary>
-            Black
-        }
-
         /// <summary>
         /// Internal list of vertex keys
         /// </summary>
