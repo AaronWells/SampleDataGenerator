@@ -21,10 +21,10 @@ namespace EdFi.SampleDataGenerator.Generators
 
         public void Populate(object input)
         {
-            var propertyExtract = PropertyExtractor.ExtractPropertyMetadata(input.GetType());
-            GenerateObjectHierarchy(input);
+            var propertyExtract = CreatePropertyExtract(input);
+            var graph = PrepareDependencyGraph(propertyExtract);
 
-            // traverse rules and create dependency graph
+            GenerateObjectHierarchy(input);
 
             _breadCrumb = new LinkedList<TraceObject>();
             _breadCrumb.AddFirst(new TraceObject
@@ -35,6 +35,41 @@ namespace EdFi.SampleDataGenerator.Generators
             });
 
             DoPopulate();
+        }
+
+        private static List<PropertyMetadata> CreatePropertyExtract(object input)
+        {
+            return PropertyExtractor.ExtractPropertyMetadata(input.GetType()).ToList();
+        }
+
+        private DirectedGraph<PropertyMetadata> PrepareDependencyGraph(List<PropertyMetadata> propertyExtract)
+        {
+            var graph = new DirectedGraph<PropertyMetadata>(propertyExtract);
+
+            foreach (var propertyMetadata in propertyExtract)
+            {
+                // find any matching rule
+                ValueRule bestMatchingRule = null;
+                foreach (var rule in _rulePack)
+                {
+                    if (propertyMetadata.Matches(rule.Path) &&
+                        (bestMatchingRule == null || rule.Path.Length < bestMatchingRule.Path.Length))
+                    {
+                        bestMatchingRule = rule;
+                    }
+                }
+                if (bestMatchingRule != null && bestMatchingRule.HasDependency)
+                {
+                    // add dependencies
+                    var dependencies =
+                        bestMatchingRule.ValueProvider.LookupProperties
+                            .Select(d => propertyExtract.Single(p => p.Matches(propertyMetadata.ResolveRelativePath(d))))
+                            .ToList();
+
+                    graph.SetDependencies(propertyMetadata, dependencies);
+                }
+            }
+            return graph;
         }
 
         private void DoPopulate()
