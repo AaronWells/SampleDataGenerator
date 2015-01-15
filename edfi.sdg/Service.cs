@@ -26,10 +26,12 @@ namespace EdFi.SampleDataGenerator
         private readonly Configuration _configuration;
         private readonly ConcurrentBag<Task> _tasks;
         private readonly ServiceParams _serviceParams;
+        private readonly ILog _logger;
 
-        public Service(ServiceParams serviceParams)
+        public Service(ServiceParams serviceParams, ILog logger)
         {
             _serviceParams = serviceParams;
+            _logger = logger;
             //todo: load configuration from filename in serviceParams
             _configuration = Configuration.DefaultConfiguration;
             _tasks = new ConcurrentBag<Task>();
@@ -104,9 +106,10 @@ namespace EdFi.SampleDataGenerator
                         }
                     }
                 }
-                catch (TaskCanceledException)
+                catch (TaskCanceledException e)
                 {
                     // the task is cancelled on a timeout, so we'll wait again for a message
+                    _logger.WriteLine(e.Message);
                 }
             }
         }

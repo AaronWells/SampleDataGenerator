@@ -61,6 +61,7 @@
     <Compile Include="Quantity\ConstantQuantity.cs" />
     <Compile Include="Quantity\NormalQuantity.cs" />
     <Compile Include="Quantity\RangeQuantity.cs" />
+    <Compile Include="Utility\Logger.cs" />
     <Compile Include="Utility\TypeExtensions.cs" />
     <Compile Include="Utility\DirectedGraph.cs" />
     <Compile Include="Utility\Utility.cs" />

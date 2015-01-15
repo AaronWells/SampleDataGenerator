@@ -32,7 +32,7 @@ namespace EdFi.SampleDataGenerator.Generators
         }
     }
 
-    public class PropertyMetadata : IComparable<PropertyMetadata>, IComparable<string>
+    public class PropertyMetadata : IComparable
     {
         private readonly PropertyPath[] propertyPaths;
 
@@ -78,6 +78,12 @@ namespace EdFi.SampleDataGenerator.Generators
             return string.Join("~", this.PropertyPaths.Select(x => x.ToString()));
         }
 
+        public int CompareTo(object obj)
+        {
+            var other = obj as PropertyMetadata;
+            return CompareTo(other);
+        }
+
         public int CompareTo(PropertyMetadata other)
         {
             return System.String.Compare(this.ToString(), other.ToString(), System.StringComparison.Ordinal);
@@ -85,8 +91,13 @@ namespace EdFi.SampleDataGenerator.Generators
 
         public int CompareTo(string other)
         {
-            var paths = this.PropertyPaths.Select(p => p.ToString());
-            return paths.Any(x => System.String.Compare(x, other, System.StringComparison.Ordinal) == 0) ? 0 : 1;
+            return Matches(other) ? 0 : 1;
+        }
+
+        public bool Matches(string path)
+        {
+            var paths = PropertyPaths.Select(p => p.ToString());
+            return paths.Any(x => string.Compare(x, path, StringComparison.Ordinal) == 0);
         }
 
         public string ResolveRelativePath(string relativePath)

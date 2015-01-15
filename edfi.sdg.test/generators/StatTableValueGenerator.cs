@@ -112,7 +112,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
             {
                 new ValueRule
                 {
-                    Class = "*",
+                    Class = "SampleType",
                     PropertySpecifier = "StringProperty2",
                     ValueProvider = new StatTableValueProvider
                     {

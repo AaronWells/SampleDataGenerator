@@ -18,6 +18,9 @@ namespace EdFi.SampleDataGenerator.ValueProvider
         public ValueProvider ValueProvider { get; set; }
 
         [XmlIgnore]
+        public bool HasDependency { get { return ValueProvider != null && ValueProvider.HasDependency; } }
+
+        [XmlIgnore]
         public string Path
         {
             get { return string.Format("{0}::{1}", Class, PropertySpecifier); }

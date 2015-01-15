@@ -19,10 +19,9 @@ namespace EdFi.SampleDataGenerator.Configurations
                     WorkQueueName = @".\Private$\edfi.sdg",
                     ValueRules = new []
                     {
-                        new ValueRule{Class = "*", PropertySpecifier = "Sex", ValueProvider = new DistributedEnumValueProvider<SexType>()},
-                        new ValueRule{Class = "*", PropertySpecifier = "OldEthnicity", ValueProvider = new DistributedEnumValueProvider<OldEthnicityType>()},
-                        new ValueRule{Class = "*", PropertySpecifier = "FirstName", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"..Sex"}, DataRepository = new DatabaseStatDataRepository {StatTableName = "GivenName"}}},
-//                        new ValueRule{Criteria = "FirstName", ValueProvider = new TestValueProvider()}
+                        new ValueRule{Class = "SexType", PropertySpecifier = "Sex", ValueProvider = new DistributedEnumValueProvider<SexType>()},
+                        new ValueRule{Class = "OldEthnicityType", PropertySpecifier = "OldEthnicity", ValueProvider = new DistributedEnumValueProvider<OldEthnicityType>()},
+                        new ValueRule{Class = "Name", PropertySpecifier = "FirstName", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"..Sex"}, DataRepository = new DatabaseStatDataRepository {StatTableName = "GivenName"}}},
                     },
                     WorkFlow = new WorkItem[]
                     {

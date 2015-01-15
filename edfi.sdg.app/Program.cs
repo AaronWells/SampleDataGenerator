@@ -1,10 +1,11 @@
 ﻿using EdFi.SampleDataGenerator;
+using EdFi.SampleDataGenerator.Utility;
 
 namespace edfi.sdg.app
 {
     using Topshelf;
 
-    class Program
+    public static class Program
     {
         static int Main()
         {
@@ -19,7 +20,7 @@ namespace edfi.sdg.app
                        });
                     x.Service<Service>(s =>
                             {
-                                s.ConstructUsing(name => new Service(serviceParams));
+                                s.ConstructUsing(name => new Service(serviceParams, new ConsoleLogger()));
                                 s.WhenStarted(tc => tc.Start());
                                 s.WhenStopped(tc => tc.Stop());
                             });

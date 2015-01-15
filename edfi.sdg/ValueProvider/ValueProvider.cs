@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace EdFi.SampleDataGenerator.ValueProvider
@@ -10,5 +11,8 @@ namespace EdFi.SampleDataGenerator.ValueProvider
         public string[] LookupProperties { get; set; }
 
         public abstract object GetValue(params string[] lookupPropertyValues);
+
+        [XmlIgnore]
+        public bool HasDependency { get { return LookupProperties != null && LookupProperties.Any(); } }
     }
 }
