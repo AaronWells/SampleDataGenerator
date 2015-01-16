@@ -1,7 +1,7 @@
 ﻿using System;
 using EdFi.SampleDataGenerator.Repository;
 
-namespace EdFi.SampleDataGenerator.ValueProvider
+namespace EdFi.SampleDataGenerator.ValueProviders
 {
     [Serializable]
     public class StatTableValueProvider : ValueProvider

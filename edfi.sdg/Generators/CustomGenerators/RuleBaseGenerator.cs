@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using EdFi.SampleDataGenerator.Generators.StandardGenerators;
 using EdFi.SampleDataGenerator.Utility;
-using EdFi.SampleDataGenerator.ValueProvider;
+using EdFi.SampleDataGenerator.ValueProviders;
 
 namespace EdFi.SampleDataGenerator.Generators.CustomGenerators
 {

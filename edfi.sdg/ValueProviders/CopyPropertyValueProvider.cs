@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EdFi.SampleDataGenerator.ValueProvider
+namespace EdFi.SampleDataGenerator.ValueProviders
 {
     public class CopyPropertyValueProvider : ValueProvider
     {

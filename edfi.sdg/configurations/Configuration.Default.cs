@@ -1,7 +1,7 @@
 ﻿using EdFi.SampleDataGenerator.Models;
 using EdFi.SampleDataGenerator.Quantity;
 using EdFi.SampleDataGenerator.Repository;
-using EdFi.SampleDataGenerator.ValueProvider;
+using EdFi.SampleDataGenerator.ValueProviders;
 using EdFi.SampleDataGenerator.WorkItems;
 
 namespace EdFi.SampleDataGenerator.Configurations

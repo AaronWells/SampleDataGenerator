@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace EdFi.SampleDataGenerator.ValueProvider
+namespace EdFi.SampleDataGenerator.ValueProviders
 {
     [Serializable]
     public abstract class ValueProvider

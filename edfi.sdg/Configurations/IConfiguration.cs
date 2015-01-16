@@ -1,4 +1,4 @@
-﻿using EdFi.SampleDataGenerator.ValueProvider;
+﻿using EdFi.SampleDataGenerator.ValueProviders;
 
 namespace EdFi.SampleDataGenerator.Configurations
 {

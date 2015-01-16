@@ -3,7 +3,7 @@ using System.Diagnostics;
 using EdFi.SampleDataGenerator.Configurations;
 using EdFi.SampleDataGenerator.Distributions;
 using EdFi.SampleDataGenerator.Test.Classes;
-using EdFi.SampleDataGenerator.ValueProvider;
+using EdFi.SampleDataGenerator.ValueProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EdFi.SampleDataGenerator.Test.Generators

@@ -4,7 +4,7 @@ using EdFi.SampleDataGenerator.Generators;
 using EdFi.SampleDataGenerator.Models;
 using EdFi.SampleDataGenerator.Repository;
 using EdFi.SampleDataGenerator.Utility;
-using EdFi.SampleDataGenerator.ValueProvider;
+using EdFi.SampleDataGenerator.ValueProviders;
 using EdFi.SampleDataGenerator.WorkItems;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -146,7 +146,15 @@ namespace EdFi.SampleDataGenerator.Test.Generators
         {
             public string Value { get; set; }
         }
-        
+
+        public class CompositDataProvider : ValueProvider
+        {
+            public override object GetValue(params string[] lookupPropertyValues)
+            {
+                return new Composite {Value = "inner value"};
+            }
+        }
+
         [TestMethod]
         public void TestWithRootRelatedRules()
         {
@@ -220,7 +228,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
         }
 
         [TestMethod]
-        public void TestWithRulesWithDependencies()
+        public void TestWithRulesWithDependencies1()
         {
             var rulePack = new List<ValueRule>
             {
@@ -229,7 +237,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                     Class = "BaseClass",
                     PropertySpecifier = "Value",
                     ValueProvider = new SampleValueProvider {MyValue = "TestValue", LookupProperties = new []{"CompositeProperty2.Value"}}
-                }
+                },
             };
 
             var generator = new Generator(rulePack);
@@ -239,7 +247,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
             generator.Populate(instance);
 
             Assert.AreEqual("TestValue", instance.Value);
-            Assert.AreEqual("TestValue", instance.CompositeProperty1.Value);
+            Assert.AreEqual(null, instance.CompositeProperty1.Value);
         }
 
         [TestMethod]
@@ -261,7 +269,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
 
             generator.Populate(instance);
 
-            Assert.AreEqual("TestValue", instance.Value);
+            Assert.AreEqual(null, instance.Value);
             Assert.AreEqual("TestValue", instance.CompositeProperty1.Value);
         }
 
@@ -280,7 +288,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                 {
                     Class = "BaseClass",
                     PropertySpecifier = "CompositeProperty1",
-                    ValueProvider = new SampleValueProvider {MyValue = "TestValue", LookupProperties = new []{"CompositeProperty2"}}
+                    ValueProvider = new CompositDataProvider { LookupProperties = new []{"CompositeProperty2"} }
                 },
             };
 
@@ -290,8 +298,8 @@ namespace EdFi.SampleDataGenerator.Test.Generators
 
             generator.Populate(instance);
 
-            Assert.AreEqual("TestValue", instance.Value);
-            Assert.AreEqual("TestValue", instance.CompositeProperty1.Value);
+            Assert.AreEqual(null, instance.Value);
+            Assert.AreEqual("inner value", instance.CompositeProperty1.Value);
         }
     }
 }

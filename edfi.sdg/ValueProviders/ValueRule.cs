@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 using EdFi.SampleDataGenerator.Configurations;
 using EdFi.SampleDataGenerator.Models;
 
-namespace EdFi.SampleDataGenerator.ValueProvider
+namespace EdFi.SampleDataGenerator.ValueProviders
 {
     [Serializable]
     public class ValueRule

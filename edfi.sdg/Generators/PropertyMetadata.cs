@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
-using EdFi.SampleDataGenerator.ValueProvider;
+using EdFi.SampleDataGenerator.ValueProviders;
 
 namespace EdFi.SampleDataGenerator.Generators
 {

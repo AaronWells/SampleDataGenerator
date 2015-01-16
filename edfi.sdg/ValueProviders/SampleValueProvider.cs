@@ -1,6 +1,6 @@
 using System.Xml.Serialization;
 
-namespace EdFi.SampleDataGenerator.ValueProvider
+namespace EdFi.SampleDataGenerator.ValueProviders
 {
     public class SampleValueProvider : ValueProvider
     {

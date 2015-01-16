@@ -7,7 +7,7 @@ using EdFi.SampleDataGenerator.Quantity;
 using EdFi.SampleDataGenerator.Utility;
 using EdFi.SampleDataGenerator.WorkItems;
 
-namespace EdFi.SampleDataGenerator.ValueProvider
+namespace EdFi.SampleDataGenerator.ValueProviders
 {
     public class DistributedEnumValueProvider<T> : ValueProvider
         where T : struct, IConvertible
