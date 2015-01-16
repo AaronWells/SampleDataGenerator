@@ -25,7 +25,7 @@ namespace EdFi.SampleDataGenerator.Test.ValueProviders
                     {
                         Class = "SomeClass",
                         PropertySpecifier = "StringProp2",
-                        ValueProvider = new CopyPropertyValueProvider {Dependencies = new[] {"StringProp1"}}
+                        ValueProvider = new CopyPropertyValueProvider {LookupProperties = new[] {"StringProp1"}}
                     }
                 };
 

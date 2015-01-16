@@ -29,7 +29,7 @@ namespace EdFi.SampleDataGenerator.Generators
                 if (propertyMetadata.BestMatchingRule != null)
                 {
                     // use the rule to populate property
-                    var value = propertyMetadata.BestMatchingRule.ValueProvider.GetValue();
+                    var value = propertyMetadata.BestMatchingRule.ValueProvider.GetValue(input);
 
                     // todo: if value-provider returns a serialized xml, it should be deserialized at this step
                     // value = Deserialize(value)
@@ -87,7 +87,7 @@ namespace EdFi.SampleDataGenerator.Generators
                 {
                     // add dependencies
                     dependencies.AddRange(
-                        bestMatchingRule.ValueProvider.Dependencies
+                        bestMatchingRule.ValueProvider.LookupProperties
                             .Select(d => propertyExtract.Single(p => p.Matches(propertyMetadata.ResolveRelativePath(d)))));
                 }
 

@@ -21,7 +21,7 @@ namespace EdFi.SampleDataGenerator.Configurations
                     {
                         new ValueRule{Class = "SexType", PropertySpecifier = "Sex", ValueProvider = new DistributedEnumValueProvider<SexType>()},
                         new ValueRule{Class = "OldEthnicityType", PropertySpecifier = "OldEthnicity", ValueProvider = new DistributedEnumValueProvider<OldEthnicityType>()},
-                        new ValueRule{Class = "Name", PropertySpecifier = "FirstName", ValueProvider = new StatTableValueProvider{Dependencies = new []{"..Sex"}, DataRepository = new DatabaseStatDataRepository {StatTableName = "GivenName"}}},
+                        new ValueRule{Class = "Name", PropertySpecifier = "FirstName", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"..Sex"}, DataRepository = new DatabaseStatDataRepository {StatTableName = "GivenName"}}},
                     },
                     WorkFlow = new WorkItem[]
                     {

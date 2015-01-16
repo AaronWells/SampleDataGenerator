@@ -92,7 +92,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                     ValueProvider = new StatTableValueProvider
                     {
                         DataRepository = new MemoryStatDataRepository(),
-                        Dependencies = new string[] {}
+                        LookupProperties = new string[] {}
                     }
                 }
             };
@@ -117,7 +117,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                     ValueProvider = new StatTableValueProvider
                     {
                         DataRepository = new MemoryStatDataRepository(),
-                        Dependencies = new[] {"StringProperty1"}
+                        LookupProperties = new[] {"StringProperty1"}
                     }
                 }
             };
@@ -236,7 +236,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                 {
                     Class = "BaseClass",
                     PropertySpecifier = "Value",
-                    ValueProvider = new SampleValueProvider {MyValue = "TestValue", Dependencies = new []{"CompositeProperty2.Value"}}
+                    ValueProvider = new SampleValueProvider {MyValue = "TestValue", LookupProperties = new []{"CompositeProperty2.Value"}}
                 },
             };
 
@@ -259,7 +259,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                 {
                     Class = "BaseClass",
                     PropertySpecifier = "CompositeProperty1.Value",
-                    ValueProvider = new SampleValueProvider {MyValue = "TestValue", Dependencies = new []{"{parent}.CompositeProperty2.Value"}}
+                    ValueProvider = new SampleValueProvider {MyValue = "TestValue", LookupProperties = new []{"{parent}.CompositeProperty2.Value"}}
                 }
             };
 
@@ -282,13 +282,13 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                 {
                     Class = "BaseClass",
                     PropertySpecifier = "CompositeProperty2.Value",
-                    ValueProvider = new SampleValueProvider {MyValue = "TestValue", Dependencies = new []{"{parent}.CompositeProperty1.Value"}}
+                    ValueProvider = new SampleValueProvider {MyValue = "TestValue", LookupProperties = new []{"{parent}.CompositeProperty1.Value"}}
                 }, 
                 new ValueRule
                 {
                     Class = "BaseClass",
                     PropertySpecifier = "CompositeProperty1",
-                    ValueProvider = new CompositDataProvider { Dependencies = new []{"CompositeProperty2"} }
+                    ValueProvider = new CompositDataProvider { LookupProperties = new []{"CompositeProperty2"} }
                 },
             };
 

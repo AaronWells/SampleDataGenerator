@@ -80,7 +80,7 @@ namespace EdFi.SampleDataGenerator.Configurations
 
             var derivedTypes = types.Where(t => t.IsSubClassOfGeneric(propertyType)).ToArray();
 
-            var enumTypes = types.Where(t => t.IsEnum).ToArray();
+            var enumTypes = types.Where(t => t.IsEnum && t.IsPublic).ToArray();
             var modelTypes = types.Where(t => BaseTargetType.IsAssignableFrom(t) && !t.IsAbstract).ToArray();
 
             foreach (var type in derivedTypes)

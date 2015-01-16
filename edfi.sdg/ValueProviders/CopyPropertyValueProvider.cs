@@ -14,10 +14,10 @@ namespace EdFi.SampleDataGenerator.ValueProviders
         /// </summary>
         public override object GetValue(params string[] dependsOn)
         {
-            if(Dependencies.Length != 1)
+            if(LookupProperties.Length != 1)
                 throw new ArgumentException("cannot pass multiple parameters to the CopyPropertyValueProvider.GetValue() method");
 
-            var dependentPath = Dependencies.First();
+            var dependentPath = LookupProperties.First();
 
             Console.WriteLine(dependentPath);
 
