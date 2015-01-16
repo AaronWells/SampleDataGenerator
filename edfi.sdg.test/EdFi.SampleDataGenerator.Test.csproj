@@ -69,6 +69,7 @@
     <Compile Include="Utility\RandomExtensions.cs" />
     <Compile Include="Utility\Generics.cs" />
     <Compile Include="Utility\DirectedGraph.cs" />
+    <Compile Include="ValueProviders\CopyPropertyValueProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\edfi.sdg\Edfi.SampleDataGenerator.csproj">

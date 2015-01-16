@@ -87,7 +87,7 @@ namespace EdFi.SampleDataGenerator.Generators
                 {
                     // add dependencies
                     dependencies.AddRange(
-                        bestMatchingRule.ValueProvider.LookupProperties
+                        bestMatchingRule.ValueProvider.Dependencies
                             .Select(d => propertyExtract.Single(p => p.Matches(propertyMetadata.ResolveRelativePath(d)))));
                 }
 

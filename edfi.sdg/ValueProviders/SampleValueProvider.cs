@@ -7,7 +7,7 @@ namespace EdFi.SampleDataGenerator.ValueProviders
         [XmlAttribute]
         public string MyValue { get; set; }
 
-        public override object GetValue(params string[] lookupPropertyValues)
+        public override object GetValue(params string[] dependsOn)
         {
             return MyValue;
         }
