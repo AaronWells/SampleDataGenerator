@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using EdFi.SampleDataGenerator.Generators.CustomGenerators;
 using EdFi.SampleDataGenerator.Generators.StandardGenerators;
 using EdFi.SampleDataGenerator.Models;
@@ -22,10 +23,31 @@ namespace EdFi.SampleDataGenerator.Generators
         public void Populate(object input)
         {
             var propertyExtract = CreatePropertyExtract(input);
+            SetPropertyRuleMap(propertyExtract);
             var graph = PrepareDependencyGraph(propertyExtract);
 
-            GenerateObjectHierarchy(input);
+            //GenerateObjectHierarchy(input);
 
+            foreach (var propertyMetadata in graph.GetEvaluationOrder())
+            {
+                // first find any matching rule:
+                if (propertyMetadata.BestMatchingRule != null)
+                {
+                    // use the rule to populate property
+                    var x = propertyMetadata.BestMatchingRule.ValueProvider.GetValue();
+                }
+                else if (propertyMetadata.PropertyInfo.PropertyType.IsCompositeType())
+                {
+                    // instantiate the property with a new class
+                    var x = propertyMetadata.AbsolutePath.PropertyChain;
+                    var instance = Activator.CreateInstance(propertyMetadata.PropertyInfo.PropertyType);
+                    input.SetPropertyValue("CompositeProperty1", instance);
+                    input.GetPropertyValue("CompositeProperty1").SetPropertyValue("Value", "bla");
+                }
+                // else : leave it alone
+            }
+
+/*
             _breadCrumb = new LinkedList<TraceObject>();
             _breadCrumb.AddFirst(new TraceObject
             {
@@ -35,6 +57,15 @@ namespace EdFi.SampleDataGenerator.Generators
             });
 
             DoPopulate();
+*/
+        }
+
+        private void SetPropertyRuleMap(IEnumerable<PropertyMetadata> propertyExtract)
+        {
+            foreach (var propertyMetadata in propertyExtract)
+            {
+                propertyMetadata.BestMatchingRule = GetBestMatchingRule(propertyMetadata);
+            }
         }
 
         private static List<PropertyMetadata> CreatePropertyExtract(object input)
@@ -48,28 +79,38 @@ namespace EdFi.SampleDataGenerator.Generators
 
             foreach (var propertyMetadata in propertyExtract)
             {
-                // find any matching rule
-                ValueRule bestMatchingRule = null;
-                foreach (var rule in _rulePack)
+                var dependencies = new List<PropertyMetadata>
                 {
-                    if (propertyMetadata.Matches(rule.Path) &&
-                        (bestMatchingRule == null || rule.Path.Length < bestMatchingRule.Path.Length))
-                    {
-                        bestMatchingRule = rule;
-                    }
-                }
+                    propertyMetadata.ParentPropertyMetadata
+                };
+                
+                var bestMatchingRule = propertyMetadata.BestMatchingRule;
+
                 if (bestMatchingRule != null && bestMatchingRule.HasDependency)
                 {
                     // add dependencies
-                    var dependencies =
+                    dependencies.AddRange(
                         bestMatchingRule.ValueProvider.LookupProperties
-                            .Select(d => propertyExtract.Single(p => p.Matches(propertyMetadata.ResolveRelativePath(d))))
-                            .ToList();
-
-                    graph.SetDependencies(propertyMetadata, dependencies);
+                            .Select(d => propertyExtract.Single(p => p.Matches(propertyMetadata.ResolveRelativePath(d)))));
                 }
+
+                graph.SetDependencies(propertyMetadata, dependencies);
             }
             return graph;
+        }
+
+        private ValueRule GetBestMatchingRule(PropertyMetadata propertyMetadata)
+        {
+            ValueRule bestMatchingRule = null;
+            foreach (var rule in _rulePack)
+            {
+                if (propertyMetadata.Matches(rule.Path) &&
+                    (bestMatchingRule == null || rule.Path.Length < bestMatchingRule.Path.Length))
+                {
+                    bestMatchingRule = rule;
+                }
+            }
+            return bestMatchingRule;
         }
 
         private void DoPopulate()

@@ -135,11 +135,6 @@ namespace EdFi.SampleDataGenerator.Test.Generators
     [TestClass]
     public class TestComposition
     {
-        private class Composite
-        {
-            public string Value { get; set; }
-        }
-
         private class BaseClass
         {
             public string Value { get; set; }
@@ -147,6 +142,11 @@ namespace EdFi.SampleDataGenerator.Test.Generators
             public Composite CompositeProperty2 { get; set; }
         }
 
+        private class Composite
+        {
+            public string Value { get; set; }
+        }
+        
         [TestMethod]
         public void TestWithRootRelatedRules()
         {
@@ -220,16 +220,68 @@ namespace EdFi.SampleDataGenerator.Test.Generators
         }
 
         [TestMethod]
-        public void TestWithRulesWithParameters()
+        public void TestWithRulesWithDependencies()
         {
             var rulePack = new List<ValueRule>
             {
                 new ValueRule
                 {
-                    Class = "*",
+                    Class = "BaseClass",
                     PropertySpecifier = "Value",
-                    ValueProvider = new SampleValueProvider {MyValue = "TestValue", LookupProperties = new []{"param1"}}
+                    ValueProvider = new SampleValueProvider {MyValue = "TestValue", LookupProperties = new []{"CompositeProperty2.Value"}}
                 }
+            };
+
+            var generator = new Generator(rulePack);
+
+            var instance = new BaseClass();
+
+            generator.Populate(instance);
+
+            Assert.AreEqual("TestValue", instance.Value);
+            Assert.AreEqual("TestValue", instance.CompositeProperty1.Value);
+        }
+
+        [TestMethod]
+        public void TestWithRulesWithDependencies2()
+        {
+            var rulePack = new List<ValueRule>
+            {
+                new ValueRule
+                {
+                    Class = "BaseClass",
+                    PropertySpecifier = "CompositeProperty1.Value",
+                    ValueProvider = new SampleValueProvider {MyValue = "TestValue", LookupProperties = new []{"{parent}.CompositeProperty2.Value"}}
+                }
+            };
+
+            var generator = new Generator(rulePack);
+
+            var instance = new BaseClass();
+
+            generator.Populate(instance);
+
+            Assert.AreEqual("TestValue", instance.Value);
+            Assert.AreEqual("TestValue", instance.CompositeProperty1.Value);
+        }
+
+        [TestMethod]
+        public void TestWithRulesWithDependencies3()
+        {
+            var rulePack = new List<ValueRule>
+            {
+                new ValueRule
+                {
+                    Class = "BaseClass",
+                    PropertySpecifier = "CompositeProperty2.Value",
+                    ValueProvider = new SampleValueProvider {MyValue = "TestValue", LookupProperties = new []{"{parent}.CompositeProperty1.Value"}}
+                }, 
+                new ValueRule
+                {
+                    Class = "BaseClass",
+                    PropertySpecifier = "CompositeProperty1",
+                    ValueProvider = new SampleValueProvider {MyValue = "TestValue", LookupProperties = new []{"CompositeProperty2"}}
+                },
             };
 
             var generator = new Generator(rulePack);
