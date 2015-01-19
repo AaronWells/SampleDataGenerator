@@ -116,7 +116,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
 
         public class CompositDataProvider : ValueProvider
         {
-            public override object GetValue(params object[] dependsOn)
+            public override object GetValue(object[] dependsOn)
             {
                 return new Composite {Value = "inner value"};
             }
