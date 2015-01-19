@@ -27,7 +27,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                 MaxQueueWrites = 50
             };
 
-            var generator = (IWorkItem) new TypeQuantityWorkItem<SerializableTestClass>
+            var generator = (WorkItem) new TypeQuantityWorkItem<SerializableTestClass>
             {
                 Id = 1,
                 QuantitySpecifier = new ConstantQuantity {Quantity = specifiedQuantity},
@@ -42,7 +42,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
             {
                 var task = queue.ReadObjectAsync();
                 task.Wait();
-                var obj = task.Result as IWorkItem;
+                var obj = task.Result as WorkItem;
                 if (obj == null)
                 {
                     generatedQuantity++; //count one item

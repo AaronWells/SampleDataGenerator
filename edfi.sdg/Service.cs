@@ -66,7 +66,7 @@ namespace EdFi.SampleDataGenerator
                     using (var workQueue = new WorkQueue(_configuration.WorkQueueName))
                     {
                         var objectRepository = new ComplexObjectRepository();
-                        if (item is IWorkItem)
+                        if (item is WorkItem)
                         {
                             workQueue.WriteObject(item);
                         }
@@ -89,7 +89,7 @@ namespace EdFi.SampleDataGenerator
                 try
                 {
                     var workItem = await workQueue.ReadObjectAsync();
-                    var generator = workItem as IWorkItem;
+                    var generator = workItem as WorkItem;
                     if (generator != null)
                     {
                         var generatedWorkItems = generator.DoWork(null, _configuration);

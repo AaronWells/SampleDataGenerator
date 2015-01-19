@@ -34,43 +34,6 @@ namespace EdFi.SampleDataGenerator.Test.Generators
             public string Gender { get; set; }
         }
 
-        [TestMethod, Obsolete]
-        public void TestWithGoodPropertyName()
-        {
-            var input = new SampleClass
-            {
-                Ethnicity = "Ethnicity.AsianOrPacificIslander",
-                Gender = "M"
-            };
-
-            var generator = new StatTableWorkItem
-            {
-                DataRepository = new MemoryStatDataRepository(),
-                PropertyToSet = "Name",
-                PropertiesToLook = new[] { "Ethnicity", "Gender" },
-            };
-
-            generator.DoWork(input, null);
-            Assert.AreEqual("test", input.Name);
-            Console.WriteLine(input.Name);
-        }
-
-        [TestMethod, Obsolete]
-        [ExpectedException(typeof(InvalidPropertyException))]
-        public void TestWithBadPropertyName()
-        {
-            var input = new SampleClass();
-
-            var generator = new StatTableWorkItem
-            {
-                DataRepository = new MemoryStatDataRepository(),
-                PropertyToSet = "SampleClass.UnknownPropertyName",
-                PropertiesToLook = new string[] { }
-            };
-
-            generator.DoWork(input, null);
-        }
-
         /// <summary>
         /// When to be populated object is a <see cref="ComplexObjectType"/>, 'id' should not be poplated
         /// </summary>

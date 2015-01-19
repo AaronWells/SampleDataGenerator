@@ -6,7 +6,7 @@ using EdFi.SampleDataGenerator.Configurations;
 namespace EdFi.SampleDataGenerator.WorkItems
 {
     [Serializable]
-    public abstract class WorkItem : IWorkItem
+    public abstract class WorkItem
     {
         /// <summary>
         /// classes is a regular expression of type names that this generator should work on.
