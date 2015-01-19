@@ -38,5 +38,49 @@ namespace EdFi.SampleDataGenerator.Test.ValueProviders
                 Assert.AreEqual("SomeValue", instance.StringProp2);
             }
         }
+
+        [TestClass]
+        public class CompositeObjectCopyTests
+        {
+            class SomeClass
+            {
+                public string StringProp { get; set; }
+                public InnerClass ClassProp { get; set; }
+            }
+
+            class InnerClass
+            {
+                public string StringProp { get; set; }
+            }
+
+            [TestMethod]
+            public void SimpleTest()
+            {
+                var ruleSet = new List<ValueRule>
+                {
+                    new ValueRule
+                    {
+                        Class = "SomeClass",
+                        PropertySpecifier = "StringProp",
+                        ValueProvider =
+                            new CopyPropertyValueProvider {LookupProperties = new[] {"ClassProp.StringProp"}}
+                    },
+                    new ValueRule
+                    {
+                        Class = "InnerClass",
+                        PropertySpecifier = "StringProp",
+                        ValueProvider = new SampleValueProvider {MyValue = "TheValue"}
+                    }
+                };
+
+                var generator = new Generator(ruleSet);
+
+                var instance = new SomeClass();
+
+                generator.Populate(instance);
+
+                Assert.AreEqual("TheValue", instance.StringProp);
+            }
+        }
     }
 }

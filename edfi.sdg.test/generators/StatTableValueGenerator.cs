@@ -104,32 +104,6 @@ namespace EdFi.SampleDataGenerator.Test.Generators
 
             Assert.AreEqual("SpecificId", instance.id);
         }
-
-        [TestMethod]
-        public void TestWithParameters()
-        {
-            var rulePack = new List<ValueRule>
-            {
-                new ValueRule
-                {
-                    Class = "SampleType",
-                    PropertySpecifier = "StringProperty2",
-                    ValueProvider = new StatTableValueProvider
-                    {
-                        DataRepository = new MemoryStatDataRepository(),
-                        LookupProperties = new[] {"StringProperty1"}
-                    }
-                }
-            };
-            var generator = new Generator(rulePack);
-
-            var instance = new SampleType {StringProperty1 = "Prop1"};
-
-            generator.Populate(instance);
-
-            Assert.AreEqual("Prop1", instance.StringProperty1);
-            Assert.AreEqual("Prop1", instance.StringProperty2);
-        }
     }
 
     [TestClass]
@@ -149,7 +123,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
 
         public class CompositDataProvider : ValueProvider
         {
-            public override object GetValue(params string[] dependsOn)
+            public override object GetValue(params object[] dependsOn)
             {
                 return new Composite {Value = "inner value"};
             }

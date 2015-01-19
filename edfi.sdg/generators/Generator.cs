@@ -23,13 +23,22 @@ namespace EdFi.SampleDataGenerator.Generators
 
             foreach (var propertyMetadata in graph.GetEvaluationOrder())
             {
-                var containingObject = LocateObject(input, propertyMetadata.AbsolutePath.PathSegment.ToList());
+                var containingObject = input.LocateObject(propertyMetadata.AbsolutePath.PropertyChain);
                 
                 // first find any matching rule:
                 if (propertyMetadata.BestMatchingRule != null)
                 {
                     // use the rule to populate property
-                    var value = propertyMetadata.BestMatchingRule.ValueProvider.GetValue(input);
+                    var valueProvider = propertyMetadata.BestMatchingRule.ValueProvider;
+                    var dependentProperties = ResolveDependencyCollection(propertyMetadata, valueProvider.LookupProperties, propertyExtract);
+                    var @params = new List<object>();
+                    foreach (var dependentProperty in dependentProperties)
+                    {
+                        var x = input.LocateObject(dependentProperty.AbsolutePath.PropertyChain);
+                        var y = x.GetPropertyValue(dependentProperty.PropertyInfo.Name);
+                        @params.Add(y);
+                    }
+                    var value = valueProvider.GetValue(@params.ToArray());
 
                     // todo: if value-provider returns a serialized xml, it should be deserialized at this step
                     // value = Deserialize(value)
@@ -46,15 +55,14 @@ namespace EdFi.SampleDataGenerator.Generators
             }
         }
 
-        private object LocateObject(object input, List<string> segments)
+        private static PropertyMetadata ResolveDependency(PropertyMetadata baseProperty, string propertyToResolve, IEnumerable<PropertyMetadata> propertyHierarchy)
         {
-            if (!segments.Any()) return null; // this is error condition
+            return propertyHierarchy.Single(p => p.Matches(baseProperty.ResolveRelativePath(propertyToResolve)));
+        }
 
-            if (segments.Count() == 1)
-                return input;
-
-            var firstSegment = input.GetPropertyValue(segments.First());
-            return LocateObject(firstSegment, segments.Skip(1).ToList());
+        private static IEnumerable<PropertyMetadata> ResolveDependencyCollection(PropertyMetadata baseProperty, IEnumerable<string> propertiesToResolve, IEnumerable<PropertyMetadata> propertyHierarchy)
+        {
+            return propertiesToResolve.Select(d => ResolveDependency(baseProperty, d, propertyHierarchy));
         }
 
         private void SetPropertyRuleMap(IEnumerable<PropertyMetadata> propertyExtract)
@@ -86,9 +94,9 @@ namespace EdFi.SampleDataGenerator.Generators
                 if (bestMatchingRule != null && bestMatchingRule.HasDependency)
                 {
                     // add dependencies
-                    dependencies.AddRange(
-                        bestMatchingRule.ValueProvider.LookupProperties
-                            .Select(d => propertyExtract.Single(p => p.Matches(propertyMetadata.ResolveRelativePath(d)))));
+                    var list = ResolveDependencyCollection(propertyMetadata, bestMatchingRule.ValueProvider.LookupProperties,
+                        propertyExtract);
+                    dependencies.AddRange(list);
                 }
 
                 graph.SetDependencies(propertyMetadata, dependencies);

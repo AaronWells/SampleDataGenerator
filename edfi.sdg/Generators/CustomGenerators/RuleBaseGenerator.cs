@@ -37,7 +37,7 @@ namespace EdFi.SampleDataGenerator.Generators.CustomGenerators
         public object Handle(PropertyInfo property)
         {
             return CanHandle(property)
-                ? _rule.ValueProvider.GetValue()
+                ? _rule.ValueProvider.GetValue(null)
                 : new NullValueGenerator().Handle(property);
         }
 

@@ -45,5 +45,22 @@ namespace EdFi.SampleDataGenerator.Utility
             var breakDown = propertyName.Split(new[] { '.' });
             return breakDown.Length < 2 ? propertyName : string.Join(".", breakDown.Skip(1));
         }
+
+        /// <summary>
+        /// finds and returns the relative object from the input paramenter based on the provided path
+        /// </summary>
+        /// <param name="input">any object as the root of a hierarchy</param>
+        /// <param name="propertyChain">property specifier from the root of hierarchy</param>
+        public static object LocateObject(this object input, string propertyChain)
+        {
+            if (string.IsNullOrWhiteSpace(propertyChain)) return null; // this is error condition
+
+            if (!propertyChain.Contains("."))
+                return input;
+
+            var segmentObject = input.GetPropertyValue(propertyChain.FirstSegment());
+            return LocateObject(segmentObject, propertyChain.ExcludeFirstSegment());
+        }
+
     }
 }

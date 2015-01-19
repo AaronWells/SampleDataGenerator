@@ -22,7 +22,7 @@ namespace EdFi.SampleDataGenerator.ValueProviders
             Quantity = new ConstantQuantity { Quantity = 1 };
         }
         
-        public override object GetValue(params string[] dependsOn)
+        public override object GetValue(object[] dependsOn =  null)
         {
             if (typeof(T).IsArray)
             {

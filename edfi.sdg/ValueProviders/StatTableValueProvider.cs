@@ -8,9 +8,9 @@ namespace EdFi.SampleDataGenerator.ValueProviders
     {
         public StatDataRepository DataRepository { get; set; }
 
-        public override object GetValue(params string[] dependsOn)
+        public override object GetValue(params object[] dependsOn)
         {
-            return DataRepository.GetNextValue(dependsOn);
+            return DataRepository.GetNextValue(LookupProperties);
         }
     }
 }

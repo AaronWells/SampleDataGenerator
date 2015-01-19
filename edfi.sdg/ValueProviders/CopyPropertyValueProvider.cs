@@ -9,19 +9,17 @@ namespace EdFi.SampleDataGenerator.ValueProviders
     public class CopyPropertyValueProvider : ValueProvider
     {
         /// <summary>
-        /// returns the value of the provided relative property. It uses the Dependencies which should carry 
-        /// one and only one relative property
+        /// returns the value of the provided relative property. It uses the LookupProperties to find
+        /// the property from one and only one relative property in the <paramref name="dependsOn"/> object hierarchy
         /// </summary>
-        public override object GetValue(params string[] dependsOn)
+        public override object GetValue(params object[] dependsOn)
         {
-            if(LookupProperties.Length != 1)
+            if (dependsOn.Length != 1)
                 throw new ArgumentException("cannot pass multiple parameters to the CopyPropertyValueProvider.GetValue() method");
 
-            var dependentPath = LookupProperties.First();
+            var theObject = dependsOn[0];
 
-            Console.WriteLine(dependentPath);
-
-            throw new NotImplementedException();
+            return theObject;
         }
     }
 }
