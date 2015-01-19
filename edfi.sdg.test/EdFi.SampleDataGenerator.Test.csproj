@@ -64,7 +64,6 @@
     <Compile Include="Messaging\WorkQueue.cs" />
     <Compile Include="Models\Models.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility\HelperTests.cs" />
     <Compile Include="Utility\IdentifierGenerator.cs" />
     <Compile Include="Utility\RandomExtensions.cs" />
     <Compile Include="Utility\Generics.cs" />

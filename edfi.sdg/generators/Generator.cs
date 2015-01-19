@@ -122,12 +122,4 @@ namespace EdFi.SampleDataGenerator.Generators
             return bestMatchingRule;
         }
     }
-
-    public class TraceObject
-    {
-        public object ObjectToTrace { get; set; }
-        public string PropertyTypeName { get; set; }
-        public string PropertyName { get; set; }
-        //public TraceObject Parent { get; set; }
-    }
 }

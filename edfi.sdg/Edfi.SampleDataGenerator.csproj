@@ -66,7 +66,6 @@
     <Compile Include="Utility\Logger.cs" />
     <Compile Include="Utility\TypeExtensions.cs" />
     <Compile Include="Utility\DirectedGraph.cs" />
-    <Compile Include="Utility\Utility.cs" />
     <Compile Include="Repository\StatDataRepository.cs" />
     <Compile Include="ValueProviders\CopyPropertyValueProvider.cs" />
     <Compile Include="WorkItems\FinalizeWorkItem.cs" />
