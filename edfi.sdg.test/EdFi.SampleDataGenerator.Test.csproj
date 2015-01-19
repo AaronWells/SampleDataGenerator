@@ -55,12 +55,12 @@
     <Compile Include="Classes\TestEnum.cs" />
     <Compile Include="Classes\TestQueue.cs" />
     <Compile Include="Configurations\Configuration.cs" />
-    <Compile Include="Generators\StatTableValueGenerator.cs" />
-    <Compile Include="Generators\TypeQuantityGenerator.cs" />
+    <Compile Include="Generators\StatTableValueGeneratorTests.cs" />
+    <Compile Include="Generators\TypeQuantityGeneratorTests.cs" />
     <Compile Include="Classes\SerializableTestClass.cs" />
-    <Compile Include="Generators\DistributedEnumValueProvider.cs" />
-    <Compile Include="Generators\Serialization.cs" />
-    <Compile Include="Generators\PropertyExtractor.cs" />
+    <Compile Include="Generators\DistributedEnumValueProviderTests.cs" />
+    <Compile Include="Generators\SerializationTests.cs" />
+    <Compile Include="Generators\PropertyExtractorTests.cs" />
     <Compile Include="Messaging\WorkQueue.cs" />
     <Compile Include="Models\Models.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

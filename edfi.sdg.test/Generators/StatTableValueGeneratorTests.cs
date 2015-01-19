@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using EdFi.SampleDataGenerator.Generators;
 using EdFi.SampleDataGenerator.Models;
 using EdFi.SampleDataGenerator.Repository;
-using EdFi.SampleDataGenerator.Utility;
 using EdFi.SampleDataGenerator.ValueProviders;
-using EdFi.SampleDataGenerator.WorkItems;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EdFi.SampleDataGenerator.Test.Generators
@@ -25,7 +23,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
     }
 
     [TestClass]
-    public class StatTableValueGenerator
+    public class StatTableValueGeneratorTests
     {
         public class SampleClass
         {

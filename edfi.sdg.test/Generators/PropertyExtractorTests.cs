@@ -4,10 +4,9 @@ namespace EdFi.SampleDataGenerator.Test.Generators
 {
     using System.Data;
     using System.Linq;
-    using System.Runtime.CompilerServices;
 
     [TestClass]
-    public class PropertyExtractor
+    public class PropertyExtractorTests
     {
         // ReSharper disable once ClassNeverInstantiated.Local
         private class ClassA

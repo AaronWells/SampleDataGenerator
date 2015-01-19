@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace EdFi.SampleDataGenerator.Test.Generators
 {
     [TestClass]
-    public class TypeQuantityGenerator
+    public class TypeQuantityGeneratorTests
     {
         /// <summary>
         /// The <see cref="TypeQuantityGenerator"/> should distribute work among multiple queued work items, 

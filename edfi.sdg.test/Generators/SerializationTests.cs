@@ -9,10 +9,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace EdFi.SampleDataGenerator.Test.Generators
 {
     [TestClass]
-    public class Serialization
+    public class SerializationTests
     {
         [TestMethod]
-        public void SerializationTests()
+        public void TestAllClasses()
         {
             var allPassed = true;
             var assembly = Assembly.Load(new AssemblyName("EdFi.SampleDataGenerator"));
