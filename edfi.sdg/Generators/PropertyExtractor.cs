@@ -16,7 +16,9 @@ namespace EdFi.SampleDataGenerator.Generators
 
         private static void RecursiveGetProperties(Type type, PropertyMetadata parent, PropertyPath[] paths, ICollection<PropertyMetadata> propertyMetadata)
         {
-            var properties = type.GetProperties().Where(p => p.CanRead && p.CanWrite);
+            var properties = type.GetProperties()
+                .Where(p => p.CanRead && p.CanWrite)
+                .Where(x => !(x.Name.EndsWith("Specified") && x.PropertyType == typeof (bool)));
 
             foreach (var propinfo in properties)
             {

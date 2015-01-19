@@ -19,14 +19,16 @@ namespace EdFi.SampleDataGenerator.Configurations
                     WorkQueueName = @".\Private$\edfi.sdg",
                     ValueRules = new []
                     {
-                        new ValueRule{Class = "SexType", PropertySpecifier = "Sex", ValueProvider = new DistributedEnumValueProvider<SexType>()},
-                        new ValueRule{Class = "OldEthnicityType", PropertySpecifier = "OldEthnicity", ValueProvider = new DistributedEnumValueProvider<OldEthnicityType>()},
+                        new ValueRule{Class = "Student", PropertySpecifier = "Sex", ValueProvider = new DistributedEnumValueProvider<SexType>()},
+                        new ValueRule{Class = "Student", PropertySpecifier = "OldEthnicity", ValueProvider = new DistributedEnumValueProvider<OldEthnicityType>()},
+                        new ValueRule{Class = "Student", PropertySpecifier = "Citizenship.CitizenshipStatus", ValueProvider = new DistributedEnumValueProvider<CitizenshipStatusType>()},
                         new ValueRule{Class = "Name", PropertySpecifier = "FirstName", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"{parent}.Sex"}, DataRepository = new DatabaseStatDataRepository {StatTableName = "GivenName"}}},
+                        new ValueRule{Class = "Name", PropertySpecifier = "LastSurname", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"{parent}.OldEthnicity", }, DataRepository = new DatabaseStatDataRepository {StatTableName = "FamilyName"}}},
                     },
                     WorkFlow = new WorkItem[]
                     {
-                        new TypeQuantityWorkItem<Student> {QuantitySpecifier = new ConstantQuantity {Quantity = 3}},
-                        new PropertyPopulatorWorkItem{ClassFilterRegex = @"^edfi\.sdg\.models\.((Student)|(Parent))$"}
+                        new TypeQuantityWorkItem<Student> {QuantitySpecifier = new ConstantQuantity {Quantity = 10}},
+                        new PropertyPopulatorWorkItem{ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.((Student)|(Parent))$"}
                     }
                 };
             }

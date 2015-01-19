@@ -10,7 +10,7 @@ namespace EdFi.SampleDataGenerator.Utility
         public static object GetPropertyValue(this object o, string propertyName)
         {
             var property = o.GetType().GetProperty(propertyName);
-            if (property == null) throw new InvalidPropertyException(propertyName);
+            if (property == null) return null;
             return property.GetValue(o);
         }
 
@@ -19,6 +19,11 @@ namespace EdFi.SampleDataGenerator.Utility
             var property = o.GetType().GetProperty(propertyName);
             if(property == null) throw new InvalidPropertyException(propertyName);
             property.SetValue(o, value);
+
+            // to signal serializer of nullable properties
+            var propertyHelper = propertyName + "Specified";
+            if(o.GetPropertyValue(propertyHelper) != null)
+                o.SetPropertyValue(propertyHelper, true);
         }
 
         public static object GetDefaultValue(this object o)

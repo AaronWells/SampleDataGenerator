@@ -14,7 +14,7 @@ namespace EdFi.SampleDataGenerator.Utility
 
         public static bool IsCompositeType(this Type type)
         {
-            return type.IsClass && type.Namespace != "System";
+            return type.IsClass && !type.IsArray && type.Namespace != "System";
         }
 
         public static IEnumerable<PropertyInfo> GetSystemProperties(this Type type)
