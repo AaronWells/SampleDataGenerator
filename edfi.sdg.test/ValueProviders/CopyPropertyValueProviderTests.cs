@@ -54,7 +54,7 @@ namespace EdFi.SampleDataGenerator.Test.ValueProviders
             }
 
             [TestMethod]
-            public void SimpleTest()
+            public void TopDownTest()
             {
                 var ruleSet = new List<ValueRule>
                 {
@@ -80,6 +80,80 @@ namespace EdFi.SampleDataGenerator.Test.ValueProviders
                 generator.Populate(instance);
 
                 Assert.AreEqual("TheValue", instance.StringProp);
+            }
+
+            [TestMethod]
+            public void BottomUpTest()
+            {
+                var ruleSet = new List<ValueRule>
+                {
+                    new ValueRule
+                    {
+                        Class = "SomeClass",
+                        PropertySpecifier = "StringProp",
+                        ValueProvider = new SampleValueProvider {MyValue = "TheValue"}
+                    },
+                    new ValueRule
+                    {
+                        Class = "InnerClass",
+                        PropertySpecifier = "StringProp",
+                        ValueProvider = new CopyPropertyValueProvider {LookupProperties = new[] {"{parent}.StringProp"}}
+                    }
+                };
+
+                var generator = new Generator(ruleSet);
+
+                var instance = new SomeClass();
+
+                generator.Populate(instance);
+
+                Assert.AreEqual("TheValue", instance.StringProp);
+                Assert.AreEqual("TheValue", instance.StringProp);
+            }
+        }
+
+        [TestClass]
+        public class ComplextObjectCopyTest
+        {
+            public class SomeClass
+            {
+                public InnerClass ClassProp1 { get; set; }
+                public InnerClass ClassProp2 { get; set; }
+            }
+
+            public class InnerClass
+            {
+                public string StringProp { get; set; }
+            }
+
+            [TestMethod]
+            public void EntireClassTest()
+            {
+                var ruleSet = new List<ValueRule>
+                {
+                    new ValueRule
+                    {
+                        Class = "SomeClass",
+                        PropertySpecifier = "ClassProp2",
+                        ValueProvider = new CopyPropertyValueProvider {LookupProperties = new []{"ClassProp1"}}
+                    },
+                    new ValueRule
+                    {
+                        Class = "SomeClass",
+                        PropertySpecifier = "ClassProp1.StringProp",
+                        ValueProvider = new SampleValueProvider {MyValue = "TheValue"}
+                    }
+                };
+
+                var generator = new Generator(ruleSet);
+
+                var instance = new SomeClass();
+
+                generator.Populate(instance);
+
+                Assert.AreEqual("TheValue", instance.ClassProp1.StringProp);
+                Assert.AreEqual("TheValue", instance.ClassProp2.StringProp);
+                Assert.IsFalse(instance.ClassProp1.Equals(instance.ClassProp2));
             }
         }
     }

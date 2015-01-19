@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace EdFi.SampleDataGenerator.Utility
 {
@@ -62,5 +64,15 @@ namespace EdFi.SampleDataGenerator.Utility
             return LocateObject(segmentObject, propertyChain.ExcludeFirstSegment());
         }
 
+        public static object Clone(this object obj)
+        {
+            var serializer = new DataContractSerializer(obj.GetType());
+            using (var ms = new MemoryStream())
+            {
+                serializer.WriteObject(ms, obj);
+                ms.Seek(0, SeekOrigin.Begin);
+                return serializer.ReadObject(ms);
+            }
+        }
     }
 }

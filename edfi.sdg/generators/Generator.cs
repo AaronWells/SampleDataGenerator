@@ -34,11 +34,15 @@ namespace EdFi.SampleDataGenerator.Generators
                     var @params = new List<object>();
                     foreach (var dependentProperty in dependentProperties)
                     {
-                        var x = input.LocateObject(dependentProperty.AbsolutePath.PropertyChain);
-                        var y = x.GetPropertyValue(dependentProperty.PropertyInfo.Name);
-                        @params.Add(y);
+                        var containingDependentObject = input.LocateObject(dependentProperty.AbsolutePath.PropertyChain);
+                        var dependentObjectValue = containingDependentObject.GetPropertyValue(dependentProperty.PropertyInfo.Name);
+                        @params.Add(dependentObjectValue);
                     }
                     var value = valueProvider.GetValue(@params.ToArray());
+                    if (value.GetType().IsCompositeType())
+                    {
+                        value = value.Clone();
+                    }
 
                     // todo: if value-provider returns a serialized xml, it should be deserialized at this step
                     // value = Deserialize(value)

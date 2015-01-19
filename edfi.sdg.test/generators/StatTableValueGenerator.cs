@@ -19,13 +19,6 @@ namespace EdFi.SampleDataGenerator.Test.Generators
         }
     }
 
-    public class SampleType
-    {
-        public int IntProperty { get; set; }
-        public string StringProperty1 { get; set; }
-        public string StringProperty2 { get; set; }
-    }
-
     public class SampleType2 : ComplexObjectType
     {
         public string id { get; set; }
@@ -109,14 +102,14 @@ namespace EdFi.SampleDataGenerator.Test.Generators
     [TestClass]
     public class TestComposition
     {
-        private class BaseClass
+        public class BaseClass
         {
             public string Value { get; set; }
             public Composite CompositeProperty1 { get; set; }
             public Composite CompositeProperty2 { get; set; }
         }
 
-        private class Composite
+        public class Composite
         {
             public string Value { get; set; }
         }
