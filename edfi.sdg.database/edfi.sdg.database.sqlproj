@@ -59,15 +59,14 @@
     <Folder Include="Properties" />
     <Folder Include="dbo" />
     <Folder Include="dbo\tables" />
-    <Folder Include="dbo\procedures" />
-    <Folder Include="dbo\data" />
     <Folder Include="stat" />
     <Folder Include="stat\tables" />
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\User Defined Types\" />
+    <Folder Include="Scripts" />
+    <Folder Include="Scripts\Post Deployment" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\procedures\upsertComplexObject.sql" />
     <Build Include="stat.sql" />
     <Build Include="dbo\tables\StatTemplate.sql" />
     <Build Include="dbo\tables\__MigrationHistory.sql" />
@@ -75,20 +74,20 @@
     <Build Include="stat\tables\GivenName.sql" />
     <Build Include="dbo\Stored Procedures\GetNextValue.sql" />
     <Build Include="dbo\User Defined Types\AttributeList.sql" />
-    <None Include="dbo\data\stat.FamilyName.Part1.sql" />
-    <None Include="dbo\data\stat.FamilyName.Part2.sql" />
-    <None Include="dbo\data\stat.FamilyName.Part3.sql" />
-    <None Include="dbo\data\stat.FamilyName.Part4.sql" />
-    <None Include="dbo\data\stat.GivenName.Part1.sql" />
-    <Build Include="dbo\data\ComplexObject.sql" />
-    <Build Include="dbo\data\ComplexObjectClass.sql" />
     <Build Include="dbo\Stored Procedures\ValidateStatTableSchema.sql" />
+    <None Include="Scripts\Post Deployment\stat.FamilyName.Table.sql" />
+    <None Include="Scripts\Post Deployment\stat.GivenName.Table.sql">
+      <SuppressTSqlWarnings>
+      </SuppressTSqlWarnings>
+    </None>
+    <Build Include="dbo\Stored Procedures\upsertComplexObject.sql" />
+    <Build Include="dbo\Tables\ComplexObject.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="edfi.sdg.database.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Script.PostDeployment.sql" />
+    <PostDeploy Include="Scripts\Post Deployment\Script.PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="local.publish.xml" />
