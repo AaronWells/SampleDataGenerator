@@ -77,16 +77,9 @@
     <Compile Include="Distributions\BucketedDistribution.cs" />
     <Compile Include="Distributions\ConstantDistribution.cs" />
     <Compile Include="Distributions\RangeDistribution.cs" />
-    <Compile Include="Generators\CustomGenerators\RuleBaseGenerator.cs" />
     <Compile Include="Distributions\DistributionBase.cs" />
     <Compile Include="Generators\Generator.cs" />
-    <Compile Include="Generators\StandardGenerators\ArrayTypeGenerator.cs" />
-    <Compile Include="Generators\StandardGenerators\ClassTypeGenerator.cs" />
-    <Compile Include="Generators\StandardGenerators\IGenerator.cs" />
     <Compile Include="WorkItems\PropertyPopulatorWorkItem.cs" />
-    <Compile Include="Generators\StandardGenerators\NullValueGenerator.cs" />
-    <Compile Include="Generators\StandardGenerators\StandardGenerator.cs" />
-    <Compile Include="Generators\StandardGenerators\SystemDataType.cs" />
     <Compile Include="ValueProviders\SampleValueProvider.cs" />
     <Compile Include="ValueProviders\ValueProvider.cs" />
     <Compile Include="Utility\InvalidPropertyException.cs" />
