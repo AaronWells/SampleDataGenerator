@@ -57,6 +57,11 @@
     <Compile Include="Generators\PropertyExtractor.cs" />
     <Compile Include="Generators\PropertyMetadata.cs" />
     <Compile Include="Generators\PropertyPath.cs" />
+    <Compile Include="Models\Models.BaseClasses.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Models.BaseClasses.tt</DependentUpon>
+    </Compile>
     <Compile Include="Quantity\BucketedQuantity.cs" />
     <Compile Include="Quantity\ChiQuantity.cs" />
     <Compile Include="Quantity\ChiSquareQuantity.cs" />
@@ -112,7 +117,15 @@
     <None Include="Models\models.md" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Models\Models.BaseClasses.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Models.BaseClasses.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

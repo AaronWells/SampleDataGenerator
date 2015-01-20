@@ -1,0 +1,28 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ output extension=".generated.cs" #>
+namespace EdFi.SampleDataGenerator.Models {
+<#
+    var regex = new Regex(@"public partial class (.*Association) : object");
+    using (var reader = new StreamReader(Host.ResolvePath("Models.cs") ))
+    {
+        string line;
+        while ((line = reader.ReadLine()) != null)
+        {
+            Match m = regex.Match(line);
+            if (m.Success)
+            {
+                var foo = m.Groups[1].Value;
+#>
+
+	public partial class <#=foo#> : IComplexObjectType { 
+		public string id { get; set; } 
+	}
+<#
+            }
+        }
+    }
+#>
+}
