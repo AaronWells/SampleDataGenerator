@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Xml.Serialization;
 using EdFi.SampleDataGenerator.Configurations;
 using EdFi.SampleDataGenerator.Models;
@@ -30,6 +31,19 @@ namespace EdFi.SampleDataGenerator.WorkItems
             {
                 var type = Type.GetType(value);
                 
+                if (type == null) // try to get it from other available assemblies
+                {
+                    var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                    foreach (var assembly in assemblies)
+                    {
+                        type = assembly.GetType(value);
+                        if (type != null) break;
+                    }
+                }
+
+                if(type==null)
+                    throw new ConfigurationErrorsException(string.Format("Cannot find CreatedType: '{0}'", value));
+
                 _assignedType = type;
 
                 // todo: check if the type has the default constructor
