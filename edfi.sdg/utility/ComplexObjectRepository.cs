@@ -7,7 +7,7 @@ namespace EdFi.SampleDataGenerator.Utility
 {
     public class ComplexObjectRepository
     {
-        public void Save(ComplexObjectType obj)
+        public void Save(IComplexObjectType obj)
         {
             using (var model = new DataModel())
             {
