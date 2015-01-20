@@ -25,5 +25,11 @@ namespace EdFi.SampleDataGenerator.ValueProviders
         {
             get { return string.Format("{0}::{1}", Class, PropertySpecifier); }
         }
+
+        public override string ToString()
+        {
+            var dependencies = string.Join(", ", ValueProvider.LookupProperties);
+            return string.Format("{0} [{1}]", Path, dependencies);
+        }
     }
 }

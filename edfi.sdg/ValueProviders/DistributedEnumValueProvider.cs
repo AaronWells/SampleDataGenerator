@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Xml.Serialization;
-using EdFi.SampleDataGenerator.Configurations;
 using EdFi.SampleDataGenerator.Distributions;
 using EdFi.SampleDataGenerator.Quantity;
-using EdFi.SampleDataGenerator.Utility;
-using EdFi.SampleDataGenerator.WorkItems;
 
 namespace EdFi.SampleDataGenerator.ValueProviders
 {
@@ -21,7 +17,7 @@ namespace EdFi.SampleDataGenerator.ValueProviders
             Quantity = new ConstantQuantity { Quantity = 1 };
         }
         
-        public override object GetValue(object[] dependsOn =  null)
+        public override object GetValue(object[] dependsOn = null)
         {
             if (typeof(T).IsArray)
             {

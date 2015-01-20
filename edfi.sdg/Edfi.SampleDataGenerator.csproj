@@ -90,7 +90,7 @@
     <Compile Include="Quantity\QuantityBase.cs" />
     <Compile Include="Models\IComplexObjectType.cs" />
     <Compile Include="Configurations\IConfiguration.cs" />
-    <Compile Include="WorkItems\TypeQuantityWorkItem.cs" />
+    <Compile Include="WorkItems\CreateInstanceWorkItem.cs" />
     <Compile Include="Quantity\IQuantity.cs" />
     <Compile Include="Messaging\IQueueReader.cs" />
     <Compile Include="Messaging\IQueueWriter.cs" />

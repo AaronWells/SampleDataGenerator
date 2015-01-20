@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Serialization;
+using EdFi.SampleDataGenerator.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EdFi.SampleDataGenerator.Test.Models
@@ -36,6 +37,19 @@ namespace EdFi.SampleDataGenerator.Test.Models
                     }
                 }
             Assert.IsTrue(allPassed);
+        }
+
+        [TestMethod]
+        public void ListAssociations()
+        {
+            var assembly = Assembly.GetAssembly(typeof (Student));
+            var allTypes = assembly.GetTypes();
+            var allModels = allTypes.Where(t => t.Namespace == "EdFi.SampleDataGenerator.Models");
+            var allAssociations = allModels.Where(t => t.Name.EndsWith("Association"));
+            foreach (var type in allAssociations.OrderBy(t => t.Name))
+            {
+                Console.WriteLine(type);
+            }
         }
     }
 }
