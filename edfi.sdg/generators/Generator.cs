@@ -8,11 +8,14 @@ namespace EdFi.SampleDataGenerator.Generators
 {
     public class Generator
     {
+        private ILog _logger;
+
         private readonly IEnumerable<ValueRule> _rulePack;
 
         public Generator(IEnumerable<ValueRule> rulePack)
         {
             _rulePack = rulePack;
+            _logger = new FileLogger("log.txt");
         }
 
         public void Populate(object input)
@@ -119,6 +122,11 @@ namespace EdFi.SampleDataGenerator.Generators
                     bestMatchingRule = rule;
                 }
             }
+
+            if (bestMatchingRule != null)
+                _logger.WriteLine("best matching rule for '{0}': {1}", propertyMetadata.PropertyInfo.Name,
+                    bestMatchingRule);
+
             return bestMatchingRule;
         }
     }
