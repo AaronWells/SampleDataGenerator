@@ -89,7 +89,7 @@ namespace EdFi.SampleDataGenerator.Configurations
                 {
                     var constraints = type.GetGenericArguments().SelectMany(x => x.GetGenericParameterConstraints()).ToArray();
                     var isEnum = constraints.All(y => y == typeof(ValueType) || y == typeof(IConvertible));
-                    result.AddRange(from enumType in isEnum ? enumTypes : modelTypes select type.MakeGenericType(new [] { enumType }));
+                    result.AddRange(from t in isEnum ? enumTypes : modelTypes select type.MakeGenericType(new [] { t }));
                 }
                 else
                 {

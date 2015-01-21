@@ -22,13 +22,36 @@ namespace EdFi.SampleDataGenerator.Configurations
                         new ValueRule{Class = "Student", PropertySpecifier = "Sex", ValueProvider = new DistributedEnumValueProvider<SexType>()},
                         new ValueRule{Class = "Student", PropertySpecifier = "OldEthnicity", ValueProvider = new DistributedEnumValueProvider<OldEthnicityType>()},
                         new ValueRule{Class = "Student", PropertySpecifier = "Citizenship.CitizenshipStatus", ValueProvider = new DistributedEnumValueProvider<CitizenshipStatusType>()},
-                        new ValueRule{Class = "Name", PropertySpecifier = "FirstName", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"{parent}.Sex"}, DataRepository = new DatabaseStatDataRepository {StatTableName = "GivenName"}}},
-                        new ValueRule{Class = "Name", PropertySpecifier = "LastSurname", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"{parent}.OldEthnicity", }, DataRepository = new DatabaseStatDataRepository {StatTableName = "FamilyName"}}},
+                        new ValueRule{Class = "Student", PropertySpecifier = "Name.FirstName", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"{parent}.Sex"}, DataRepository = new DatabaseStatDataRepository {StatTableName = "GivenName"}}},
+                        new ValueRule{Class = "Student", PropertySpecifier = "Name.LastSurname", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"{parent}.OldEthnicity", }, DataRepository = new DatabaseStatDataRepository {StatTableName = "FamilyName"}}},
                     },
                     WorkFlow = new WorkItem[]
                     {
-                        new TypeQuantityWorkItem<Student> {QuantitySpecifier = new ConstantQuantity {Quantity = 10}},
-                        new PropertyPopulatorWorkItem{ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.((Student)|(Parent))$"}
+                        new CreateInstanceWorkItem
+                        {
+                            CreatedType = typeof(Student).FullName, 
+                            QuantitySpecifier = new ConstantQuantity {Quantity = 1}
+                        },
+                        new PropertyPopulatorWorkItem
+                        {
+                            ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.(Student)$"
+                        },
+                        new CreateInstanceWorkItem
+                        {
+                            ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.Student$",
+                            CreatedType = typeof(StudentParentAssociation).FullName, 
+                            QuantitySpecifier = new ChiQuantity{Max=6, Min=1},
+                        },
+                        new CreateInstanceWorkItem
+                        {
+                            ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.StudentParentAssociation",
+                            CreatedType = typeof(Parent).FullName, 
+                            QuantitySpecifier = new ConstantQuantity{Quantity = 1},
+                        },
+                        new PropertyPopulatorWorkItem
+                        {
+                            ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.(Parent)$"
+                        },
                     }
                 };
             }

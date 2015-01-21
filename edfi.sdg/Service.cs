@@ -73,7 +73,7 @@ namespace EdFi.SampleDataGenerator
                         else
                         {
                             var envelope = new WorkEnvelope { NextStep = generatorId, Model = item };
-                            objectRepository.Save(item as ComplexObjectType);
+                            objectRepository.Save(item as IComplexObjectType);
                             workQueue.WriteObject(envelope);
                         }
                     }

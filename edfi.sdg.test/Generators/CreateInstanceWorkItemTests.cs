@@ -7,10 +7,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace EdFi.SampleDataGenerator.Test.Generators
 {
     [TestClass]
-    public class TypeQuantityGeneratorTests
+    public class CreateInstanceWorkItemTests
     {
         /// <summary>
-        /// The <see cref="TypeQuantityGenerator"/> should distribute work among multiple queued work items, 
+        /// The <see cref="CreateInstanceWorkItem"/> should distribute work among multiple queued work items, 
         /// and create exactly the specified quantity of items.
         /// </summary>
         [TestMethod]
@@ -27,9 +27,10 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                 MaxQueueWrites = 50
             };
 
-            var generator = (WorkItem) new TypeQuantityWorkItem<SerializableTestClass>
+            var generator = (WorkItem) new CreateInstanceWorkItem
             {
                 Id = 1,
+                CreatedType = typeof(SerializableTestClass).FullName,
                 QuantitySpecifier = new ConstantQuantity {Quantity = specifiedQuantity},
             };
 
