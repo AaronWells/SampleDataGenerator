@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Reflection;
 using System.Xml.Serialization;
 using EdFi.SampleDataGenerator.Configurations;
 using EdFi.SampleDataGenerator.Models;
@@ -77,6 +78,29 @@ namespace EdFi.SampleDataGenerator.WorkItems
                 for (var i = 0; i < qty; i++)
                 {
                     results[i] = Activator.CreateInstance(_assignedType);
+
+                    if (_assignedType.IsAssociation())
+                    {
+                        var id = ((IComplexObjectType)input).id;
+                        var referencePropertyName = input.GetType().Name + "Reference";
+                        var referencePropertyTypeName = input.GetType().FullName + "ReferenceType";
+                        var referencePropertyType = Type.GetType(referencePropertyTypeName);
+                        if (referencePropertyType == null)
+                        {
+                            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                            foreach (var assembly in assemblies)
+                            {
+                                referencePropertyType = assembly.GetType(referencePropertyTypeName);
+                                if (referencePropertyType != null) break;
+                            }
+                        }
+                        if (referencePropertyType != null)
+                        {
+                            var referenceInstance = Activator.CreateInstance(referencePropertyType);
+                            results[i].SetPropertyValue(referencePropertyName, referenceInstance);
+                            referenceInstance.SetPropertyValue("id", id);
+                        }
+                    }
 
                     var complexObjectType = results[i] as IComplexObjectType;
                     if(complexObjectType != null)

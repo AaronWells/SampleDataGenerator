@@ -26,6 +26,11 @@ namespace EdFi.SampleDataGenerator.Utility
                 o.SetPropertyValue(propertyHelper, true);
         }
 
+        public static bool IsAssociation(this object o)
+        {
+            return o != null && o.GetType().IsAssociation();
+        }
+
         public static object GetDefaultValue(this object o)
         {
             return o.GetType().GetDefaultValue();

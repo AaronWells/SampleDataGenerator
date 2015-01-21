@@ -24,6 +24,8 @@ namespace EdFi.SampleDataGenerator.Configurations
                         new ValueRule{Class = "Student", PropertySpecifier = "Citizenship.CitizenshipStatus", ValueProvider = new DistributedEnumValueProvider<CitizenshipStatusType>()},
                         new ValueRule{Class = "Student", PropertySpecifier = "Name.FirstName", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"{parent}.Sex"}, DataRepository = new DatabaseStatDataRepository {StatTableName = "GivenName"}}},
                         new ValueRule{Class = "Student", PropertySpecifier = "Name.LastSurname", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"{parent}.OldEthnicity", }, DataRepository = new DatabaseStatDataRepository {StatTableName = "FamilyName"}}},
+                        new ValueRule{Class = "Parent", PropertySpecifier = "Name.FirstName", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"{parent}.Sex"}, DataRepository = new DatabaseStatDataRepository {StatTableName = "GivenName"}}},
+                        new ValueRule{Class = "Parent", PropertySpecifier = "Name.LastSurname", ValueProvider = new StatTableValueProvider{LookupProperties = new []{"{parent}.OldEthnicity", }, DataRepository = new DatabaseStatDataRepository {StatTableName = "FamilyName"}}},
                     },
                     WorkFlow = new WorkItem[]
                     {
@@ -42,6 +44,7 @@ namespace EdFi.SampleDataGenerator.Configurations
                             CreatedType = typeof(StudentParentAssociation).FullName, 
                             QuantitySpecifier = new ChiQuantity{Max=6, Min=1},
                         },
+/*
                         new CreateInstanceWorkItem
                         {
                             ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.StudentParentAssociation",
@@ -52,6 +55,7 @@ namespace EdFi.SampleDataGenerator.Configurations
                         {
                             ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.(Parent)$"
                         },
+*/
                     }
                 };
             }

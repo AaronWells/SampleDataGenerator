@@ -8,7 +8,7 @@ namespace EdFi.SampleDataGenerator.Generators
 {
     public class Generator
     {
-        private ILog _logger;
+        private readonly ILog _logger;
 
         private readonly IEnumerable<ValueRule> _rulePack;
 

@@ -27,5 +27,10 @@ namespace EdFi.SampleDataGenerator.Utility
             return type.GetProperties().Where(
                 p => !p.PropertyType.IsArray && p.PropertyType.Namespace != "System" && p.PropertyType.IsClass);
         }
+
+        public static bool IsAssociation(this Type t)
+        {
+            return t != null && t.Name.EndsWith("Association");
+        }
     }
 }

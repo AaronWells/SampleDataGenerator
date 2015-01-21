@@ -1,4 +1,5 @@
 ﻿using EdFi.SampleDataGenerator.Configurations;
+using EdFi.SampleDataGenerator.Models;
 using EdFi.SampleDataGenerator.Quantity;
 using EdFi.SampleDataGenerator.Test.Classes;
 using EdFi.SampleDataGenerator.WorkItems;
@@ -57,6 +58,53 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                 }
             }
             Assert.AreEqual(specifiedQuantity, generatedQuantity);
+        }
+
+        [TestClass]
+        public class AssociationCreationTest
+        {
+            public class A : IComplexObjectType
+            {
+                public string id { get; set; }
+            }
+
+            public class B : IComplexObjectType
+            {
+                public string id { get; set; }
+            }
+
+            public class ABAssociation
+            {
+                public AReferenceType AReference { get; set; }
+                public BReferenceType BReference { get; set; }
+            }
+
+            public class ReferenceType
+            {
+                public string id { get; set; }
+            }
+
+            public class AReferenceType : ReferenceType
+            {
+            }
+
+            public class BReferenceType : ReferenceType
+            {
+            }
+
+            [TestMethod]
+            public void SimpleAssociation()
+            {
+                var input = new A {id = "aid"};
+                var workItem = new CreateInstanceWorkItem
+                {
+                    Id = 1,
+                    CreatedType = typeof (ABAssociation).FullName,
+                    QuantitySpecifier = new ConstantQuantity {Quantity = 1}
+                };
+                var result = workItem.DoWork(input, new Configuration{MaxQueueWrites = int.MaxValue});
+                Assert.AreEqual("aid", ((ABAssociation)result[0]).AReference.id);
+            }
         }
     }
 }
