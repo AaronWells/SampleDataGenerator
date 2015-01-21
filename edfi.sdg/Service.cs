@@ -40,9 +40,8 @@ namespace EdFi.SampleDataGenerator
 
         public void Bootstrap()
         {
-            var workQueue = new WorkQueue(_configuration.WorkQueueName);
             var generator = _configuration.WorkFlow.First();
-            var workItems = generator.DoWork(workQueue, _configuration);
+            var workItems = generator.DoWork(null, _configuration);
             EnqueueWorkItems(workItems, generator.Id);
         }
 
@@ -103,6 +102,10 @@ namespace EdFi.SampleDataGenerator
                             var nextGenerator = _configuration.WorkFlow[workEnvelope.NextStep];
                             var generatedWorkItems = nextGenerator.DoWork(workEnvelope.Model, _configuration);
                             EnqueueWorkItems(generatedWorkItems, nextGenerator.Id);
+                        }
+                        else
+                        {
+                            _logger.WriteLine("{0}", workEnvelope);
                         }
                     }
                 }

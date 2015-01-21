@@ -3,6 +3,11 @@
 	@AttributeFilters as dbo.AttributeList readonly
 as
 begin
+	declare @filter varchar(200) = ''
+	
+	if(exists(select top 1 * from @AttributeFilters))
+		set @filter = ' where Attribute in (select * from @AttributeFilters) '
+
 	declare @command as nvarchar(max) =
 	'with 
 	RankedResult as
@@ -12,8 +17,7 @@ begin
 		from 
 		(
 			select 		id, sum(Prop100K) as Prop100K
-			from		stat.' + @StatTableName + '
-			where		Attribute in (select * from @AttributeFilters)
+			from		stat.' + @StatTableName + @filter + '
 			group by	id
 		) t
 	)

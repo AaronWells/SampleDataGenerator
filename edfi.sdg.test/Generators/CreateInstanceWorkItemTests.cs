@@ -103,6 +103,59 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                     QuantitySpecifier = new ConstantQuantity {Quantity = 1}
                 };
                 var result = workItem.DoWork(input, new Configuration{MaxQueueWrites = int.MaxValue});
+                
+                Assert.AreEqual(2, result.Length);
+                Assert.AreNotEqual(null, result[0]); // A should be in there
+                Assert.AreEqual("aid", ((ABAssociation)result[1]).AReference.id);
+            }
+        }
+
+        [TestClass]
+        public class AssociationSecondPartyCreationTest
+        {
+            public class A : IComplexObjectType
+            {
+                public string id { get; set; }
+            }
+
+            public class B : IComplexObjectType
+            {
+                public string id { get; set; }
+            }
+
+            public class ABAssociation
+            {
+                public AReferenceType AReference { get; set; }
+                public BReferenceType BReference { get; set; }
+            }
+
+            public class ReferenceType
+            {
+                public string id { get; set; }
+            }
+
+            public class AReferenceType : ReferenceType
+            {
+            }
+
+            public class BReferenceType : ReferenceType
+            {
+            }
+
+            [TestMethod]
+            public void SimpleAssociation()
+            {
+                var input = new ABAssociation
+                {
+                    AReference = new AReferenceType { id = "aid" },
+                };
+                var workItem = new CreateInstanceWorkItem
+                {
+                    Id = 1,
+                    CreatedType = typeof (B).FullName,
+                    QuantitySpecifier = new ConstantQuantity {Quantity = 1}
+                };
+                var result = workItem.DoWork(input, new Configuration{MaxQueueWrites = int.MaxValue});
                 Assert.AreEqual("aid", ((ABAssociation)result[0]).AReference.id);
             }
         }
