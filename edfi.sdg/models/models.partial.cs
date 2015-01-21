@@ -20,10 +20,4 @@ namespace EdFi.SampleDataGenerator.Models
     //        return (ComplexObjectType)serializer.Deserialize(textReader);
     //    }
     }
-
-    public partial class StudentParentAssociation : IComplexObjectType
-    {
-        [XmlAttribute]
-        public string id { get; set; }
-    }
 }
