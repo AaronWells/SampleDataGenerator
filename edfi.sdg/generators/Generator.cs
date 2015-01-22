@@ -9,7 +9,7 @@ namespace EdFi.SampleDataGenerator.Generators
 {
     public class Generator
     {
-        private static readonly ILog _logger = LogManager.GetLogger(typeof(Generator));
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(Generator));
 
         private readonly IEnumerable<ValueRule> _rulePack;
 
@@ -124,7 +124,7 @@ namespace EdFi.SampleDataGenerator.Generators
             }
 
             if (bestMatchingRule != null)
-                _logger.Debug(string.Format("best matching rule for '{0}': {1}", propertyMetadata.PropertyInfo.Name, bestMatchingRule));
+                Logger.Debug(string.Format("best matching rule for '{0}': {1}", propertyMetadata.PropertyInfo.Name, bestMatchingRule));
 
             return bestMatchingRule;
         }

@@ -114,7 +114,7 @@ namespace EdFi.SampleDataGenerator
                 catch (TaskCanceledException e)
                 {
                     // the task is cancelled on a timeout, so we'll wait again for a message
-                    Logger.Debug(e.Message);
+                    Console.WriteLine(e.Message);
                 }
             }
         }
