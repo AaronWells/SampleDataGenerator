@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using EdFi.SampleDataGenerator.Utility;
 using EdFi.SampleDataGenerator.ValueProviders;
+using log4net;
 
 namespace EdFi.SampleDataGenerator.Generators
 {
     public class Generator
     {
-        private readonly ILog _logger;
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(Generator));
 
         private readonly IEnumerable<ValueRule> _rulePack;
 
         public Generator(IEnumerable<ValueRule> rulePack)
         {
             _rulePack = rulePack;
-            _logger = new FileLogger("log.txt");
         }
 
         public void Populate(object input)
@@ -124,8 +124,7 @@ namespace EdFi.SampleDataGenerator.Generators
             }
 
             if (bestMatchingRule != null)
-                _logger.WriteLine("best matching rule for '{0}': {1}", propertyMetadata.PropertyInfo.Name,
-                    bestMatchingRule);
+                _logger.Debug(string.Format("best matching rule for '{0}': {1}", propertyMetadata.PropertyInfo.Name, bestMatchingRule));
 
             return bestMatchingRule;
         }

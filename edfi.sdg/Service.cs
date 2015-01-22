@@ -5,10 +5,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using EdFi.SampleDataGenerator.Configurations;
+using EdFi.SampleDataGenerator.Generators;
 using EdFi.SampleDataGenerator.Messaging;
 using EdFi.SampleDataGenerator.Models;
 using EdFi.SampleDataGenerator.Utility;
 using EdFi.SampleDataGenerator.WorkItems;
+using log4net;
 
 namespace EdFi.SampleDataGenerator
 {
@@ -26,12 +28,12 @@ namespace EdFi.SampleDataGenerator
         private readonly Configuration _configuration;
         private readonly ConcurrentBag<Task> _tasks;
         private readonly ServiceParams _serviceParams;
-        private readonly ILog _logger;
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(Generator));
 
-        public Service(ServiceParams serviceParams, ILog logger)
+
+        public Service(ServiceParams serviceParams)
         {
             _serviceParams = serviceParams;
-            _logger = logger;
             //todo: load configuration from filename in serviceParams
             _configuration = Configuration.DefaultConfiguration;
             _tasks = new ConcurrentBag<Task>();
@@ -105,14 +107,14 @@ namespace EdFi.SampleDataGenerator
                         }
                         else
                         {
-                            _logger.WriteLine("{0}", workEnvelope);
+                            Logger.Debug(workEnvelope);
                         }
                     }
                 }
                 catch (TaskCanceledException e)
                 {
                     // the task is cancelled on a timeout, so we'll wait again for a message
-                    _logger.WriteLine(e.Message);
+                    Logger.Debug(e.Message);
                 }
             }
         }

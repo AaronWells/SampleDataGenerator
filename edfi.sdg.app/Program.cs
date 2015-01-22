@@ -1,5 +1,4 @@
 ﻿using EdFi.SampleDataGenerator;
-using EdFi.SampleDataGenerator.Utility;
 
 namespace edfi.sdg.app
 {
@@ -20,7 +19,7 @@ namespace edfi.sdg.app
                        });
                     x.Service<Service>(s =>
                             {
-                                s.ConstructUsing(name => new Service(serviceParams, new ConsoleLogger()));
+                                s.ConstructUsing(name => new Service(serviceParams));
                                 s.WhenStarted(tc => tc.Start());
                                 s.WhenStopped(tc => tc.Stop());
                             });
