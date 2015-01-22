@@ -6,18 +6,18 @@ namespace EdFi.SampleDataGenerator.Repository
     [Serializable]
     public class DatabaseStatDataRepository : StatDataRepository
     {
-        private readonly DataAccess _dataAccess;
+        private readonly DataRepository _dataRepository;
 
         public DatabaseStatDataRepository()
         {
-            _dataAccess = new DataAccess();
+            _dataRepository = new DataRepository();
         }
 
         public string StatTableName { get; set; }
 
         public override string GetNextValue(string[] lookupProperties)
         {
-            return _dataAccess.GetNextValue(StatTableName, lookupProperties);
+            return _dataRepository.GetNextValue(StatTableName, lookupProperties);
         }
     }
 }

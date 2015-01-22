@@ -14,6 +14,7 @@ using log4net;
 
 namespace EdFi.SampleDataGenerator
 {
+    using EdFi.SampleDataGenerator.Data;
 
     public class ServiceParams
     {
@@ -69,7 +70,7 @@ namespace EdFi.SampleDataGenerator
                 {
                     using (var workQueue = new WorkQueue(_configuration.WorkQueueName))
                     {
-                        var objectRepository = new ComplexObjectRepository();
+                        var objectRepository = new DataRepository();
                         if (item is WorkItem)
                         {
                             workQueue.WriteObject(item);
