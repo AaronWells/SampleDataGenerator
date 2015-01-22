@@ -74,7 +74,9 @@
     <Compile Include="Utility\TypeExtensions.cs" />
     <Compile Include="Utility\DirectedGraph.cs" />
     <Compile Include="Repository\StatDataRepository.cs" />
+    <Compile Include="ValueProviders\EmailAddressValueProvider.cs" />
     <Compile Include="ValueProviders\CopyPropertyValueProvider.cs" />
+    <Compile Include="ValueProviders\LoginNameValueProvider.cs" />
     <Compile Include="WorkItems\FinalizeWorkItem.cs" />
     <Compile Include="WorkItems\ReferenceCreationWorkItem.cs" />
     <Compile Include="ValueProviders\ValueRule.cs" />

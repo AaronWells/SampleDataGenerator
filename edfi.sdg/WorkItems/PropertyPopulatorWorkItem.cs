@@ -1,6 +1,5 @@
 ﻿using EdFi.SampleDataGenerator.Configurations;
 using EdFi.SampleDataGenerator.Generators;
-using EdFi.SampleDataGenerator.Models;
 
 namespace EdFi.SampleDataGenerator.WorkItems
 {
@@ -9,7 +8,7 @@ namespace EdFi.SampleDataGenerator.WorkItems
         protected override object[] DoWorkImplementation(object input, IConfiguration configuration)
         {
             var generator = new Generator(configuration.GetValueRules());
-            generator.Populate(input as ComplexObjectType);
+            generator.Populate(input);
             return new[] { input };
         }
     }
