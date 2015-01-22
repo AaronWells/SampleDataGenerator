@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using EdFi.SampleDataGenerator.Utility;
 
 namespace EdFi.SampleDataGenerator.ValueProviders
 {
@@ -14,6 +14,10 @@ namespace EdFi.SampleDataGenerator.ValueProviders
         /// </summary>
         public override object GetValue(object[] dependsOn)
         {
+            if(dependsOn.IsNullOrEmpty())
+                throw new ArgumentException("should pass a parameter to CopyPropertyValueProvider.GetValue() method");
+
+            // ReSharper disable once PossibleNullReferenceException
             if (dependsOn.Length != 1)
                 throw new ArgumentException("cannot pass multiple parameters to the CopyPropertyValueProvider.GetValue() method");
 

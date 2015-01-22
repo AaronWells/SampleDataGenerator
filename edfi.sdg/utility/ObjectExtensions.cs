@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -83,6 +84,11 @@ namespace EdFi.SampleDataGenerator.Utility
                 ms.Seek(0, SeekOrigin.Begin);
                 return serializer.ReadObject(ms);
             }
+        }
+
+        public static bool IsNullOrEmpty(this IEnumerable<object> array)
+        {
+            return array == null || !array.Any();
         }
     }
 }

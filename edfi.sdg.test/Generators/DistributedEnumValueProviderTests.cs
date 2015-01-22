@@ -28,7 +28,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
                     }
                 };
 
-                var value = (TestEnum)valueProvider.GetValue();
+                var value = (TestEnum)valueProvider.GetValue(null);
 
                 switch (value)
                 {

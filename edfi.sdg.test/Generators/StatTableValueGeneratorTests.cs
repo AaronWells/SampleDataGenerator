@@ -25,13 +25,6 @@ namespace EdFi.SampleDataGenerator.Test.Generators
     [TestClass]
     public class StatTableValueGeneratorTests
     {
-        public class SampleClass
-        {
-            public string Name { get; set; }
-            public string Ethnicity { get; set; }
-            public string Gender { get; set; }
-        }
-
         /// <summary>
         /// When to be populated object is a <see cref="ComplexObjectType"/>, 'id' should not be poplated
         /// </summary>
