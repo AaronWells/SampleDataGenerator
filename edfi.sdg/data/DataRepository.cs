@@ -49,14 +49,14 @@
             }
         }
 
-        public IComplexObjectType[] GetByClassName(string className)
+        public T[] GetByClassName<T>(string className)
         {
             using (var model = new DataModel())
             {
                 var query = model.Database.SqlQuery<string>(
                     "select Xml from dbo.ComplexObject where ClassName = @identifier", new SqlParameter("@className", className));
 
-                var result = query.Select(x => ComplexObjectTypeExtensions.FromXml(className, x)).ToArray();
+                var result = query.Select(x => (T)ComplexObjectTypeExtensions.FromXml(className, x)).ToArray();
                 return result;
             }
         }

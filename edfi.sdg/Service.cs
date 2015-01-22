@@ -8,7 +8,6 @@ using EdFi.SampleDataGenerator.Configurations;
 using EdFi.SampleDataGenerator.Generators;
 using EdFi.SampleDataGenerator.Messaging;
 using EdFi.SampleDataGenerator.Models;
-using EdFi.SampleDataGenerator.Utility;
 using EdFi.SampleDataGenerator.WorkItems;
 using log4net;
 

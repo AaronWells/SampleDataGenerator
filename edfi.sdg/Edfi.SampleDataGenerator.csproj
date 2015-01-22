@@ -114,6 +114,7 @@
     <Compile Include="Utility\Generics.cs" />
     <Compile Include="Utility\IdentifierGenerator.cs" />
     <Compile Include="Utility\RandomExtensions.cs" />
+    <Compile Include="Writers\InterchangeWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
