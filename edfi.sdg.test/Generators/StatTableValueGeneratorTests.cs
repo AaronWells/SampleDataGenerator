@@ -19,7 +19,7 @@ namespace EdFi.SampleDataGenerator.Test.Generators
 
     public class SampleType2 : ComplexObjectType
     {
-        public string id { get; set; }
+        //public string id { get; set; }
     }
 
     [TestClass]

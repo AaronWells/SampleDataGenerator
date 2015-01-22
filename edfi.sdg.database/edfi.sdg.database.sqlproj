@@ -72,9 +72,13 @@
     <Build Include="dbo\tables\__MigrationHistory.sql" />
     <Build Include="stat\tables\FamilyName.sql" />
     <Build Include="stat\tables\GivenName.sql" />
-    <Build Include="dbo\Stored Procedures\GetNextValue.sql" />
+    <Build Include="dbo\Stored Procedures\GetNextValue.sql">
+      <SuppressTSqlWarnings>71502</SuppressTSqlWarnings>
+    </Build>
     <Build Include="dbo\User Defined Types\AttributeList.sql" />
-    <Build Include="dbo\Stored Procedures\ValidateStatTableSchema.sql" />
+    <Build Include="dbo\Stored Procedures\ValidateStatTableSchema.sql">
+      <SuppressTSqlWarnings>71502</SuppressTSqlWarnings>
+    </Build>
     <None Include="Scripts\Post Deployment\stat.FamilyName.Table.sql" />
     <None Include="Scripts\Post Deployment\stat.GivenName.Table.sql">
       <SuppressTSqlWarnings>
