@@ -27,7 +27,7 @@
             }
         }
 
-        public static Type GetItemsType(Type interchangeType)
+        private static Type GetItemsType(Type interchangeType)
         {
             var interchangeInterface = interchangeType.GetInterfaces()
                 .Single(x => x.FullName.StartsWith("EdFi.SampleDataGenerator.Models.IInterchange") && x.IsGenericType);

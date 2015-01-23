@@ -12,7 +12,7 @@ namespace EdFi.SampleDataGenerator.Test.Writers
     public class InterchangeWriterTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void WriteInterchangeStudentParentFromDatabase()
         {
             var interchangeTypes = new Type[] { typeof(InterchangeStudentParent) };
 

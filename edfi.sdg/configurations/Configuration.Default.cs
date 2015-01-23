@@ -37,12 +37,12 @@ namespace EdFi.SampleDataGenerator.Configurations
                         new CreateInstanceWorkItem
                         {
                             CreatedType = typeof(Student).FullName, 
-                            QuantitySpecifier = new ConstantQuantity {Quantity = 20}
+                            QuantitySpecifier = new ConstantQuantity {Quantity = 100}
                         },
-                        new PropertyPopulatorWorkItem
-                        {
-                            ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.(Student)$"
-                        },
+                        //new PropertyPopulatorWorkItem
+                        //{
+                        //    ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.(Student)$"
+                        //},
                         new CreateInstanceWorkItem
                         {
                             ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.Student$",
@@ -57,7 +57,7 @@ namespace EdFi.SampleDataGenerator.Configurations
                         },
                         new PropertyPopulatorWorkItem
                         {
-                            ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.(Parent)$"
+                            ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.((Parent)|(Student)|(StudentParentAssociation))$"
                         },
                         //new PropertyPopulatorWorkItem
                         //{
