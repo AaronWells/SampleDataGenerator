@@ -10,6 +10,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.Xml.Serialization;
 namespace EdFi.SampleDataGenerator.Models {
 //
 //	Association classes need to have an additional property of "id"
@@ -27,6 +28,7 @@ namespace EdFi.SampleDataGenerator.Models {
                 var foo = m.Groups[1].Value;
 #>
 public partial class <#=foo#> : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 <#

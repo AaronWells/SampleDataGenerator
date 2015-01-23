@@ -32,5 +32,10 @@ namespace EdFi.SampleDataGenerator.Utility
         {
             return t != null && t.Name.EndsWith("Association");
         }
+
+        public static bool IsInterchange(this Type t)
+        {
+            return t != null && t.Namespace == "EdFi.SampleDataGenerator.Models" && t.FullName.StartsWith("Interchange");
+        }
     }
 }

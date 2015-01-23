@@ -54,7 +54,7 @@
             using (var model = new DataModel())
             {
                 var query = model.Database.SqlQuery<string>(
-                    "select Xml from dbo.ComplexObject where ClassName = @identifier", new SqlParameter("@className", className));
+                    "select Xml from dbo.ComplexObject where ClassName = @className", new SqlParameter("@className", className));
 
                 var result = query.Select(x => (T)ComplexObjectTypeExtensions.FromXml(className, x)).ToArray();
                 return result;

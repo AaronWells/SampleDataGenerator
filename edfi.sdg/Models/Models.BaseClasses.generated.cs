@@ -5,59 +5,77 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.Xml.Serialization;
 namespace EdFi.SampleDataGenerator.Models {
 //
 //	Association classes need to have an additional property of "id"
 //
 public partial class FeederSchoolAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class InterchangeStaffAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class StaffEducationOrgAssignmentAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class StaffEducationOrgEmploymentAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class StaffProgramAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class TeacherSchoolAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class TeacherSectionAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class StaffCohortAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class StudentCohortAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class StudentDisciplineIncidentAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class StudentEducationOrganizationAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class StudentSchoolAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class StudentSectionAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class EducationOrganizationInterventionPrescriptionAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class StudentInterventionAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class StudentParentAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 public partial class StudentProgramAssociation : IComplexObjectType { 
+	[XmlAttribute]
 	public string id { get; set; } 
 }
 //

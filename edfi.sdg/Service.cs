@@ -51,14 +51,10 @@ namespace EdFi.SampleDataGenerator
         {
             if (_serviceParams.Bootstrap)
                 Bootstrap();
-#if !DEBUG
-            for (var i = 0; i < configuration.ThreadCount; i++)
+            for (var i = 0; i < _configuration.ThreadCount; i++)
             {
-#endif
                 _tasks.Add(Task.Factory.StartNew(() => DoWorkAsync(_tokenSource.Token), _tokenSource.Token));
-#if !DEBUG
             }
-#endif
         }
 
         private void EnqueueWorkItems(IEnumerable<object> workItems, int generatorId)

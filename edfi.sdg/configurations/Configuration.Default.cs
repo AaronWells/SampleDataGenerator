@@ -15,7 +15,7 @@ namespace EdFi.SampleDataGenerator.Configurations
                 return new Configuration
                 {
                     MaxQueueWrites = 10,
-                    ThreadCount = 1,
+                    ThreadCount = 8,
                     WorkQueueName = @".\Private$\edfi.sdg",
                     ValueRules = new []
                     {
@@ -37,7 +37,7 @@ namespace EdFi.SampleDataGenerator.Configurations
                         new CreateInstanceWorkItem
                         {
                             CreatedType = typeof(Student).FullName, 
-                            QuantitySpecifier = new ConstantQuantity {Quantity = 1}
+                            QuantitySpecifier = new ConstantQuantity {Quantity = 20}
                         },
                         new PropertyPopulatorWorkItem
                         {
@@ -59,10 +59,10 @@ namespace EdFi.SampleDataGenerator.Configurations
                         {
                             ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.(Parent)$"
                         },
-                        new PropertyPopulatorWorkItem
-                        {
-                            ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.(StudentParentAssociation)$"
-                        },
+                        //new PropertyPopulatorWorkItem
+                        //{
+                        //    ClassFilterRegex = @"^EdFi\.SampleDataGenerator\.Models\.(StudentParentAssociation)$"
+                        //},
                     }
                 };
             }
