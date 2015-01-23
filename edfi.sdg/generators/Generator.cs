@@ -27,7 +27,9 @@ namespace EdFi.SampleDataGenerator.Generators
             foreach (var propertyMetadata in graph.GetEvaluationOrder())
             {
                 var containingObject = input.LocateObject(propertyMetadata.AbsolutePath.PropertyChain);
-                
+
+                var currentValue = propertyMetadata.PropertyInfo.GetMethod.Invoke(containingObject, new object[] { });
+
                 // first find any matching rule:
                 if (propertyMetadata.BestMatchingRule != null)
                 {
@@ -52,7 +54,7 @@ namespace EdFi.SampleDataGenerator.Generators
 
                     containingObject.SetPropertyValue(propertyMetadata.PropertyInfo.Name, value);
                 }
-                else if (propertyMetadata.PropertyInfo.PropertyType.IsCompositeType())
+                else if (currentValue == null && propertyMetadata.PropertyInfo.PropertyType.IsCompositeType())
                 {
                     // instantiate the property with a new class
                     var value = Activator.CreateInstance(propertyMetadata.PropertyInfo.PropertyType);
@@ -95,7 +97,7 @@ namespace EdFi.SampleDataGenerator.Generators
                 {
                     propertyMetadata.ParentPropertyMetadata
                 };
-                
+
                 var bestMatchingRule = propertyMetadata.BestMatchingRule;
 
                 if (bestMatchingRule != null && bestMatchingRule.HasDependency)
