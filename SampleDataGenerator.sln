@@ -18,6 +18,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Entities", "2.Entities", "{4A1989A0-742D-4F87-BEA9-98971DAF720C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7.App", "7.App", "{5757E3A7-91C7-4B48-BD78-AF539D14A2D9}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Service", "5.Service", "{BA031760-AD41-45E2-B6B3-5FA66575A8AF}"
 EndProject
