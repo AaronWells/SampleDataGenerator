@@ -18,7 +18,7 @@ namespace EdFi.SampleDataGenerator.Utility
 
         public static string Create(Guid guid)
         {
-            var builder = new StringBuilder();
+            var builder = new StringBuilder("x");
             // need trailing 0 to not be a negative value
             var bytes = new List<byte>(guid.ToByteArray()) { 0 };
             var bigint = new BigInteger(bytes.ToArray());
@@ -33,6 +33,7 @@ namespace EdFi.SampleDataGenerator.Utility
 
         public static Guid ToGuid(string identifier)
         {
+            identifier = identifier.Substring(1);
             var bytes = new byte[16];
             var bigint = new BigInteger(0);
             foreach (var digit in identifier.ToCharArray().Reverse())
