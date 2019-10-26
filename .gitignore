@@ -15,3 +15,5 @@ _NCrunch*
 *.ncrunchproject
 *.ncrunchsolution
 
+/.vs/SampleDataGenerator
+/.vs
